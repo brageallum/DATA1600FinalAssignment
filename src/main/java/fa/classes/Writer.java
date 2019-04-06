@@ -12,7 +12,7 @@ class CSVWriter implements WriteStrategy {
   }
 }
 
-class SerializeWriter implements WriteStrategy {
+class SerializedWriter implements WriteStrategy {
   @Override
   public void writeToFile() {
 

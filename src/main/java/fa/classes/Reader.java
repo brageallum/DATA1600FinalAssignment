@@ -15,7 +15,7 @@ class CSVReader implements ReadStrategy {
   }
 }
 
-class SerialReader implements ReadStrategy {
+class SerializedReader implements ReadStrategy {
 
   @Override
   public void readFile() {
