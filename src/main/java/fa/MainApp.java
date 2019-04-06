@@ -6,18 +6,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import javafx.stage.StageStyle;
 
 public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("scene.fxml"));
+
+        Parent root = FXMLLoader.load(getClass().getResource("view/App.fxml"));
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
         stage.setTitle("Final Assignment");
+        //stage.setResizable(false);
+        stage.initStyle(StageStyle.DECORATED);
+        stage.setMinWidth(600);
+        stage.setMinHeight(400);
         stage.setScene(scene);
         stage.show();
     }
