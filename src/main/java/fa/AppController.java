@@ -23,7 +23,6 @@ public class AppController {
         String pageUrl = (String) ((Node)e.getSource()).getUserData();
 
         try {
-
             for (Node btn : navigationBar.getChildren()) {
                 btn.getStyleClass().remove("isActive");
             }

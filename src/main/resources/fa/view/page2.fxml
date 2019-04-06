@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.Button?>
 
-<AnchorPane styleClass="area--page">
+<AnchorPane styleClass="area--page" userData="Page2">
   <Label layoutX="244.0" layoutY="159.0">Page 2</Label>
   <Button>Hello fuck</Button>
 </AnchorPane>
