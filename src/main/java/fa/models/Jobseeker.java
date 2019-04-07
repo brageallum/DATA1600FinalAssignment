@@ -6,23 +6,22 @@ import java.util.Date;
 public class Jobseeker extends Person {
 
   private String education;
-  private ArrayList<Work> workExperience;
+  private String workExperience;
   private Integer wage;
-  private ArrayList<Person> references;
+  private String references;
 
-  public Jobseeker(String first_name,String last_name, String email, String phone,
-                    Date birthdate, String education, ArrayList<Work> work_experience,
-                    Integer wage, ArrayList<Person> references) {
+  public Jobseeker(String line) {
 
-    setFirstName(first_name);
-    setLastName(last_name);
-    setEmailAddress(email);
-    setPhoneNumber(phone);
-    setBirthdate(birthdate);
-    setEducation(education);
-    setWorkExperience(work_experience);
-    setWage(wage);
-    setReferences(references);
+    String[] data = line.split(",");
+    setFirstName(data[0]);
+    setLastName(data[1]);
+    setEmailAddress(data[2]);
+    setPhoneNumber(data[3]);
+    //setBirthdate(data[4]); // Handle Date
+    setEducation(data[5]);
+    setWorkExperience(data[6]);
+    setWage(Integer.parseInt(data[7]));
+    setReferences(data[8]);
 
   }
 
@@ -30,7 +29,7 @@ public class Jobseeker extends Person {
     return education;
   }
 
-  public ArrayList<Work> getWorkExperience() {
+  public String getWorkExperience() {
     return workExperience;
   }
 
@@ -38,7 +37,7 @@ public class Jobseeker extends Person {
     return wage;
   }
 
-  public ArrayList<Person> getReferences() {
+  public String getReferences() {
     return references;
   }
 
@@ -46,7 +45,7 @@ public class Jobseeker extends Person {
     this.education = education;
   }
 
-  public void setWorkExperience(ArrayList<Work> workExperience) {
+  public void setWorkExperience(String workExperience) {
     this.workExperience = workExperience;
   }
 
@@ -54,7 +53,12 @@ public class Jobseeker extends Person {
     this.wage = wage;
   }
 
-  public void setReferences(ArrayList<Person> references) {
+  public void setReferences(String references) {
     this.references = references;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("Name: %s, Education: %s", getFirstName(), getLastName());
   }
 }

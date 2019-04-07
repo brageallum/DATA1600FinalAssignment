@@ -4,6 +4,7 @@ import fa.classes.FileHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,9 +16,12 @@ import java.util.Date;
 
 public class AppController {
 
+    private static String currentPage = "home";
+
     @FXML private BorderPane rootContainer;
     @FXML private HBox navigationBar;
     @FXML private ImageView logoImage;
+    @FXML private HBox topBar;
 
     @FXML
     private void navigateApp(ActionEvent e) {
@@ -25,10 +29,18 @@ public class AppController {
         String pageUrl = (String) ((Node)e.getSource()).getUserData();
 
         try {
+
+            Node button = (Node) e.getSource();
+
+            if (button.getId().equals(currentPage)) {
+                return;
+            }
+            currentPage = button.getId();
+
             for (Node btn : navigationBar.getChildren()) {
                 btn.getStyleClass().remove("isActive");
             }
-            ((Node) e.getSource()).getStyleClass().add("isActive");
+            button.getStyleClass().add("isActive");
 
             FXMLLoader loaded = new FXMLLoader(getClass().getResource(pageUrl));
             rootContainer.setCenter(loaded.load());
@@ -39,20 +51,23 @@ public class AppController {
 
     public void initialize() {
         System.out.format("[ %s ]: AppController initialized.\n", new Date());
+        topBar.setAlignment(Pos.CENTER_LEFT);
+        logoImage.setFitHeight(25.0);
+        logoImage.setFitWidth(25.0);
         logoImage.setImage(
           new Image(
-            String.valueOf(getClass().getResource("images/e.png"))
+            String.valueOf(getClass().getResource("images/window.png"))
           )
         );
     }
 
     @FXML
     public void importData(ActionEvent e) {
-        FileHandler.openFileChooser();
+        new FileHandler().openFileChooser();
     }
 
     @FXML
     public void exportData(ActionEvent e) {
-        FileHandler.openFileChooser();
+        new FileHandler().openFileChooser();
     }
 }

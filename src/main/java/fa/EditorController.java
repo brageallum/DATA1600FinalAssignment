@@ -1,5 +1,12 @@
 package fa;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+
+import fa.models.DB;
+import fa.models.Jobseeker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,9 +24,19 @@ public class EditorController {
   @FXML private Label displayData;
 
   public void initialize() {
-    ObservableList<String> items = FXCollections.observableArrayList("Lorem", "Ipsum", "Dolor");
+    System.out.format("[ %s ]: EditorController initialized.\n", new Date());
+
+    ArrayList<String> jobkeeperName = new ArrayList<>();
+    DB.init().getJobseekers().forEach((k) -> {
+      System.out.println(k.getFirstName());
+      jobkeeperName.add(k.getFirstName());
+    });
+
+    ObservableList<String> items = FXCollections.observableArrayList(jobkeeperName);
+
     itemsList.setCellFactory(stringListView -> new DataListCell());
     itemsList.setItems(items);
+
     itemsList.getSelectionModel().selectedItemProperty().addListener(
       (observableValue, oldValue, newValue) -> displayData.setText(newValue)
     );

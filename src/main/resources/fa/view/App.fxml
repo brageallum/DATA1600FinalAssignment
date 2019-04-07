@@ -21,12 +21,11 @@
         </Menu>
       </MenuBar>
       <!-- Navigation Bar -->
-      <HBox spacing="10" styleClass="area--navigation">
+      <HBox spacing="10" styleClass="area--navigation" fx:id="topBar">
         <!-- Logo -->
         <ImageView
           fx:id="logoImage"
-          fitHeight="30"
-          fitWidth="30"
+          styleClass="logoImage"
           pickOnBounds="true"
           preserveRatio="true" />
         <!-- Navigation buttons -->

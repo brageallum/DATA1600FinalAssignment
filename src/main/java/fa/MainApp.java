@@ -1,5 +1,9 @@
 package fa;
 
+import java.io.File;
+import java.nio.file.Paths;
+
+import fa.classes.Reader;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +16,10 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+
+        File DBInit = new File(Paths.get("./src/main/resources/fa/data/db.csv").toAbsolutePath().normalize().toString());
+        System.out.println(DBInit);
+        Reader.read("csv", DBInit);
 
         Parent root = FXMLLoader.load(getClass().getResource("view/App.fxml"));
 

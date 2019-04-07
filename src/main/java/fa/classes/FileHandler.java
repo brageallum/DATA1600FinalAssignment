@@ -1,9 +1,13 @@
 package fa.classes;
 
+import fa.models.DB;
 import javafx.stage.FileChooser;
 import java.io.File;
+import java.nio.file.Paths;
 
 public class FileHandler {
+
+  private String InitialDirectory = Paths.get("./src/main/resources/fa/data").toAbsolutePath().normalize().toString();
 
   private static final FileChooser.ExtensionFilter allowedExt =
     new FileChooser.ExtensionFilter("All compatible types", "*.jobj", "*.csv");
@@ -14,12 +18,11 @@ public class FileHandler {
   private static final FileChooser.ExtensionFilter jobjExt =
     new FileChooser.ExtensionFilter("Serialized java objects", "*.jobj");
 
-  private static final FileChooser.ExtensionFilter allExt =
-    new FileChooser.ExtensionFilter("All", "*");
-
-  public static void openFileChooser() {
+  public DB openFileChooser() {
+    System.out.println(InitialDirectory);
     FileChooser fc = new FileChooser();
-    fc.getExtensionFilters().addAll(allowedExt, csvExt, jobjExt, allExt);
+    fc.setInitialDirectory(new File(InitialDirectory));
+    fc.getExtensionFilters().addAll(allowedExt, csvExt, jobjExt);
 
     File selectedFile = fc.showOpenDialog(null);
 
@@ -29,8 +32,10 @@ public class FileHandler {
       extension = extension.substring(extension.indexOf('.') + 1);
       System.out.println(extension);
 
-      System.out.println(Reader.read(extension, selectedFile));
+      return Reader.read(extension, selectedFile);
     }
+
+    return DB.init();
   }
 
 }
