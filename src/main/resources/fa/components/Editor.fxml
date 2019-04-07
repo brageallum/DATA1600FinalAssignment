@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<fx:root type="SplitPane" dividerPositions="0.3" xmlns:fx="http://javafx.com/fxml" >
+    <ListView fx:id="itemsList" minWidth="200" />
+    <HBox alignment="CENTER" minWidth="400">
+        <VBox fx:id="editorFormContainer" alignment="CENTER" />
+    </HBox>
+</fx:root>

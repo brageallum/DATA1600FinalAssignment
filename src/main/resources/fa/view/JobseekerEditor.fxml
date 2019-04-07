@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import fa.components.Editor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<Editor xmlns:fx="http://javafx.com/fxml">
+    <form>
+        <Label text="Lorem Ipsum."/>
+        <Button>Click me!</Button>
+    </form>
+</Editor>
