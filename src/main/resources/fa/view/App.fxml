@@ -32,7 +32,7 @@
         <!-- Navigation buttons -->
         <HBox fx:id="navigationBar" >
           <Button  fx:id="home" userData="view/home.fxml" onAction="#navigateApp" styleClass="button--navigation, isActive">Home</Button>
-          <Button fx:id="page2" userData="view/page2.fxml" onAction="#navigateApp" styleClass="button--navigation">Page 2</Button>
+          <Button fx:id="editor" userData="view/editor.fxml" onAction="#navigateApp" styleClass="button--navigation">Editor</Button>
         </HBox>
       </HBox>
     </VBox>
