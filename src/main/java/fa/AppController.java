@@ -1,6 +1,6 @@
 package fa;
 
-import fa.classes.FileHandler;
+import fa.io.FileHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

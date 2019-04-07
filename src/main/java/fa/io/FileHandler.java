@@ -1,4 +1,4 @@
-package fa.classes;
+package fa.io;
 
 import javafx.stage.FileChooser;
 import java.io.File;
