@@ -21,20 +21,31 @@ public class AppController {
 
     @FXML
     private void navigateApp(ActionEvent e) {
-
-        String pageUrl = (String) ((Node)e.getSource()).getUserData();
+        Node clickedLink = (Node) e.getSource();
+        String pageUrl = (String) clickedLink.getUserData();
 
         try {
-            for (Node btn : navigationBar.getChildren()) {
-                btn.getStyleClass().remove("isActive");
-            }
-            ((Node) e.getSource()).getStyleClass().add("isActive");
-
-            FXMLLoader loaded = new FXMLLoader(getClass().getResource(pageUrl));
-            rootContainer.setCenter(loaded.load());
+            loadView(pageUrl);
+            unhighlightAllNavigationLinks();
+            highlightNavigationLink(clickedLink);
         } catch(IOException error) {
             error.printStackTrace();
         }
+    }
+
+    private void highlightNavigationLink(Node link) {
+        link.getStyleClass().add("isActive");
+    }
+
+    private void unhighlightAllNavigationLinks() {
+        for (Node link : navigationBar.getChildren()) {
+            link.getStyleClass().remove("isActive");
+        }
+    }
+
+    private void loadView(String pageUrl) throws IOException {
+        FXMLLoader loaded = new FXMLLoader(getClass().getResource(pageUrl));
+        rootContainer.setCenter(loaded.load());
     }
 
     public void initialize() {
