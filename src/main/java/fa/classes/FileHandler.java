@@ -1,10 +1,9 @@
-package fa;
+package fa.classes;
 
 import javafx.stage.FileChooser;
-
 import java.io.File;
 
-class FileHandler {
+public class FileHandler {
 
   private static final FileChooser.ExtensionFilter allowedExt =
     new FileChooser.ExtensionFilter("All compatible types", "*.jobj", "*.csv");
@@ -18,7 +17,7 @@ class FileHandler {
   private static final FileChooser.ExtensionFilter allExt =
     new FileChooser.ExtensionFilter("All", "*");
 
-  static void openFileChooser() {
+  public static void openFileChooser() {
     FileChooser fc = new FileChooser();
     fc.getExtensionFilters().addAll(allowedExt, csvExt, jobjExt, allExt);
 
@@ -26,7 +25,11 @@ class FileHandler {
 
     if (selectedFile != null) {
       // TODO: Implement file reading
-      System.out.println(selectedFile.getName());
+      String extension = selectedFile.getName();
+      extension = extension.substring(extension.indexOf('.') + 1);
+      System.out.println(extension);
+
+      System.out.println(Reader.read(extension, selectedFile));
     }
   }
 
