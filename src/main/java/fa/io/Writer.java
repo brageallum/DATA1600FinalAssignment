@@ -1,4 +1,4 @@
-package fa.classes;
+package fa.io;
 
 interface WriteStrategy {
   // TODO: Change void to data model type.

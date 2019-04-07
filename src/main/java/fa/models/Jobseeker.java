@@ -1,8 +1,5 @@
 package fa.models;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 public class Jobseeker extends Person {
 
   private String education;

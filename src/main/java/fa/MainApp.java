@@ -3,7 +3,7 @@ package fa;
 import java.io.File;
 import java.nio.file.Paths;
 
-import fa.classes.Reader;
+import fa.io.Reader;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;

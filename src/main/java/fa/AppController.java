@@ -1,6 +1,6 @@
 package fa;
 
-import fa.classes.FileHandler;
+import fa.io.FileHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,28 +25,34 @@ public class AppController {
 
     @FXML
     private void navigateApp(ActionEvent e) {
-
-        String pageUrl = (String) ((Node)e.getSource()).getUserData();
+        Node clickedLink = (Node) e.getSource();
+        String pageUrl = (String) clickedLink.getUserData();
 
         try {
-
-            Node button = (Node) e.getSource();
-
-            if (button.getId().equals(currentPage)) {
-                return;
+            if (!clickedLink.getId().equals(currentPage)) {
+              currentPage = clickedLink.getId();
+              loadView(pageUrl);
+              unhighlightAllNavigationLinks();
+              highlightNavigationLink(clickedLink);
             }
-            currentPage = button.getId();
-
-            for (Node btn : navigationBar.getChildren()) {
-                btn.getStyleClass().remove("isActive");
-            }
-            button.getStyleClass().add("isActive");
-
-            FXMLLoader loaded = new FXMLLoader(getClass().getResource(pageUrl));
-            rootContainer.setCenter(loaded.load());
         } catch(IOException error) {
             error.printStackTrace();
         }
+    }
+
+    private void highlightNavigationLink(Node link) {
+        link.getStyleClass().add("isActive");
+    }
+
+    private void unhighlightAllNavigationLinks() {
+        for (Node link : navigationBar.getChildren()) {
+            link.getStyleClass().remove("isActive");
+        }
+    }
+
+    private void loadView(String pageUrl) throws IOException {
+        FXMLLoader loaded = new FXMLLoader(getClass().getResource(pageUrl));
+        rootContainer.setCenter(loaded.load());
     }
 
     public void initialize() {

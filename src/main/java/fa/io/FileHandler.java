@@ -1,4 +1,4 @@
-package fa.classes;
+package fa.io;
 
 import fa.models.DB;
 import javafx.stage.FileChooser;
