@@ -16,8 +16,8 @@
       <!-- Tool bar -->
       <MenuBar styleClass="area--tools">
         <Menu text="File" >
-          <MenuItem text="Import data from file"/>
-          <MenuItem text="Export data to file"/>
+          <MenuItem text="Import data from file" onAction="#importData" />
+          <MenuItem text="Export data to file" onAction="#exportData" />
         </Menu>
       </MenuBar>
       <!-- Navigation Bar -->

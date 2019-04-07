@@ -1,7 +1,5 @@
 package fa;
 
-import java.io.IOException;
-import java.util.Date;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+
+import java.io.IOException;
+import java.util.Date;
 
 public class AppController {
 
@@ -42,5 +43,15 @@ public class AppController {
             String.valueOf(getClass().getResource("images/e.png"))
           )
         );
+    }
+
+    @FXML
+    public void importData(ActionEvent e) {
+        FileHandler.openFileChooser();
+    }
+
+    @FXML
+    public void exportData(ActionEvent e) {
+        FileHandler.openFileChooser();
     }
 }
