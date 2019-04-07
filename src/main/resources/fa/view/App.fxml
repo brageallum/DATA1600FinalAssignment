@@ -1,28 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+
 <BorderPane fx:id="rootContainer" prefWidth="1200" prefHeight="700" fx:controller="fa.AppController" xmlns:fx="http://javafx.com/fxml/1">
 
   <top>
-    <!-- Navigation Bar -->
-    <HBox spacing="10" styleClass="area--navigation">
-      <!-- Logo -->
-      <ImageView
-        fx:id="logoImage"
-        fitHeight="60"
-        fitWidth="60"
-        pickOnBounds="true"
-        preserveRatio="true" />
-      <!-- Navigation buttons -->
-      <HBox fx:id="navigationBar" >
-        <Button  fx:id="home" userData="view/home.fxml" onAction="#navigateApp" styleClass="button--navigation, isActive">Home</Button>
-        <Button fx:id="page2" userData="view/page2.fxml" onAction="#navigateApp" styleClass="button--navigation">Page 2</Button>
+    <VBox styleClass="area--top-bar">
+      <!-- Tool bar -->
+      <MenuBar styleClass="area--tools">
+        <Menu text="File" >
+          <MenuItem text="Import data from file"/>
+          <MenuItem text="Export data to file"/>
+        </Menu>
+      </MenuBar>
+      <!-- Navigation Bar -->
+      <HBox spacing="10" styleClass="area--navigation">
+        <!-- Logo -->
+        <ImageView
+          fx:id="logoImage"
+          fitHeight="30"
+          fitWidth="30"
+          pickOnBounds="true"
+          preserveRatio="true" />
+        <!-- Navigation buttons -->
+        <HBox fx:id="navigationBar" >
+          <Button  fx:id="home" userData="view/home.fxml" onAction="#navigateApp" styleClass="button--navigation, isActive">Home</Button>
+          <Button fx:id="page2" userData="view/page2.fxml" onAction="#navigateApp" styleClass="button--navigation">Page 2</Button>
+        </HBox>
       </HBox>
-    </HBox>
+    </VBox>
   </top>
   <center>
     <!-- Content -->

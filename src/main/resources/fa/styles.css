@@ -2,21 +2,56 @@
     -fx-padding: 30px;
 }
 
-.area--navigation {
-    -fx-background-color: #2299dd;
-    -fx-pref-height: 60px;
-    -fx-padding: 0px 40px;
+.area--top-bar {
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 0, 1);
 }
+
+.area--navigation {
+    -fx-background-color: #3C3F41;
+    -fx-pref-height: 30px;
+}
+
+.button {
+    -fx-cursor: hand;
+}
+
 .button--navigation {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-background-radius: 0px;
     -fx-text-fill: #fff;
-    -fx-pref-height: 60px;
-    -fx-cursor: hand;
+    -fx-pref-height: 30px;
     -fx-font-size: 16px;
 }
 .button--navigation.isActive {
-    -fx-background-color: rgba(0,0,0,0.2);
+    -fx-background-color: #1a75aa;
+}
+
+.area--tools {
+    -fx-background-color: #3C3F41;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #5f6467;
+}
+
+.area--tools .menu,
+.area--tools .menu .context-menu {
+    -fx-background-color: #3C3F41;
+    -fx-cursor: hand;
+}
+
+.area--tools .menu .label {
+    -fx-text-fill: #fff;
+}
+
+.area--tools .menu .context-menu {
+    -fx-padding: 0;
+    -fx-border-width: 1;
+    -fx-border-color: #5f6467;
+}
+
+.area--tools .menu:hover,
+.area--tools .menu:focused,
+.area--tools .menu .context-menu .menu-item:hover,
+.area--tools .menu .context-menu .menu-item:focused {
+    -fx-background-color: #1a75aa;
 }
