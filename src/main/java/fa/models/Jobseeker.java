@@ -56,6 +56,6 @@ public class Jobseeker extends Person {
 
   @Override
   public String toString() {
-    return String.format("Name: %s, Education: %s", getFirstName(), getLastName());
+    return getFirstName() + " " + getLastName();
   }
 }

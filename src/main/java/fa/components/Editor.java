@@ -1,24 +1,18 @@
 package fa.components;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-
-import fa.models.DB;
-import javafx.collections.FXCollections;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
-public class Editor extends SplitPane {
-  @FXML private ListView<String> itemsList;
+import java.io.IOException;
+
+public class Editor<T> extends SplitPane {
+  @FXML private ListView<T> itemsList;
   @FXML private Pane editorFormContainer;
 
   public Editor() {
@@ -37,38 +31,11 @@ public class Editor extends SplitPane {
     return editorFormContainer.getChildren();
   }
 
-  public void initialize() {
-    System.out.format("[ %s ]: Editor initialized.\n", new Date());
-
-    ArrayList<String> jobkeeperName = new ArrayList<>();
-    DB.init().getJobseekers().forEach((k) -> {
-      System.out.println(k.getFirstName());
-      jobkeeperName.add(k.getFirstName());
-    });
-
-    ObservableList<String> items = FXCollections.observableArrayList(jobkeeperName);
-
-    itemsList.setCellFactory(stringListView -> new DataListCell());
+  void setItemsList(ObservableList<T> items) {
     itemsList.setItems(items);
-
-    // TODO: This needs to be changed to pass the new value to the editor form
-    itemsList.getSelectionModel().selectedItemProperty().addListener(
-      (observableValue, oldValue, newValue) -> ((Label)editorFormContainer.getChildren().get(0)).setText(newValue)
-    );
   }
-}
 
-class DataListCell extends ListCell<String> {
-  @Override
-  public void updateItem(String item, boolean empty) {
-    super.updateItem(item, empty);
-
-    if (item != null) {
-      HBox row = new HBox();
-      row.getStyleClass().add("data-list");
-      row.getChildren().addAll(new Label(item));
-
-      setGraphic(row);
-    }
+  void onNewItem(ChangeListener<T> changeListener) {
+    itemsList.getSelectionModel().selectedItemProperty().addListener(changeListener);
   }
 }
