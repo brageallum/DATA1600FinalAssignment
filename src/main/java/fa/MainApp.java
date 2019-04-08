@@ -28,7 +28,7 @@ public class MainApp extends Application {
 
         stage.setTitle("Final Assignment");
         //stage.setResizable(false);
-        stage.initStyle(StageStyle.DECORATED);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setMinWidth(600);
         stage.setMinHeight(400);
         stage.setScene(scene);

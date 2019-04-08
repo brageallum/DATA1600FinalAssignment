@@ -29,31 +29,43 @@
     -fx-text-fill: #2299dd;
 }
 
-.area--tools {
-    -fx-background-color: #3C3F41;
-    -fx-border-width: 0 0 1 0;
-    -fx-border-color: #5f6467;
+.area--tools, .area--menubar {
+    -fx-background-color: #2e3032;
+    -fx-border-width: 0 0 0 0;
 }
 
-.area--tools .menu,
-.area--tools .menu .context-menu {
+.area--tools .button--close-app, .area--tools .button--minimize-app {
+    -fx-background-color: #2e3032;
+    -fx-border-width: 0;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 0;
+}
+
+.area--tools .button--close-app:hover {
+    -fx-background-color: #c0392b;
+}
+
+
+.area--menubar .menu,
+.area--menubar .menu .context-menu {
     -fx-background-color: #3C3F41;
     -fx-cursor: hand;
 }
 
-.area--tools .menu .label {
+.area--menubar .menu .label {
     -fx-text-fill: #fff;
 }
 
-.area--tools .menu .context-menu {
+.area--menubar .menu .context-menu {
     -fx-padding: 0;
     -fx-border-width: 0;
     -fx-border-color: #5f6467;
 }
 
-.area--tools .menu:hover,
-.area--tools .menu:focused,
-.area--tools .menu .context-menu .menu-item:hover,
-.area--tools .menu .context-menu .menu-item:focused {
+
+.area--menubar .menu:hover,
+.area--menubar .menu:focused,
+.area--menubar .menu .context-menu .menu-item:hover,
+.area--menubar .menu .context-menu .menu-item:focused {
     -fx-background-color: #1a75aa;
 }

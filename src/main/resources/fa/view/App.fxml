@@ -8,18 +8,24 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.Region?>
 
 <BorderPane fx:id="rootContainer" prefWidth="1200" prefHeight="700" fx:controller="fa.AppController" xmlns:fx="http://javafx.com/fxml/1">
 
   <top>
     <VBox styleClass="area--top-bar">
       <!-- Tool bar -->
-      <MenuBar styleClass="area--tools">
-        <Menu text="File" >
-          <MenuItem text="Import data from file" onAction="#importData" />
-          <MenuItem text="Export data to file" onAction="#exportData" />
-        </Menu>
-      </MenuBar>
+
+      <HBox styleClass="area--tools">
+        <MenuBar styleClass="area--menubar">
+          <Menu text="File" >
+            <MenuItem text="Import data from file" onAction="#importData" />
+            <MenuItem text="Export data to file" onAction="#exportData" />
+          </Menu>
+        </MenuBar>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button onAction="#closeApp" styleClass="button--close-app">✕</Button>
+      </HBox>
       <!-- Navigation Bar -->
       <HBox spacing="10" styleClass="area--navigation" fx:id="topBar">
         <!-- Logo -->
@@ -31,7 +37,8 @@
         <!-- Navigation buttons -->
         <HBox fx:id="navigationBar" >
           <Button  fx:id="home" userData="view/home.fxml" onAction="#navigateApp" styleClass="button--navigation, isActive">Home</Button>
-          <Button fx:id="jobseekerEditor" userData="view/JobseekerEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Jobseekers</Button>
+          <Button fx:id="jobseekerEditor" userData="view/JobseekerEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Job seekers</Button>
+          <Button fx:id="workplaceEditor" userData="view/JobseekerEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Workplace</Button>
         </HBox>
       </HBox>
     </VBox>
