@@ -21,7 +21,10 @@ public class JobSeekerEditorController {
     System.out.format("[ %s ]: JobSeekerEditorController initialized.\n", new Date());
 
     editor.setItemsList(DB.init().getJobSeekers());
-    editor.onNewItem((observableValue, oldValue, newValue) -> selectItem(newValue));
+    editor.onNewItem((observableValue, oldValue, newValue) -> {
+      if (newValue != null) selectItem(newValue);
+      else clearForm();
+    });
   }
 
   private void selectItem(JobSeeker jobSeeker) {
@@ -39,7 +42,7 @@ public class JobSeekerEditorController {
     } else {
       updateJobSeeker();
     }
-    clearForm();
+    editor.clearSelection();
   }
 
   private void createNewJobSeeker() {

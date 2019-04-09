@@ -38,4 +38,8 @@ public class Editor<T> extends SplitPane {
   public void onNewItem(ChangeListener<T> changeListener) {
     itemsList.getSelectionModel().selectedItemProperty().addListener(changeListener);
   }
+
+  public void clearSelection() {
+    itemsList.getSelectionModel().clearSelection();
+  }
 }
