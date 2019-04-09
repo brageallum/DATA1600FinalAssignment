@@ -4,8 +4,6 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
-
 public class DB {
 
   private final ObservableList<JobSeeker> jobSeekers = FXCollections.observableArrayList(jobSeeker -> new Observable[] {
@@ -30,12 +28,12 @@ public class DB {
 
   private DB() {}
 
-  public void setJobSeekers(ArrayList<JobSeeker> jobSeekers) {
-    this.jobSeekers.addAll(jobSeekers);
-  }
-
   public ObservableList<JobSeeker> getJobSeekers() {
     return this.jobSeekers;
+  }
+
+  public void clearAll() {
+    this.jobSeekers.removeAll();
   }
 
   @Override

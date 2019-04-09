@@ -1,8 +1,8 @@
 package fa.io;
 
-import fa.models.DB;
 import javafx.stage.FileChooser;
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 
 public class FileHandler {
@@ -18,7 +18,7 @@ public class FileHandler {
   private static final FileChooser.ExtensionFilter jobjExt =
     new FileChooser.ExtensionFilter("Serialized java objects", "*.jobj");
 
-  public DB openFileChooser() {
+  public void openFileChooser() {
     System.out.println(InitialDirectory);
     FileChooser fc = new FileChooser();
     fc.setInitialDirectory(new File(InitialDirectory));
@@ -27,15 +27,17 @@ public class FileHandler {
     File selectedFile = fc.showOpenDialog(null);
 
     if (selectedFile != null) {
-      // TODO: Implement file reading
       String extension = selectedFile.getName();
       extension = extension.substring(extension.indexOf('.') + 1);
       System.out.println(extension);
 
-      return Reader.read(extension, selectedFile);
+      try {
+        Reader.read(extension, selectedFile);
+      } catch (IOException e) {
+        // TODO: Error handling.
+        e.printStackTrace();
+      }
     }
-
-    return DB.init();
   }
 
 }
