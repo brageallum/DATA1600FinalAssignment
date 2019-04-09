@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import fa.models.DB;
-import fa.models.Jobseeker;
+import fa.models.JobSeeker;
 
 interface ReadStrategy {
 
@@ -22,27 +22,27 @@ class CSVReader implements ReadStrategy {
   @Override
   public DB readFile(File file) throws IOException {
     // TODO: Add reader logic.
-    ArrayList<Jobseeker> jobseekers = new ArrayList<>();
+    ArrayList<JobSeeker> jobSeekers = new ArrayList<>();
 
     try {
       BufferedReader reader = Files.newBufferedReader(Paths.get(file.toString()));
       String line;
 
       while((line = reader.readLine()) != null) {
-        Jobseeker seeker = parseJobseeker(line);
-        jobseekers.add(seeker);
+        JobSeeker seeker = parseJobSeeker(line);
+        jobSeekers.add(seeker);
       }
     } catch(IOException e) {
       System.out.println(e.getMessage());
     }
 
     DB data = DB.init();
-    data.setJobseekers(jobseekers);
+    data.setJobSeekers(jobSeekers);
 
     return data;
   }
 
-  private Jobseeker parseJobseeker(String line) {
+  private JobSeeker parseJobSeeker(String line) {
     String[] data = line.split(",");
 
     String firstName = data[0];
@@ -55,7 +55,7 @@ class CSVReader implements ReadStrategy {
     int wage = Integer.parseInt(data[7]);
     String references = data[8];
 
-    return new Jobseeker(
+    return new JobSeeker(
       firstName,
       lastName,
       emailAddress,
@@ -75,7 +75,7 @@ class SerializedReader implements ReadStrategy {
   @Override
   public DB readFile(File file) {
     // TODO: Add reader logic.
-    ArrayList<Jobseeker> jobseekers = new ArrayList<>();
+    ArrayList<JobSeeker> jobSeekers = new ArrayList<>();
 
     return DB.init();
   }

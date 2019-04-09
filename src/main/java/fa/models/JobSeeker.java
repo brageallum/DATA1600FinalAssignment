@@ -7,14 +7,14 @@ import javafx.beans.property.StringProperty;
 
 import java.util.Date;
 
-public class Jobseeker extends Person {
+public class JobSeeker extends Person {
 
   private final StringProperty education;
   private final StringProperty workExperience;
   private final IntegerProperty wage;
   private final StringProperty references;
 
-  public Jobseeker(
+  public JobSeeker(
     String firstName,
     String lastName,
     String emailAddress,

@@ -8,15 +8,15 @@ import java.util.ArrayList;
 
 public class DB {
 
-  private final ObservableList<Jobseeker> jobseekers = FXCollections.observableArrayList(jobseeker -> new Observable[] {
-    jobseeker.getFirstName(),
-    jobseeker.getLastName(),
-    jobseeker.getEmailAddress(),
-    jobseeker.getPhoneNumber(),
-    jobseeker.getEducation(),
-    jobseeker.getWorkExperience(),
-    jobseeker.getWage(),
-    jobseeker.getReferences()
+  private final ObservableList<JobSeeker> jobSeekers = FXCollections.observableArrayList(jobSeeker -> new Observable[] {
+    jobSeeker.getFirstName(),
+    jobSeeker.getLastName(),
+    jobSeeker.getEmailAddress(),
+    jobSeeker.getPhoneNumber(),
+    jobSeeker.getEducation(),
+    jobSeeker.getWorkExperience(),
+    jobSeeker.getWage(),
+    jobSeeker.getReferences()
   });
 
   private static DB instance;
@@ -30,18 +30,18 @@ public class DB {
 
   private DB() {}
 
-  public void setJobseekers(ArrayList<Jobseeker> jobseekers) {
-    this.jobseekers.addAll(jobseekers);
+  public void setJobSeekers(ArrayList<JobSeeker> jobSeekers) {
+    this.jobSeekers.addAll(jobSeekers);
   }
 
-  public ObservableList<Jobseeker> getJobseekers() {
-    return this.jobseekers;
+  public ObservableList<JobSeeker> getJobSeekers() {
+    return this.jobSeekers;
   }
 
   @Override
   public String toString() {
     StringBuilder returnData = new StringBuilder();
-    for (Jobseeker seeker : this.jobseekers) {
+    for (JobSeeker seeker : this.jobSeekers) {
       returnData.append(seeker.toString());
     }
     return returnData.toString();
