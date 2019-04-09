@@ -1,10 +1,23 @@
 package fa.models;
 
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class DB {
 
-  private ArrayList<Jobseeker> jobseekers;
+  private final ObservableList<Jobseeker> jobseekers = FXCollections.observableArrayList(jobseeker -> new Observable[] {
+    jobseeker.getFirstName(),
+    jobseeker.getLastName(),
+    jobseeker.getEmailAddress(),
+    jobseeker.getPhoneNumber(),
+    jobseeker.getEducation(),
+    jobseeker.getWorkExperience(),
+    jobseeker.getWage(),
+    jobseeker.getReferences()
+  });
 
   private static DB instance;
 
@@ -18,10 +31,10 @@ public class DB {
   private DB() {}
 
   public void setJobseekers(ArrayList<Jobseeker> jobseekers) {
-    this.jobseekers = jobseekers;
+    this.jobseekers.addAll(jobseekers);
   }
 
-  public ArrayList<Jobseeker> getJobseekers() {
+  public ObservableList<Jobseeker> getJobseekers() {
     return this.jobseekers;
   }
 

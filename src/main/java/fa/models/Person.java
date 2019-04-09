@@ -1,52 +1,40 @@
 package fa.models;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 import java.util.Date;
 
 abstract class Person {
 
-  private String firstName;
-  private String lastName;
-  private String emailAddress;
-  private String phoneNumber;
-  private Date birthdate;
+  private final StringProperty firstName;
+  private final StringProperty lastName;
+  private final StringProperty emailAddress;
+  private final StringProperty phoneNumber;
+  private final ObjectProperty<Date> birthDate;
 
-  public String getFirstName() {
+  Person(String firstName, String lastName, String emailAddress, String phoneNumber, Date birthDate) {
+    this.firstName = new SimpleStringProperty(firstName);
+    this.lastName = new SimpleStringProperty(lastName);
+    this.emailAddress = new SimpleStringProperty(emailAddress);
+    this.phoneNumber = new SimpleStringProperty(phoneNumber);
+    this.birthDate = new SimpleObjectProperty<>(birthDate);
+  }
+
+  public StringProperty getFirstName() {
     return firstName;
   }
 
-  public String getLastName() {
+  public StringProperty getLastName() {
     return lastName;
   }
 
-  public String getEmailAddress() {
+  public StringProperty getEmailAddress() {
     return emailAddress;
   }
-
-  public String getPhoneNumber() {
+  public StringProperty getPhoneNumber() {
     return phoneNumber;
-  }
-
-  public Date getBirthdate() {
-    return birthdate;
-  }
-
-  public void setFirstName(String firstName) {
-    this.firstName = firstName;
-  }
-
-  public void setLastName(String lastName) {
-    this.lastName = lastName;
-  }
-
-  public void setEmailAddress(String emailAddress) {
-    this.emailAddress = emailAddress;
-  }
-
-  public void setPhoneNumber(String phoneNumber) {
-    this.phoneNumber = phoneNumber;
-  }
-
-  public void setBirthdate(Date birthdate) {
-    this.birthdate = birthdate;
   }
 }

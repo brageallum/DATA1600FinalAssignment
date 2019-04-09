@@ -29,7 +29,7 @@ class CSVReader implements ReadStrategy {
       String line;
 
       while((line = reader.readLine()) != null) {
-        Jobseeker seeker = new Jobseeker(line);
+        Jobseeker seeker = parseJobseeker(line);
         jobseekers.add(seeker);
       }
     } catch(IOException e) {
@@ -40,6 +40,32 @@ class CSVReader implements ReadStrategy {
     data.setJobseekers(jobseekers);
 
     return data;
+  }
+
+  private Jobseeker parseJobseeker(String line) {
+    String[] data = line.split(",");
+
+    String firstName = data[0];
+    String lastName = data[1];
+    String emailAddress = data[2];
+    String phoneNumber = data[3];
+    //Date birthDate = data[4]; // Handle Date
+    String education = data[5];
+    String workExperience = data[6];
+    int wage = Integer.parseInt(data[7]);
+    String references = data[8];
+
+    return new Jobseeker(
+      firstName,
+      lastName,
+      emailAddress,
+      phoneNumber,
+      null,
+      education,
+      workExperience,
+      wage,
+      references
+    );
   }
 
 }

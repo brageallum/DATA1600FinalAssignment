@@ -1,61 +1,56 @@
 package fa.models;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
+import java.util.Date;
+
 public class Jobseeker extends Person {
 
-  private String education;
-  private String workExperience;
-  private Integer wage;
-  private String references;
+  private final StringProperty education;
+  private final StringProperty workExperience;
+  private final IntegerProperty wage;
+  private final StringProperty references;
 
-  public Jobseeker(String line) {
+  public Jobseeker(
+    String firstName,
+    String lastName,
+    String emailAddress,
+    String phoneNumber,
+    Date birthDate,
+    String education,
+    String workExperience,
+    int wage,
+    String references) {
 
-    String[] data = line.split(",");
-    setFirstName(data[0]);
-    setLastName(data[1]);
-    setEmailAddress(data[2]);
-    setPhoneNumber(data[3]);
-    //setBirthdate(data[4]); // Handle Date
-    setEducation(data[5]);
-    setWorkExperience(data[6]);
-    setWage(Integer.parseInt(data[7]));
-    setReferences(data[8]);
+    super(firstName, lastName, emailAddress, phoneNumber, birthDate);
 
+    this.education = new SimpleStringProperty(education);
+    this.workExperience = new SimpleStringProperty(workExperience);
+    this.wage = new SimpleIntegerProperty(wage);
+    this.references = new SimpleStringProperty(references);
   }
 
-  public String getEducation() {
+  public StringProperty getEducation() {
     return education;
   }
 
-  public String getWorkExperience() {
+  public StringProperty getWorkExperience() {
     return workExperience;
   }
 
-  public Integer getWage() {
+  public IntegerProperty getWage() {
     return wage;
   }
 
-  public String getReferences() {
+  public StringProperty getReferences() {
     return references;
-  }
-
-  public void setEducation(String education) {
-    this.education = education;
-  }
-
-  public void setWorkExperience(String workExperience) {
-    this.workExperience = workExperience;
-  }
-
-  public void setWage(Integer wage) {
-    this.wage = wage;
-  }
-
-  public void setReferences(String references) {
-    this.references = references;
   }
 
   @Override
   public String toString() {
-    return getFirstName() + " " + getLastName();
+    return getFirstName().getValue() + " " + getLastName().getValue();
   }
 }
