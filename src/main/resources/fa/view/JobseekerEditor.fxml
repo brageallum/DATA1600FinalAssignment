@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
-<Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.components.JobSeekerEditor">
+<Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.JobSeekerEditorController">
     <form>
         <Label fx:id="title" />
         <HBox><Label text="First name"/><TextField fx:id="firstNameField" /></HBox>

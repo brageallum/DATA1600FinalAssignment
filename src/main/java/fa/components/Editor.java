@@ -31,11 +31,11 @@ public class Editor<T> extends SplitPane {
     return editorFormContainer.getChildren();
   }
 
-  void setItemsList(ObservableList<T> items) {
+  public void setItemsList(ObservableList<T> items) {
     itemsList.setItems(items);
   }
 
-  void onNewItem(ChangeListener<T> changeListener) {
+  public void onNewItem(ChangeListener<T> changeListener) {
     itemsList.getSelectionModel().selectedItemProperty().addListener(changeListener);
   }
 }

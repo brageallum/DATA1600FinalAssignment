@@ -1,5 +1,6 @@
-package fa.components;
+package fa;
 
+import fa.components.Editor;
 import fa.models.DB;
 import fa.models.JobSeeker;
 import javafx.fxml.FXML;
@@ -8,7 +9,7 @@ import javafx.scene.control.TextField;
 
 import java.util.Date;
 
-public class JobSeekerEditor {
+public class JobSeekerEditorController {
   @FXML private Label title;
   @FXML private Editor<JobSeeker> editor;
   @FXML private TextField firstNameField;
@@ -17,7 +18,7 @@ public class JobSeekerEditor {
   private JobSeeker selectedItem;
 
   public void initialize() {
-    System.out.format("[ %s ]: JobSeekerEditor initialized.\n", new Date());
+    System.out.format("[ %s ]: JobSeekerEditorController initialized.\n", new Date());
 
     editor.setItemsList(DB.init().getJobSeekers());
     editor.onNewItem((observableValue, oldValue, newValue) -> selectItem(newValue));
