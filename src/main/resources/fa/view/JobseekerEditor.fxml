@@ -4,9 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
 <Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.components.JobSeekerEditor">
     <form>
         <Label fx:id="title" />
-        <HBox><Label text="First name"/><TextField fx:id="firstNameField" onAction="#firstnameHandler" /></HBox>
+        <HBox><Label text="First name"/><TextField fx:id="firstNameField" /></HBox>
+        <HBox><Label text="Last name"/><TextField fx:id="lastNameField" /></HBox>
+        <Button onAction="#submit" text="Submit" />
     </form>
 </Editor>
