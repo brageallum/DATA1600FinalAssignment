@@ -18,21 +18,13 @@ public class FileHandler {
   private static final FileChooser.ExtensionFilter jobjExt =
     new FileChooser.ExtensionFilter("Serialized java objects", "*.jobj");
 
-  public void openFileChooser() {
-    System.out.println(InitialDirectory);
-    FileChooser fc = new FileChooser();
-    fc.setInitialDirectory(new File(InitialDirectory));
-    fc.getExtensionFilters().addAll(allowedExt, csvExt, jobjExt);
-
-    File selectedFile = fc.showOpenDialog(null);
-
-    if (selectedFile != null) {
-      String extension = selectedFile.getName();
-      extension = extension.substring(extension.indexOf('.') + 1);
-      System.out.println(extension);
+  public void importFile() {
+    File file = getFileChooser().showOpenDialog(null);
+    if (file != null) {
+      String extension = getFileExtension(file);
 
       try {
-        Reader.read(extension, selectedFile);
+        Reader.read(extension, file);
       } catch (IOException e) {
         // TODO: Error handling.
         e.printStackTrace();
@@ -40,4 +32,29 @@ public class FileHandler {
     }
   }
 
+  public void exportFile() {
+    File file = getFileChooser().showSaveDialog(null);
+    if (file != null) {
+      String extension = getFileExtension(file);
+
+      try {
+        Writer.write(extension, file);
+      } catch (IOException e) {
+        // TODO: Error handling.
+        e.printStackTrace();
+      }
+    }
+  }
+
+  private FileChooser getFileChooser() {
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setInitialDirectory(new File(InitialDirectory));
+    fileChooser.getExtensionFilters().addAll(allowedExt, csvExt, jobjExt);
+
+    return fileChooser;
+  }
+
+  private String getFileExtension(File file) {
+    return file.getName().split("\\.")[1];
+  }
 }

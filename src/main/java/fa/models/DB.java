@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class DB {
+  private static DB instance;
 
   private final ObservableList<JobSeeker> jobSeekers = FXCollections.observableArrayList(jobSeeker -> new Observable[] {
     jobSeeker.getFirstName(),
@@ -17,7 +18,7 @@ public class DB {
     jobSeeker.getReferences()
   });
 
-  private static DB instance;
+  private DB() {}
 
   public static DB init() {
     if (instance == null) {
@@ -26,7 +27,6 @@ public class DB {
     return instance;
   }
 
-  private DB() {}
 
   public ObservableList<JobSeeker> getJobSeekers() {
     return this.jobSeekers;
@@ -44,5 +44,4 @@ public class DB {
     }
     return returnData.toString();
   }
-
 }

@@ -20,7 +20,7 @@ class CSVReader implements ReadStrategy {
 
   @Override
   public void readFile(File file) throws IOException {
-    BufferedReader reader = Files.newBufferedReader(Paths.get(file.toString()));
+    BufferedReader reader = Files.newBufferedReader(Paths.get(file.getPath()));
 
     String line;
     while((line = reader.readLine()) != null) {

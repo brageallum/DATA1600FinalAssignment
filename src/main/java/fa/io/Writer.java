@@ -1,24 +1,47 @@
 package fa.io;
 
+import fa.models.DB;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 interface WriteStrategy {
-  // TODO: Change void to data model type.
-  void writeToFile();
+  void writeToFile(File file) throws IOException;
 }
 
 class CSVWriter implements WriteStrategy {
   @Override
-  public void writeToFile() {
+  public void writeToFile(File file) throws IOException  {
 
   }
 }
 
 class SerializedWriter implements WriteStrategy {
   @Override
-  public void writeToFile() {
+  public void writeToFile(File file) throws IOException {
+    FileOutputStream fos = new FileOutputStream(file.getPath());
+    ObjectOutputStream outputStream = new ObjectOutputStream(fos);
 
+    // TODO: implement writing the DB to a serialized file
+    // The below statement will currently not work, since there is no way to make DB serializable without removing the ObservableLists
+    outputStream.writeObject(DB.init());
+
+    fos.close();
+    outputStream.close();
   }
 }
 
 public class Writer {
-  // Use either CSVWriter or SerializeWriter based on file type
+  public static void write(String ext, File file) throws IOException {
+    switch(ext) {
+      case "csv":
+        new CSVWriter().writeToFile(file);
+        break;
+      case "jobj":
+        new SerializedWriter().writeToFile(file);
+        break;
+    }
+  }
 }
