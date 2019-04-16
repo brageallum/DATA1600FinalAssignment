@@ -25,8 +25,7 @@ class SerializedWriter implements WriteStrategy {
     ObjectOutputStream outputStream = new ObjectOutputStream(fos);
 
     // TODO: implement writing the DB to a serialized file
-    // The below statement will currently not work, since there is no way to make DB serializable without removing the ObservableLists
-    outputStream.writeObject(DB.init());
+    outputStream.writeObject(DB.init().toMap());
 
     fos.close();
     outputStream.close();

@@ -6,6 +6,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class JobSeeker extends Person {
   private static int nextId = 100;
@@ -65,6 +67,36 @@ public class JobSeeker extends Person {
     this.references = new SimpleStringProperty(references);
   }
 
+  public static JobSeeker fromMap(Map<String, String> map) {
+    if (!(
+      map.get("id") != null && map.get("id").matches("-?\\d+")
+      && map.get("firstName") != null
+      && map.get("lastName") != null
+      && map.get("emailAddress") != null
+      && map.get("phoneNumber") != null
+//      && map.get("data") != null
+      && map.get("education") != null
+      && map.get("workExperience") != null
+      && map.get("wage") != null && map.get("wage").matches("-?\\d+")
+      && map.get("references") != null
+    )) {
+      // TODO: Throw exception (bad input file)
+    }
+
+    return new JobSeeker(
+      Integer.parseInt(map.get("id")),
+      map.get("firstName"),
+      map.get("lastName"),
+      map.get("emailAddress"),
+      map.get("phoneNumber"),
+      null,
+      map.get("education"),
+      map.get("workExperience"),
+      Integer.parseInt(map.get("wage")),
+      map.get("references")
+    );
+  }
+
   public StringProperty getEducation() {
     return education;
   }
@@ -84,5 +116,16 @@ public class JobSeeker extends Person {
   @Override
   public String toString() {
     return String.format("[%s] %s %s", ID, getFirstName().getValue(), getLastName().getValue());
+  }
+
+  @Override
+  public Map<String, String> toMap() {
+    Map<String, String> map = super.toMap();
+    map.put("id", Integer.toString(ID));
+    map.put("education", getEducation().getValue());
+    map.put("workExperience", getWorkExperience().getValue());
+    map.put("wage", getWage().getValue().toString());
+    map.put("references", getReferences().getValue());
+    return map;
   }
 }

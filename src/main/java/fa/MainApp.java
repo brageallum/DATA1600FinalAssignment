@@ -18,7 +18,6 @@ public class MainApp extends Application {
     public void start(Stage stage) throws Exception {
 
         File DBInit = new File(Paths.get("./src/main/resources/fa/data/db.csv").toAbsolutePath().normalize().toString());
-        System.out.println(DBInit);
         Reader.read("csv", DBInit);
 
         Parent root = FXMLLoader.load(getClass().getResource("view/App.fxml"));
@@ -27,7 +26,6 @@ public class MainApp extends Application {
         scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
         stage.setTitle("Final Assignment");
-        //stage.setResizable(false);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setMinWidth(600);
         stage.setMinHeight(400);

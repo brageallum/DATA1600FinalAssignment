@@ -4,6 +4,11 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class DB {
   private static DB instance;
 
@@ -29,11 +34,21 @@ public class DB {
 
 
   public ObservableList<JobSeeker> getJobSeekers() {
-    return this.jobSeekers;
+    return jobSeekers;
   }
 
   public void clearAll() {
     this.jobSeekers.removeAll();
+  }
+
+  public void fromMap(Map<String, List<Map<String, String>>> map) {
+    getJobSeekers().setAll(map.get("jobSeekers").stream().map(JobSeeker::fromMap).collect(Collectors.toList()));
+  }
+
+  public Map<String, List<Map<String, String>>> toMap() {
+    Map<String, List<Map<String, String>>> map = new HashMap<>();
+    map.put("jobSeekers", jobSeekers.stream().map(JobSeeker::toMap).collect(Collectors.toList()));
+    return map;
   }
 
   @Override

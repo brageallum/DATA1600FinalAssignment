@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Reader {
-  public static void read(String ext, File file) throws IOException {
+  public static void read(String ext, File file) throws IOException, ClassNotFoundException {
     DB.init().clearAll();
     switch(ext) {
       case "csv":

@@ -28,6 +28,8 @@ public class FileHandler {
       } catch (IOException e) {
         // TODO: Error handling.
         e.printStackTrace();
+      } catch (ClassNotFoundException e) {
+        e.printStackTrace();
       }
     }
   }
