@@ -1,55 +1,44 @@
 package fa.models;
 
+import fa.utils.SerializableProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
-import java.util.*;
+import java.io.Serializable;
+import java.util.Date;
 
-abstract class Person {
+abstract class Person implements Serializable {
 
-  private final StringProperty firstName;
-  private final StringProperty lastName;
-  private final StringProperty emailAddress;
-  private final StringProperty phoneNumber;
-  private final ObjectProperty<Date> birthDate; // TODO: implement birthDate
+  private final SerializableProperty<String> firstName;
+  private final SerializableProperty<String> lastName;
+  private final SerializableProperty<String> emailAddress;
+  private final SerializableProperty<String> phoneNumber;
+  private final SerializableProperty<Date> birthDate; // TODO: implement birthDate
 
   Person(String firstName, String lastName, String emailAddress, String phoneNumber, Date birthDate) {
-    this.firstName = new SimpleStringProperty(firstName);
-    this.lastName = new SimpleStringProperty(lastName);
-    this.emailAddress = new SimpleStringProperty(emailAddress);
-    this.phoneNumber = new SimpleStringProperty(phoneNumber);
-    this.birthDate = new SimpleObjectProperty<>(birthDate);
+    this.firstName = new SerializableProperty<>(firstName);
+    this.lastName = new SerializableProperty<>(lastName);
+    this.emailAddress = new SerializableProperty<>(emailAddress);
+    this.phoneNumber = new SerializableProperty<>(phoneNumber);
+    this.birthDate = new SerializableProperty<>(birthDate);
   }
 
-  public StringProperty getFirstName() {
-    return firstName;
+  public ObjectProperty<String> getFirstName() {
+    return firstName.getProperty();
   }
 
-  public StringProperty getLastName() {
-    return lastName;
+  public ObjectProperty<String> getLastName() {
+    return lastName.getProperty();
   }
 
-  public StringProperty getEmailAddress() {
-    return emailAddress;
+  public ObjectProperty<String> getEmailAddress() {
+    return emailAddress.getProperty();
   }
 
-  public StringProperty getPhoneNumber() {
-    return phoneNumber;
+  public ObjectProperty<String> getPhoneNumber() {
+    return phoneNumber.getProperty();
   }
 
   public ObjectProperty<Date> getBirthDate() {
-    return birthDate;
-  }
-
-  public Map<String, String> toMap() {
-    Map<String, String> map = new HashMap<>();
-    map.put("firstName", getFirstName().getValue());
-    map.put("lastName", getLastName().getValue());
-    map.put("emailAddress", getEmailAddress().getValue());
-    map.put("phoneNumber", getPhoneNumber().getValue());
-//    map.put("birthDate", getBirthDate().getValue().toString());
-    return map;
+    return birthDate.getProperty();
   }
 }

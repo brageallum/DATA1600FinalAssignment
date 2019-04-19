@@ -2,20 +2,20 @@ package fa.io;
 
 import fa.models.DB;
 
-import java.io.*;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 class SerializedReader implements ReadStrategy {
   @Override
   public void readFile(File file) throws IOException, ClassNotFoundException {
     FileInputStream fileIn =  new FileInputStream(file);
-    ObjectInputStream in = new ObjectInputStream(fileIn);
+    ObjectInputStream ois = new ObjectInputStream(fileIn);
 
-    Map<String, List<Map<String, String>>> map = (Map<String, List<Map<String, String>>>) in.readObject();
-    DB.init().fromMap(map);
+    DB.replaceInstance((DB) ois.readObject());
 
-    in.close();
+    ois.close();
     fileIn.close();
   }
 }
