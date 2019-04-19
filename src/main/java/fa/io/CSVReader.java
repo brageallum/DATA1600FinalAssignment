@@ -18,8 +18,11 @@ class CSVReader implements ReadStrategy {
     "birthDate", "education", "workExperience", "wage", "references"
   };
 
+  private DB detachedDB;
+
   @Override
-  public void readFile(File file) throws IOException {
+  public DB readFile(File file) throws IOException {
+    detachedDB = DB.getDetachedInstance();
     BufferedReader reader = Files.newBufferedReader(Paths.get(file.getPath()));
 
     String line;
@@ -28,6 +31,8 @@ class CSVReader implements ReadStrategy {
 
       parseLine(line);
     }
+
+    return detachedDB;
   }
 
   private boolean isEmpty(String line) {
@@ -37,7 +42,7 @@ class CSVReader implements ReadStrategy {
   private void parseLine(String line) {
     switch (getType(line)) {
       case "JobSeeker":
-        DB.init().getJobSeekers().add(parseJobSeeker(line));
+        detachedDB.getJobSeekers().add(parseJobSeeker(line));
         break;
       default:
         // TODO: Throw "CSVReaderInvalidTypeException" (or something like that)

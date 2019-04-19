@@ -1,16 +1,15 @@
 package fa;
 
-import java.io.File;
-import java.nio.file.Paths;
-
-import fa.io.Reader;
+import fa.io.FileHandler;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.File;
+import java.nio.file.Paths;
 
 public class MainApp extends Application {
 
@@ -18,7 +17,7 @@ public class MainApp extends Application {
     public void start(Stage stage) throws Exception {
 
         File DBInit = new File(Paths.get("./src/main/resources/fa/data/db.csv").toAbsolutePath().normalize().toString());
-        Reader.read("csv", DBInit);
+        new FileHandler().importData(DBInit);
 
         Parent root = FXMLLoader.load(getClass().getResource("view/App.fxml"));
 

@@ -1,6 +1,9 @@
 package fa.io;
 
+import fa.models.DB;
+import javafx.concurrent.Task;
 import javafx.stage.FileChooser;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -18,33 +21,54 @@ public class FileHandler {
   private static final FileChooser.ExtensionFilter jobjExt =
     new FileChooser.ExtensionFilter("Serialized java objects", "*.jobj");
 
-  public void importFile() {
+  public void openImportDataDialog() {
     File file = getFileChooser().showOpenDialog(null);
     if (file != null) {
-      String extension = getFileExtension(file);
-
-      try {
-        Reader.read(extension, file);
-      } catch (IOException e) {
-        // TODO: Error handling.
-        e.printStackTrace();
-      } catch (ClassNotFoundException e) {
-        e.printStackTrace();
-      }
+      importData(file);
     }
   }
 
-  public void exportFile() {
+  public void importData(File file) {
+    String extension = getFileExtension(file);
+
+    Task<DB> task = new Task<>() {
+      @Override
+      protected DB call() throws Exception {
+        try {
+          return Reader.read(extension, file);
+        } catch (IOException e) {
+          // TODO: Error handling.
+          e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+          e.printStackTrace();
+        }
+        return null;
+      }
+    };
+
+    task.setOnSucceeded(eventHandler -> {
+      System.out.println(task.getValue());
+      DB.replaceInstance(task.getValue());
+    });
+
+    new Thread(task).start();
+  }
+
+  public void openExportDataDialog() {
     File file = getFileChooser().showSaveDialog(null);
     if (file != null) {
-      String extension = getFileExtension(file);
+      exportData(file);
+    }
+  }
 
-      try {
-        Writer.write(extension, file);
-      } catch (IOException e) {
-        // TODO: Error handling.
-        e.printStackTrace();
-      }
+  public void exportData(File file) {
+    String extension = getFileExtension(file);
+
+    try {
+      Writer.write(extension, file);
+    } catch (IOException e) {
+      // TODO: Error handling.
+      e.printStackTrace();
     }
   }
 

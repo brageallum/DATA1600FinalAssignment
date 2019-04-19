@@ -25,7 +25,7 @@ class SerializedWriter implements WriteStrategy {
     ObjectOutputStream outputStream = new ObjectOutputStream(fos);
 
     // TODO: implement writing the DB to a serialized file
-    outputStream.writeObject(DB.init());
+    outputStream.writeObject(DB.getInstance());
 
     fos.close();
     outputStream.close();

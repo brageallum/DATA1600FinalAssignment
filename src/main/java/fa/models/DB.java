@@ -4,9 +4,6 @@ import fa.utils.SerializableObservableList;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectStreamException;
 import java.io.Serializable;
 
 public class DB implements Serializable {
@@ -25,14 +22,21 @@ public class DB implements Serializable {
 
   private DB() {}
 
-  public static DB init() {
+  public static DB getInstance() {
     if (instance == null) {
       instance = new DB();
     }
     return instance;
   }
 
+  public static DB getDetachedInstance() {
+    return new DB();
+  }
+
   public static void replaceInstance(DB newDb) {
+    if (instance == null) {
+      instance = new DB();
+    }
     instance.getJobSeekers().setAll(newDb.getJobSeekers());
   }
 

@@ -6,16 +6,13 @@ import java.io.File;
 import java.io.IOException;
 
 public class Reader {
-  public static void read(String ext, File file) throws IOException, ClassNotFoundException {
-    DB.init().clearAll();
+  public static DB read(String ext, File file) throws IOException, ClassNotFoundException {
     switch(ext) {
       case "csv":
-          new CSVReader().readFile(file);
-        break;
+        return new CSVReader().readFile(file);
       case "jobj":
-        new SerializedReader().readFile(file);
-        break;
+        return new SerializedReader().readFile(file);
     }
+    return null;
   }
-
 }

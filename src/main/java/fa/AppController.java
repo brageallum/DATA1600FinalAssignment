@@ -76,11 +76,11 @@ public class AppController {
 
     @FXML
     public void importData(ActionEvent e) {
-        new FileHandler().importFile();
+        new FileHandler().openImportDataDialog();
     }
 
     @FXML
     public void exportData(ActionEvent e) {
-        new FileHandler().exportFile();
+        new FileHandler().openExportDataDialog();
     }
 }
