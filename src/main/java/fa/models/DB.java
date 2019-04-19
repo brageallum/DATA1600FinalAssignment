@@ -1,18 +1,18 @@
 package fa.models;
 
+import fa.utils.SerializableObservableList;
 import javafx.beans.Observable;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectStreamException;
+import java.io.Serializable;
 
-public class DB {
+public class DB implements Serializable {
   private static DB instance;
 
-  private final ObservableList<JobSeeker> jobSeekers = FXCollections.observableArrayList(jobSeeker -> new Observable[] {
+  private final SerializableObservableList<JobSeeker> jobSeekers = new SerializableObservableList<>(jobSeeker -> new Observable[] {
     jobSeeker.getFirstName(),
     jobSeeker.getLastName(),
     jobSeeker.getEmailAddress(),
@@ -32,29 +32,22 @@ public class DB {
     return instance;
   }
 
+  public static void replaceInstance(DB newDb) {
+    instance.getJobSeekers().setAll(newDb.getJobSeekers());
+  }
 
   public ObservableList<JobSeeker> getJobSeekers() {
-    return jobSeekers;
+    return jobSeekers.getObservableList();
   }
 
   public void clearAll() {
-    this.jobSeekers.removeAll();
-  }
-
-  public void fromMap(Map<String, List<Map<String, String>>> map) {
-    getJobSeekers().setAll(map.get("jobSeekers").stream().map(JobSeeker::fromMap).collect(Collectors.toList()));
-  }
-
-  public Map<String, List<Map<String, String>>> toMap() {
-    Map<String, List<Map<String, String>>> map = new HashMap<>();
-    map.put("jobSeekers", jobSeekers.stream().map(JobSeeker::toMap).collect(Collectors.toList()));
-    return map;
+    this.jobSeekers.getObservableList().removeAll();
   }
 
   @Override
   public String toString() {
     StringBuilder returnData = new StringBuilder();
-    for (JobSeeker seeker : this.jobSeekers) {
+    for (JobSeeker seeker : this.jobSeekers.getObservableList()) {
       returnData.append(seeker.toString());
     }
     return returnData.toString();

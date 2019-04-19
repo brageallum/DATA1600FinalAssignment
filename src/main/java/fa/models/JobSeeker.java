@@ -1,21 +1,18 @@
 package fa.models;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import fa.utils.SerializableProperty;
+import javafx.beans.property.*;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-public class JobSeeker extends Person {
+public class JobSeeker extends Person implements Serializable {
   private static int nextId = 100;
 
-  private final StringProperty education;
-  private final StringProperty workExperience;
-  private final IntegerProperty wage;
-  private final StringProperty references;
+  private final SerializableProperty<String> education;
+  private final SerializableProperty<String> workExperience;
+  private final SerializableProperty<Integer> wage;
+  private final SerializableProperty<String> references;
 
   private final int ID;
 
@@ -61,71 +58,30 @@ public class JobSeeker extends Person {
     super(firstName, lastName, emailAddress, phoneNumber, birthDate);
 
     this.ID = ID;
-    this.education = new SimpleStringProperty(education);
-    this.workExperience = new SimpleStringProperty(workExperience);
-    this.wage = new SimpleIntegerProperty(wage);
-    this.references = new SimpleStringProperty(references);
+    this.education = new SerializableProperty<>(education);
+    this.workExperience = new SerializableProperty<>(workExperience);
+    this.wage = new SerializableProperty<>(wage);
+    this.references = new SerializableProperty<>(references);
   }
 
-  public static JobSeeker fromMap(Map<String, String> map) {
-    if (!(
-      map.get("id") != null && map.get("id").matches("-?\\d+")
-      && map.get("firstName") != null
-      && map.get("lastName") != null
-      && map.get("emailAddress") != null
-      && map.get("phoneNumber") != null
-//      && map.get("data") != null
-      && map.get("education") != null
-      && map.get("workExperience") != null
-      && map.get("wage") != null && map.get("wage").matches("-?\\d+")
-      && map.get("references") != null
-    )) {
-      // TODO: Throw exception (bad input file)
-    }
-
-    return new JobSeeker(
-      Integer.parseInt(map.get("id")),
-      map.get("firstName"),
-      map.get("lastName"),
-      map.get("emailAddress"),
-      map.get("phoneNumber"),
-      null,
-      map.get("education"),
-      map.get("workExperience"),
-      Integer.parseInt(map.get("wage")),
-      map.get("references")
-    );
+  public ObjectProperty<String> getEducation() {
+    return education.getProperty();
   }
 
-  public StringProperty getEducation() {
-    return education;
+  public ObjectProperty<String> getWorkExperience() {
+    return workExperience.getProperty();
   }
 
-  public StringProperty getWorkExperience() {
-    return workExperience;
+  public ObjectProperty<Integer> getWage() {
+    return wage.getProperty();
   }
 
-  public IntegerProperty getWage() {
-    return wage;
-  }
-
-  public StringProperty getReferences() {
-    return references;
+  public ObjectProperty<String> getReferences() {
+    return references.getProperty();
   }
 
   @Override
   public String toString() {
     return String.format("[%s] %s %s", ID, getFirstName().getValue(), getLastName().getValue());
-  }
-
-  @Override
-  public Map<String, String> toMap() {
-    Map<String, String> map = super.toMap();
-    map.put("id", Integer.toString(ID));
-    map.put("education", getEducation().getValue());
-    map.put("workExperience", getWorkExperience().getValue());
-    map.put("wage", getWage().getValue().toString());
-    map.put("references", getReferences().getValue());
-    return map;
   }
 }
