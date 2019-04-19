@@ -46,10 +46,7 @@ public class FileHandler {
       }
     };
 
-    task.setOnSucceeded(eventHandler -> {
-      System.out.println(task.getValue());
-      DB.replaceInstance(task.getValue());
-    });
+    task.setOnSucceeded(eventHandler -> DB.replaceInstance(task.getValue()));
 
     new Thread(task).start();
   }

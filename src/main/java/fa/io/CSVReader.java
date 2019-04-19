@@ -22,6 +22,11 @@ class CSVReader implements ReadStrategy {
 
   @Override
   public DB readFile(File file) throws IOException {
+    /*
+      Since JavaFX does not allow for changing the UI from another Thread then the main Thread,
+      and making changes to the DB singleton instance automatically updates the UI, we store the newly read data
+      in a DB instance which is detached from the global singleton instance until we return it to the main Thread.
+     */
     detachedDB = DB.getDetachedInstance();
     BufferedReader reader = Files.newBufferedReader(Paths.get(file.getPath()));
 
