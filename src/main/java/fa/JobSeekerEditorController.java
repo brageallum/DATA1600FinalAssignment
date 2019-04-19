@@ -1,19 +1,19 @@
 package fa;
 
 import fa.components.Editor;
+import fa.components.EditorTextField;
 import fa.models.DB;
 import fa.models.JobSeeker;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
 import java.util.Date;
 
 public class JobSeekerEditorController {
   @FXML private Label title;
   @FXML private Editor<JobSeeker> editor;
-  @FXML private TextField firstNameField;
-  @FXML private TextField lastNameField;
+  @FXML private EditorTextField firstNameField;
+  @FXML private EditorTextField lastNameField;
 
   private JobSeeker selectedItem;
 
@@ -31,8 +31,8 @@ public class JobSeekerEditorController {
     title.setText("Editing: " + jobSeeker.toString());
     selectedItem = jobSeeker;
 
-    firstNameField.setText(jobSeeker.getFirstName().getValue());
-    lastNameField.setText(jobSeeker.getLastName().getValue());
+    firstNameField.setFieldText(jobSeeker.getFirstName().getValue());
+    lastNameField.setFieldText(jobSeeker.getLastName().getValue());
   }
 
   @FXML
@@ -47,8 +47,8 @@ public class JobSeekerEditorController {
 
   private void createNewJobSeeker() {
     DB.init().getJobSeekers().add(new JobSeeker(
-      firstNameField.getText(),
-      lastNameField.getText(),
+      firstNameField.getFieldText(),
+      lastNameField.getFieldText(),
       "",
       "",
       new Date(),
@@ -60,15 +60,15 @@ public class JobSeekerEditorController {
   }
 
   private void updateJobSeeker() {
-    selectedItem.getFirstName().set(firstNameField.getText());
-    selectedItem.getLastName().set(lastNameField.getText());
+    selectedItem.getFirstName().set(firstNameField.getFieldText());
+    selectedItem.getLastName().set(lastNameField.getFieldText());
   }
 
   private void clearForm() {
     title.setText("");
     selectedItem = null;
 
-    firstNameField.setText("");
-    lastNameField.setText("");
+    firstNameField.setFieldText("");
+    lastNameField.setFieldText("");
   }
 }

@@ -69,3 +69,7 @@
 .area--menubar .menu .context-menu .menu-item:focused {
     -fx-background-color: #1a75aa;
 }
+
+.editorTextField .label {
+    -fx-font-weight: bold;
+}

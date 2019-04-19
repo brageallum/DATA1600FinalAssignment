@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<fx:root type="HBox" alignment="BASELINE_CENTER" spacing="10" styleClass="editorTextField" xmlns:fx="http://javafx.com/fxml" >
+    <Label fx:id="label"/><TextField fx:id="field" />
+</fx:root>
