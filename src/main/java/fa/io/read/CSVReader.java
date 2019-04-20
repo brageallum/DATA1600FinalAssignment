@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -51,7 +53,7 @@ class CSVReader implements ReadStrategy {
         break;
       default:
         throw new ReadCSVInvalidTypeException(
-            String.format("\"%s\" is not a valid data type (on line %s)", type, line.getLineNumber())
+            String.format("[on line %s]: \"%s\" is not a valid data type.", line.getLineNumber(), type)
           );
     }
   }
@@ -68,21 +70,28 @@ class CSVReader implements ReadStrategy {
   private JobSeeker parseJobSeeker(Line line) throws ReadCSVInvalidFormatException {
     Matcher data = getCSVRowPattern(jobSeekerFields).matcher(line.getText());
     if (!data.find()) throw new ReadCSVInvalidFormatException(
-        String.format("Incorrect format for type JobSeeker (on line %s)", line.getLineNumber())
+        String.format("[on line %s]: Incorrect format for type JobSeeker.", line.getLineNumber())
       );
 
-    return new JobSeeker(
-      Integer.parseInt(data.group("id")),
-      data.group("firstName"),
-      data.group("lastName"),
-      data.group("emailAddress"),
-      data.group("phoneNumber"),
-      null,
-      data.group("education"),
-      data.group("workExperience"),
-      Integer.parseInt(data.group("wage")),
-      data.group("references")
-    );
+    try {
+      return new JobSeeker(
+        Integer.parseInt(data.group("id")),
+        data.group("firstName"),
+        data.group("lastName"),
+        data.group("emailAddress"),
+        data.group("phoneNumber"),
+        new SimpleDateFormat("dd/MM/yyyy").parse(data.group("birthDate")),
+        data.group("education"),
+        data.group("workExperience"),
+        Integer.parseInt(data.group("wage")),
+        data.group("references")
+      );
+    } catch (ParseException e) {
+      e.printStackTrace();
+      throw new ReadCSVInvalidFormatException(
+          String.format("[on line %s]: Invalid date format (valid format is dd/MM/yyyy).", line.getLineNumber())
+        );
+    }
   }
 
   private Pattern getCSVRowPattern(String[] fields) {
