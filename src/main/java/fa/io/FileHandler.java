@@ -7,6 +7,8 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class FileHandler {
 
@@ -28,19 +30,23 @@ public class FileHandler {
     }
   }
 
+  private static final Lock ioLock = new ReentrantLock();
+
   public void importData(File file) {
     String extension = getFileExtension(file);
 
     Task<DB> task = new Task<>() {
       @Override
       protected DB call() throws Exception {
-        try {
-          return Reader.read(extension, file);
-        } catch (IOException e) {
-          // TODO: Error handling.
-          e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-          e.printStackTrace();
+        synchronized (ioLock) {
+          try {
+            return Reader.read(extension, file);
+          } catch (IOException e) {
+            // TODO: Error handling.
+            e.printStackTrace();
+          } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+          }
         }
         return null;
       }
