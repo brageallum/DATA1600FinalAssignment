@@ -14,7 +14,7 @@ public class JobSeeker extends Person implements Serializable {
   private final SerializableProperty<Integer> wage;
   private final SerializableProperty<String> references;
 
-  private final int ID;
+  public final int ID;
 
   public JobSeeker(
     String firstName,
