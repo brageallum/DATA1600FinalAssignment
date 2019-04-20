@@ -33,35 +33,31 @@ class CSVReader implements ReadStrategy {
     detachedDB = DB.getDetachedInstance();
     BufferedReader reader = Files.newBufferedReader(Paths.get(file.getPath()));
 
-    String line;
-    int lineNr = 1;
-    while((line = reader.readLine()) != null) {
-      if (isEmpty(line)) continue;
+    Line line = new Line();
+    while(line.nextLine(reader.readLine())) {
+      if (line.isEmpty()) continue;
 
-      parseLine(line, lineNr);
-      lineNr++;
+      parseLine(line);
     }
 
     return detachedDB;
   }
 
-  private boolean isEmpty(String line) {
-    return line.matches("^\\s$");
-  }
-
-  private void parseLine(String line, int lineNr) throws ReadCSVException {
+  private void parseLine(Line line) throws ReadCSVException {
     String type = getType(line);
     switch (type) {
       case "JobSeeker":
-        detachedDB.getJobSeekers().add(parseJobSeeker(line, lineNr));
+        detachedDB.getJobSeekers().add(parseJobSeeker(line));
         break;
       default:
-        throw new ReadCSVInvalidTypeException(String.format("\"%s\" is not a valid data type (on line %s)", type, lineNr));
+        throw new ReadCSVInvalidTypeException(
+            String.format("\"%s\" is not a valid data type (on line %s)", type, line.getLineNumber())
+          );
     }
   }
 
-  private String getType(String line) {
-    Matcher typeMatcher = Pattern.compile("^(?<type>[^;]+?);").matcher(line);
+  private String getType(Line line) {
+    Matcher typeMatcher = Pattern.compile("^(?<type>[^;]+?);").matcher(line.getText());
     if (typeMatcher.find()) {
       return typeMatcher.group("type");
     } else {
@@ -69,9 +65,11 @@ class CSVReader implements ReadStrategy {
     }
   }
 
-  private JobSeeker parseJobSeeker(String line, int lineNr) throws ReadCSVInvalidFormatException {
-    Matcher data = getCSVRowPattern(jobSeekerFields).matcher(line);
-    if (!data.find()) throw new ReadCSVInvalidFormatException(String.format("Incorrect format for type JobSeeker (on line %s)", lineNr));
+  private JobSeeker parseJobSeeker(Line line) throws ReadCSVInvalidFormatException {
+    Matcher data = getCSVRowPattern(jobSeekerFields).matcher(line.getText());
+    if (!data.find()) throw new ReadCSVInvalidFormatException(
+        String.format("Incorrect format for type JobSeeker (on line %s)", line.getLineNumber())
+      );
 
     return new JobSeeker(
       Integer.parseInt(data.group("id")),
@@ -93,5 +91,30 @@ class CSVReader implements ReadStrategy {
     );
     pattern += "?\\s*$";
     return Pattern.compile(pattern);
+  }
+}
+
+class Line {
+  private String text;
+  private int lineNumber = 0;
+
+  boolean nextLine(String nextLine) {
+    if (nextLine == null) return false;
+
+    text = nextLine;
+    lineNumber++;
+    return true;
+  }
+
+  String getText() {
+    return text;
+  }
+
+  int getLineNumber() {
+    return lineNumber;
+  }
+
+  boolean isEmpty() {
+    return text.matches("^\\s$");
   }
 }
