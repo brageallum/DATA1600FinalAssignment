@@ -67,12 +67,22 @@ public class FileHandler {
   public void exportData(File file) {
     String extension = getFileExtension(file);
 
-    try {
-      Writer.write(extension, file);
-    } catch (IOException e) {
-      // TODO: Error handling.
-      e.printStackTrace();
-    }
+    Task<Void> task = new Task<>() {
+      @Override
+      protected Void call() throws Exception {
+        synchronized (ioLock) {
+          try {
+            Writer.write(extension, file);
+          } catch (IOException e) {
+            // TODO: Error handling.
+            e.printStackTrace();
+          }
+        }
+        return null;
+      }
+    };
+
+    new Thread(task).start();
   }
 
   private FileChooser getFileChooser() {
