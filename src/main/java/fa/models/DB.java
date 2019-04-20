@@ -6,6 +6,11 @@ import javafx.collections.ObservableList;
 
 import java.io.Serializable;
 
+/**
+ * This is where all our data is stored. It uses the singleton pattern to make a single instance
+ * accessible throughout the application, but can also be instantiated as a local variable, which allows
+ * for storing data locally without effecting the application UI (needed for reading files).
+ */
 public class DB implements Serializable {
   private static DB instance;
 
@@ -42,10 +47,6 @@ public class DB implements Serializable {
 
   public ObservableList<JobSeeker> getJobSeekers() {
     return jobSeekers.getObservableList();
-  }
-
-  public void clearAll() {
-    this.jobSeekers.getObservableList().removeAll();
   }
 
   @Override
