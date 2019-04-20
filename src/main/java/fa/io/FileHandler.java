@@ -4,10 +4,11 @@ import fa.io.read.Reader;
 import fa.io.write.Writer;
 import fa.models.DB;
 import javafx.concurrent.Task;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -41,20 +42,17 @@ public class FileHandler {
       @Override
       protected DB call() throws Exception {
         synchronized (ioLock) {
-          try {
-            return Reader.read(extension, file);
-          } catch (IOException e) {
-            // TODO: Error handling.
-            e.printStackTrace();
-          } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-          }
+          return Reader.read(extension, file);
         }
-        return null;
       }
     };
 
     task.setOnSucceeded(eventHandler -> DB.replaceInstance(task.getValue()));
+
+    task.setOnFailed(e -> showErrorDialog(
+      "Error while importing data from file: " + file.getName(),
+      task.getException().getMessage()
+    ));
 
     new Thread(task).start();
   }
@@ -73,18 +71,25 @@ public class FileHandler {
       @Override
       protected Void call() throws Exception {
         synchronized (ioLock) {
-          try {
-            Writer.write(extension, file);
-          } catch (IOException e) {
-            // TODO: Error handling.
-            e.printStackTrace();
-          }
+          Writer.write(extension, file);
+          return null;
         }
-        return null;
       }
     };
 
+    task.setOnFailed(e -> showErrorDialog(
+      "Error while exporting data to file: " + file.getName(),
+      task.getException().getMessage()
+    ));
+
     new Thread(task).start();
+  }
+
+  private void showErrorDialog(String header, String message) {
+    Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
+    alert.setHeaderText(header);
+    alert.getDialogPane().getStylesheets().add(getClass().getResource("../styles.css").toExternalForm());
+    alert.showAndWait();
   }
 
   private FileChooser getFileChooser() {

@@ -1,5 +1,8 @@
 package fa.io.read;
 
+import fa.io.read.exceptions.ReadCSVException;
+import fa.io.read.exceptions.ReadCSVInvalidFormatException;
+import fa.io.read.exceptions.ReadCSVInvalidTypeException;
 import fa.models.DB;
 import fa.models.JobSeeker;
 
@@ -21,7 +24,7 @@ class CSVReader implements ReadStrategy {
   private DB detachedDB;
 
   @Override
-  public DB readFile(File file) throws IOException {
+  public DB readFile(File file) throws IOException, ReadCSVException {
     /*
       Since JavaFX does not allow for changing the UI from another Thread then the main Thread,
       and making changes to the DB singleton instance automatically updates the UI, we store the newly read data
@@ -31,10 +34,12 @@ class CSVReader implements ReadStrategy {
     BufferedReader reader = Files.newBufferedReader(Paths.get(file.getPath()));
 
     String line;
+    int lineNr = 1;
     while((line = reader.readLine()) != null) {
       if (isEmpty(line)) continue;
 
-      parseLine(line);
+      parseLine(line, lineNr);
+      lineNr++;
     }
 
     return detachedDB;
@@ -44,14 +49,14 @@ class CSVReader implements ReadStrategy {
     return line.matches("^\\s$");
   }
 
-  private void parseLine(String line) {
-    switch (getType(line)) {
+  private void parseLine(String line, int lineNr) throws ReadCSVException {
+    String type = getType(line);
+    switch (type) {
       case "JobSeeker":
-        detachedDB.getJobSeekers().add(parseJobSeeker(line));
+        detachedDB.getJobSeekers().add(parseJobSeeker(line, lineNr));
         break;
       default:
-        // TODO: Throw "CSVReaderInvalidTypeException" (or something like that)
-        break;
+        throw new ReadCSVInvalidTypeException(String.format("\"%s\" is not a valid data type (on line %s)", type, lineNr));
     }
   }
 
@@ -64,9 +69,9 @@ class CSVReader implements ReadStrategy {
     }
   }
 
-  private JobSeeker parseJobSeeker(String line) {
+  private JobSeeker parseJobSeeker(String line, int lineNr) throws ReadCSVInvalidFormatException {
     Matcher data = getCSVRowPattern(jobSeekerFields).matcher(line);
-    if (!data.find()) return null;
+    if (!data.find()) throw new ReadCSVInvalidFormatException(String.format("Incorrect format for type JobSeeker (on line %s)", lineNr));
 
     return new JobSeeker(
       Integer.parseInt(data.group("id")),
