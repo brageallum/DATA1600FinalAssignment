@@ -1,4 +1,4 @@
-package fa.io;
+package fa.io.read;
 
 import fa.models.DB;
 import fa.models.JobSeeker;
