@@ -39,7 +39,6 @@ public class JobSeeker extends Person implements Serializable {
       wage,
       references
     );
-    nextId += 1;
   }
 
   public JobSeeker(
@@ -56,6 +55,8 @@ public class JobSeeker extends Person implements Serializable {
   ) {
 
     super(firstName, lastName, emailAddress, phoneNumber, birthDate);
+
+    if (ID > nextId) nextId = ID + 1;
 
     this.ID = ID;
     this.education = new SerializableProperty<>(education);
