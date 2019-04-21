@@ -32,4 +32,25 @@ public class EditorFieldValidator {
       "Can only contain letters and spaces"
     );
   }
+
+  public static EditorFieldValidator requireNumbersOnly() {
+    return new EditorFieldValidator(
+      val -> val.matches("^[0-9]*$"),
+      "Can only contain numbers"
+    );
+  }
+
+  public static EditorFieldValidator requireLength(int length) {
+    return new EditorFieldValidator(
+      val -> val.length() == length,
+      "Has to be of length " + length
+    );
+  }
+
+  public static EditorFieldValidator requireValidEmail() {
+    return new EditorFieldValidator(
+      val -> val.matches("^\\w+@\\w+\\.[a-z]+$"),
+      "Not a valid email"
+    );
+  }
 }

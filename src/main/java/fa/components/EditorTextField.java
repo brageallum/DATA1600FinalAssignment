@@ -14,7 +14,7 @@ public class EditorTextField extends VBox {
   @FXML private Label errorMsg;
   @FXML private TextField field;
 
-  private EditorFieldValidator[] validators;
+  private EditorFieldValidator[] validators = new EditorFieldValidator[0];
 
   public EditorTextField() {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fa/components/EditorTextField.fxml"));
