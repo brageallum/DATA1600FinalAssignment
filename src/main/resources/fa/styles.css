@@ -70,8 +70,16 @@
     -fx-background-color: #1a75aa;
 }
 
-.editorTextField .label {
+.editor-text-field {
+    -fx-padding: 0;
+}
+.editor-text-field__label {
+    -fx-font-size: 13;
+}
+.editor-text-field__error {
+    -fx-font-size: 12;
     -fx-font-weight: bold;
+    -fx-text-fill: #c0392b;
 }
 
 .dialog-pane .button-bar .container {

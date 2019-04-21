@@ -4,6 +4,7 @@ import fa.components.Editor;
 import fa.components.EditorTextField;
 import fa.models.DB;
 import fa.models.JobSeeker;
+import fa.utils.EditorFieldValidator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -20,11 +21,18 @@ public class JobSeekerEditorController {
   public void initialize() {
     System.out.format("[ %s ]: JobSeekerEditorController initialized.\n", new Date());
 
+    setFieldValidators();
+
     editor.setItemsList(DB.getInstance().getJobSeekers());
     editor.onNewItem((observableValue, oldValue, newValue) -> {
       if (newValue != null) selectItem(newValue);
       else clearForm();
     });
+  }
+
+  private void setFieldValidators() {
+    firstNameField.setValidators(EditorFieldValidator.requireNonEmpty(), EditorFieldValidator.requireLettersAndSpaceOnly());
+    lastNameField.setValidators(EditorFieldValidator.requireNonEmpty(), EditorFieldValidator.requireLettersAndSpaceOnly());
   }
 
   private void selectItem(JobSeeker jobSeeker) {
@@ -37,12 +45,17 @@ public class JobSeekerEditorController {
 
   @FXML
   public void submit() {
+    if (fieldsNotValid()) return;
     if (selectedItem == null) {
       createNewJobSeeker();
     } else {
       updateJobSeeker();
     }
     editor.clearSelection();
+  }
+
+  private boolean fieldsNotValid() {
+    return !(firstNameField.validate() & lastNameField.validate());
   }
 
   private void createNewJobSeeker() {

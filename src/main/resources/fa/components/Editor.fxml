@@ -7,6 +7,6 @@
 <fx:root type="SplitPane" dividerPositions="0.3" xmlns:fx="http://javafx.com/fxml" >
     <ListView fx:id="itemsList" minWidth="200" />
     <HBox alignment="CENTER" minWidth="400">
-        <VBox fx:id="editorFormContainer" alignment="CENTER_RIGHT" spacing="20" />
+        <VBox fx:id="editorFormContainer" alignment="CENTER_RIGHT" spacing="15" />
     </HBox>
 </fx:root>
