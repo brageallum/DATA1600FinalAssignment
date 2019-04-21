@@ -17,14 +17,22 @@ public class FileHandler {
 
   private String InitialDirectory = Paths.get("./src/main/resources/fa/data").toAbsolutePath().normalize().toString();
 
-  private static final FileChooser.ExtensionFilter allowedExt =
-    new FileChooser.ExtensionFilter("All compatible types", "*.jobj", "*.csv");
+  private static final Lock ioLock = new ReentrantLock();
 
-  private static final FileChooser.ExtensionFilter csvExt =
-    new FileChooser.ExtensionFilter("Comma separated values", "*.csv");
+  private static final FileChooser.ExtensionFilter allowedExt = new FileChooser.ExtensionFilter(
+    "All compatible types",
+    "*.jobj", "*.csv"
+  );
 
-  private static final FileChooser.ExtensionFilter jobjExt =
-    new FileChooser.ExtensionFilter("Serialized java objects", "*.jobj");
+  private static final FileChooser.ExtensionFilter csvExt = new FileChooser.ExtensionFilter(
+    "Comma separated values",
+    "*.csv"
+  );
+
+  private static final FileChooser.ExtensionFilter jobjExt = new FileChooser.ExtensionFilter(
+    "Serialized java objects",
+    "*.jobj"
+  );
 
   public void openImportDataDialog() {
     File file = getFileChooser().showOpenDialog(null);
@@ -32,8 +40,6 @@ public class FileHandler {
       importData(file);
     }
   }
-
-  private static final Lock ioLock = new ReentrantLock();
 
   public void importData(File file) {
     String extension = getFileExtension(file);

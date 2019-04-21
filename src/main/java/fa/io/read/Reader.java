@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Reader {
   public static DB read(String ext, File file) throws IOException, ClassNotFoundException, ReadException {
-    switch(ext) {
+    switch (ext) {
       case "csv":
         return new CSVReader().readFile(file);
       case "jobj":

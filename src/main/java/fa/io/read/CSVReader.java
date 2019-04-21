@@ -36,7 +36,7 @@ class CSVReader implements ReadStrategy {
     BufferedReader reader = Files.newBufferedReader(Paths.get(file.getPath()));
 
     Line line = new Line();
-    while(line.nextLine(reader.readLine())) {
+    while (line.nextLine(reader.readLine())) {
       if (line.isEmpty()) continue;
 
       parseLine(line);
@@ -53,8 +53,8 @@ class CSVReader implements ReadStrategy {
         break;
       default:
         throw new ReadCSVInvalidTypeException(
-            String.format("[on line %s]: \"%s\" is not a valid data type.", line.getLineNumber(), type)
-          );
+          String.format("[on line %s]: \"%s\" is not a valid data type.", line.getLineNumber(), type)
+        );
     }
   }
 
@@ -70,8 +70,8 @@ class CSVReader implements ReadStrategy {
   private JobSeeker parseJobSeeker(Line line) throws ReadCSVInvalidFormatException {
     Matcher data = getCSVRowPattern(jobSeekerFields).matcher(line.getText());
     if (!data.find()) throw new ReadCSVInvalidFormatException(
-        String.format("[on line %s]: Incorrect format for type JobSeeker.", line.getLineNumber())
-      );
+      String.format("[on line %s]: Incorrect format for type JobSeeker.", line.getLineNumber())
+    );
 
     try {
       return new JobSeeker(
@@ -89,8 +89,8 @@ class CSVReader implements ReadStrategy {
     } catch (ParseException e) {
       e.printStackTrace();
       throw new ReadCSVInvalidFormatException(
-          String.format("[on line %s]: Invalid date format (valid format is dd/MM/yyyy).", line.getLineNumber())
-        );
+        String.format("[on line %s]: Invalid date format (valid format is dd/MM/yyyy).", line.getLineNumber())
+      );
     }
   }
 

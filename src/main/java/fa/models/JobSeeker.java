@@ -1,7 +1,7 @@
 package fa.models;
 
 import fa.utils.SerializableProperty;
-import javafx.beans.property.*;
+import javafx.beans.property.ObjectProperty;
 
 import java.io.Serializable;
 import java.util.Date;

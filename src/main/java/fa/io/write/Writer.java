@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Writer {
   public static void write(String ext, File file) throws IOException {
-    switch(ext) {
+    switch (ext) {
       case "csv":
         new CSVWriter().writeToFile(file);
         break;

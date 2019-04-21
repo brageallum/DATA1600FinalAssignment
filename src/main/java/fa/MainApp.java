@@ -13,35 +13,35 @@ import java.nio.file.Paths;
 
 public class MainApp extends Application {
 
-    @Override
-    public void start(Stage stage) throws Exception {
+  @Override
+  public void start(Stage stage) throws Exception {
 
-        File DBInit = new File(Paths.get("./src/main/resources/fa/data/db.csv").toAbsolutePath().normalize().toString());
-        new FileHandler().importData(DBInit);
+    File DBInit = new File(Paths.get("./src/main/resources/fa/data/db.csv").toAbsolutePath().normalize().toString());
+    new FileHandler().importData(DBInit);
 
-        Parent root = FXMLLoader.load(getClass().getResource("view/App.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("view/App.fxml"));
 
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+    Scene scene = new Scene(root);
+    scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
-        stage.setTitle("Final Assignment");
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.setMinWidth(600);
-        stage.setMinHeight(400);
-        stage.setScene(scene);
-        stage.show();
-    }
+    stage.setTitle("Final Assignment");
+    stage.initStyle(StageStyle.UNDECORATED);
+    stage.setMinWidth(600);
+    stage.setMinHeight(400);
+    stage.setScene(scene);
+    stage.show();
+  }
 
-    /**
-     * The main() method is ignored in correctly deployed JavaFX application.
-     * main() serves only as fallback in case the application can not be
-     * launched through deployment artifacts, e.g., in IDEs with limited FX
-     * support. NetBeans ignores main().
-     *
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
+  /**
+   * The main() method is ignored in correctly deployed JavaFX application.
+   * main() serves only as fallback in case the application can not be
+   * launched through deployment artifacts, e.g., in IDEs with limited FX
+   * support. NetBeans ignores main().
+   *
+   * @param args the command line arguments
+   */
+  public static void main(String[] args) {
+    launch(args);
+  }
 
 }

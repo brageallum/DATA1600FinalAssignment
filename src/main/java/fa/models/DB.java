@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class DB implements Serializable {
   private static DB instance;
 
-  private final SerializableObservableList<JobSeeker> jobSeekers = new SerializableObservableList<>(jobSeeker -> new Observable[] {
+  private final SerializableObservableList<JobSeeker> jobSeekers = new SerializableObservableList<>(jobSeeker -> new Observable[]{
     jobSeeker.getFirstName(),
     jobSeeker.getLastName(),
     jobSeeker.getEmailAddress(),

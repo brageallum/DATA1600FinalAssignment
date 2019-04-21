@@ -10,7 +10,7 @@ import java.io.ObjectInputStream;
 class SerializedReader implements ReadStrategy {
   @Override
   public DB readFile(File file) throws IOException, ClassNotFoundException {
-    FileInputStream fileIn =  new FileInputStream(file);
+    FileInputStream fileIn = new FileInputStream(file);
     ObjectInputStream ois = new ObjectInputStream(fileIn);
 
     DB db = (DB) ois.readObject();
