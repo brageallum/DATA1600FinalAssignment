@@ -4,7 +4,7 @@ import fa.utils.SerializableProperty;
 import javafx.beans.property.ObjectProperty;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 abstract class Person implements Serializable {
 
@@ -12,9 +12,9 @@ abstract class Person implements Serializable {
   private final SerializableProperty<String> lastName;
   private final SerializableProperty<String> emailAddress;
   private final SerializableProperty<String> phoneNumber;
-  private final SerializableProperty<Date> birthDate; // TODO: implement birthDate
+  private final SerializableProperty<LocalDate> birthDate; // TODO: implement birthDate
 
-  Person(String firstName, String lastName, String emailAddress, String phoneNumber, Date birthDate) {
+  Person(String firstName, String lastName, String emailAddress, String phoneNumber, LocalDate birthDate) {
     this.firstName = new SerializableProperty<>(firstName);
     this.lastName = new SerializableProperty<>(lastName);
     this.emailAddress = new SerializableProperty<>(emailAddress);
@@ -38,7 +38,7 @@ abstract class Person implements Serializable {
     return phoneNumber.getProperty();
   }
 
-  public ObjectProperty<Date> getBirthDate() {
+  public ObjectProperty<LocalDate> getBirthDate() {
     return birthDate.getProperty();
   }
 }

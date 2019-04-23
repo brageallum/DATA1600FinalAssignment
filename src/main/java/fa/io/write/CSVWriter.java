@@ -6,7 +6,7 @@ import fa.models.JobSeeker;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 class CSVWriter implements WriteStrategy {
@@ -27,7 +27,7 @@ class CSVWriter implements WriteStrategy {
       jobSeeker.getLastName().getValue(),
       jobSeeker.getEmailAddress().getValue(),
       jobSeeker.getPhoneNumber().getValue(),
-      new SimpleDateFormat("dd/MM/yyyy").format(jobSeeker.getBirthDate().getValue()),
+      jobSeeker.getBirthDate().getValue().format(DateTimeFormatter.ISO_LOCAL_DATE),
       jobSeeker.getEducation().getValue(),
       jobSeeker.getWorkExperience().getValue(),
       Integer.toString(jobSeeker.getWage().getValue()),

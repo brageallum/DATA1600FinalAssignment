@@ -4,7 +4,7 @@ import fa.utils.SerializableProperty;
 import javafx.beans.property.ObjectProperty;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class JobSeeker extends Person implements Serializable {
   private static int nextId = 100;
@@ -21,7 +21,7 @@ public class JobSeeker extends Person implements Serializable {
     String lastName,
     String emailAddress,
     String phoneNumber,
-    Date birthDate,
+    LocalDate birthDate,
     String education,
     String workExperience,
     int wage,
@@ -47,7 +47,7 @@ public class JobSeeker extends Person implements Serializable {
     String lastName,
     String emailAddress,
     String phoneNumber,
-    Date birthDate,
+    LocalDate birthDate,
     String education,
     String workExperience,
     int wage,

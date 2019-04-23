@@ -11,8 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -80,16 +80,16 @@ class CSVReader implements ReadStrategy {
         data.group("lastName"),
         data.group("emailAddress"),
         data.group("phoneNumber"),
-        new SimpleDateFormat("dd/MM/yyyy").parse(data.group("birthDate")),
+        LocalDate.parse(data.group("birthDate")),
         data.group("education"),
         data.group("workExperience"),
         Integer.parseInt(data.group("wage")),
         data.group("references")
       );
-    } catch (ParseException e) {
+    } catch (DateTimeParseException e) {
       e.printStackTrace();
       throw new ReadCSVInvalidFormatException(
-        String.format("[on line %s]: Invalid date format (valid format is dd/MM/yyyy).", line.getLineNumber())
+        String.format("[on line %s]: Invalid date format (valid format is yyyy-MM-dd).", line.getLineNumber())
       );
     }
   }

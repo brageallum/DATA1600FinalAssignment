@@ -8,6 +8,7 @@ import fa.utils.EditorFieldValidator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class JobSeekerEditorController {
@@ -86,7 +87,7 @@ public class JobSeekerEditorController {
       lastNameField.getFieldText(),
       emailAddressField.getFieldText(),
       phoneNumberField.getFieldText(),
-      new Date(),
+      LocalDate.now(),
       educationField.getFieldText(),
       workExperienceField.getFieldText(),
       Integer.parseInt(wageField.getFieldText()),
