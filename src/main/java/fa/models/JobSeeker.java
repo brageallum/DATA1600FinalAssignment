@@ -1,6 +1,6 @@
 package fa.models;
 
-import fa.utils.SerializableProperty;
+import fa.utils.serialization.SerializableProperty;
 import javafx.beans.property.ObjectProperty;
 
 import java.io.Serializable;

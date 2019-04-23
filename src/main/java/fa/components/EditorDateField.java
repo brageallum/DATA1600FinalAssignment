@@ -1,6 +1,6 @@
 package fa.components;
 
-import fa.utils.LocalDateValidator;
+import fa.utils.validation.LocalDateValidator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.DatePicker;

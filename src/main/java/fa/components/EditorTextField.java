@@ -1,6 +1,6 @@
 package fa.components;
 
-import fa.utils.StringValidator;
+import fa.utils.validation.StringValidator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;

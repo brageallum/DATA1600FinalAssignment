@@ -1,4 +1,4 @@
-package fa.utils;
+package fa.utils.validation;
 
 import java.util.function.Function;
 

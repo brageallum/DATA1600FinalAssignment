@@ -1,6 +1,6 @@
 package fa.models;
 
-import fa.utils.SerializableObservableList;
+import fa.utils.serialization.SerializableObservableList;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 

@@ -1,4 +1,4 @@
-package fa.utils;
+package fa.utils.serialization;
 
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;

@@ -5,8 +5,8 @@ import fa.components.EditorDateField;
 import fa.components.EditorTextField;
 import fa.models.DB;
 import fa.models.JobSeeker;
-import fa.utils.LocalDateValidator;
-import fa.utils.StringValidator;
+import fa.utils.validation.LocalDateValidator;
+import fa.utils.validation.StringValidator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
