@@ -12,7 +12,7 @@ abstract class Person implements Serializable {
   private final SerializableProperty<String> lastName;
   private final SerializableProperty<String> emailAddress;
   private final SerializableProperty<String> phoneNumber;
-  private final SerializableProperty<LocalDate> birthDate; // TODO: implement birthDate
+  private final SerializableProperty<LocalDate> birthDate;
 
   Person(String firstName, String lastName, String emailAddress, String phoneNumber, LocalDate birthDate) {
     this.firstName = new SerializableProperty<>(firstName);
