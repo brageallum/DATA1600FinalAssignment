@@ -1,23 +1,24 @@
 package fa.components;
 
-import fa.utils.StringValidator;
+import fa.utils.LocalDateValidator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
-public class EditorTextField extends VBox {
+public class EditorDateField extends VBox {
   @FXML private Label label;
   @FXML private Label errorMsg;
-  @FXML private TextField field;
+  @FXML private DatePicker field;
 
-  private StringValidator[] validators = new StringValidator[0];
+  private LocalDateValidator[] validators = new LocalDateValidator[0];
 
-  public EditorTextField() {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fa/components/EditorTextField.fxml"));
+  public EditorDateField() {
+    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fa/components/EditorDateField.fxml"));
     fxmlLoader.setRoot(this);
     fxmlLoader.setController(this);
 
@@ -29,12 +30,12 @@ public class EditorTextField extends VBox {
   }
 
   public void initialize() {
-    field.textProperty().addListener(((observableValue, oldValue, newValue) -> validate()));
+    field.valueProperty().addListener(((observableValue, oldValue, newValue) -> validate()));
   }
 
   public boolean validate() {
-    for (StringValidator validator : validators) {
-      if (!validator.validate(field.getText())) {
+    for (LocalDateValidator validator : validators) {
+      if (!validator.validate(field.getValue())) {
         errorMsg.setText(validator.getErrorText());
         return false;
       }
@@ -43,16 +44,16 @@ public class EditorTextField extends VBox {
     return true;
   }
 
-  public void setValidators(StringValidator... validators) {
+  public void setValidators(LocalDateValidator... validators) {
     this.validators = validators;
   }
 
-  public void setValue(String s) {
-    field.setText(s);
+  public void setValue(LocalDate d) {
+    field.setValue(d);
   }
 
-  public String getValue() {
-    return field.getText();
+  public LocalDate getValue() {
+    return field.getValue();
   }
 
   public void setLabelText(String s) {

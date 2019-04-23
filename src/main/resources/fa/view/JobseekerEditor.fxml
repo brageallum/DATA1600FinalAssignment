@@ -4,6 +4,7 @@
 <?import fa.components.EditorTextField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import fa.components.EditorDateField?>
 <Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.JobSeekerEditorController">
     <form>
         <Label fx:id="title" />
@@ -11,7 +12,7 @@
         <EditorTextField fx:id="lastNameField" labelText="Last name:" />
         <EditorTextField fx:id="emailAddressField" labelText="Email address:" />
         <EditorTextField fx:id="phoneNumberField" labelText="Phone number:" />
-        <!--Date birthDate-->
+        <EditorDateField fx:id="birthDateField" labelText="Birth date:" />
         <EditorTextField fx:id="educationField" labelText="Education:" />
         <EditorTextField fx:id="workExperienceField" labelText="Work experience:" />
         <EditorTextField fx:id="wageField" labelText="Wage:" />
