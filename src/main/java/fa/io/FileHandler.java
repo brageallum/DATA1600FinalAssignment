@@ -107,6 +107,7 @@ public class FileHandler {
   }
 
   private String getFileExtension(File file) {
-    return file.getName().split("\\.")[1];
+    String[] pieces = file.getName().split("\\.");
+    return pieces[pieces.length - 1];
   }
 }
