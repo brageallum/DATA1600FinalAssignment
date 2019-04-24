@@ -6,6 +6,8 @@ import fa.models.DB;
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -55,10 +57,13 @@ public class FileHandler {
 
     task.setOnSucceeded(eventHandler -> DB.replaceInstance(task.getValue()));
 
-    task.setOnFailed(e -> showErrorDialog(
-      "Error while importing data from file: " + file.getName(),
-      task.getException().getMessage()
-    ));
+    task.setOnFailed(e -> {
+      task.getException().printStackTrace();
+      showErrorDialog(
+        "Error while importing data from file: " + file.getName(),
+        task.getException().getMessage()
+      );
+    });
 
     new Thread(task).start();
   }
@@ -83,17 +88,26 @@ public class FileHandler {
       }
     };
 
-    task.setOnFailed(e -> showErrorDialog(
-      "Error while exporting data to file: " + file.getName(),
-      task.getException().getMessage()
-    ));
+    task.setOnFailed(e -> {
+      task.getException().printStackTrace();
+      showErrorDialog(
+        "Error while exporting data to file: " + file.getName(),
+        task.getException().getMessage()
+      );
+    });
 
     new Thread(task).start();
   }
 
   private void showErrorDialog(String header, String message) {
-    Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
+    Alert alert = new Alert(Alert.AlertType.ERROR, "This will be overwritten", ButtonType.OK);
     alert.setHeaderText(header);
+
+    // The dialog does not wrap text by default. By adding the message as a Text node, we can enable text wrapping.
+    Text cont = new Text(message);
+    cont.setWrappingWidth(380);
+    alert.getDialogPane().setContent(new VBox(cont)); // The VBox allows for adding padding
+
     alert.getDialogPane().getStylesheets().add(getClass().getResource("../styles.css").toExternalForm());
     alert.showAndWait();
   }

@@ -85,7 +85,7 @@
 .dialog-pane .button-bar .container {
     -fx-background-color: #fff;
 }
-.dialog-pane .label.content {
+.dialog-pane .content {
     -fx-font-size: 14;
     -fx-padding: 10 30 0 30;
     -fx-background-color: #fff;
