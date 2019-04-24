@@ -65,24 +65,24 @@ public class JobSeeker extends Person implements Serializable {
     this.references = new SerializableProperty<>(references);
   }
 
-  public ObjectProperty<String> getEducation() {
+  public ObjectProperty<String> educationProperty() {
     return education.getProperty();
   }
 
-  public ObjectProperty<String> getWorkExperience() {
+  public ObjectProperty<String> workExperienceProperty() {
     return workExperience.getProperty();
   }
 
-  public ObjectProperty<Integer> getWage() {
+  public ObjectProperty<Integer> wageProperty() {
     return wage.getProperty();
   }
 
-  public ObjectProperty<String> getReferences() {
+  public ObjectProperty<String> referencesProperty() {
     return references.getProperty();
   }
 
   @Override
   public String toString() {
-    return String.format("[%s] %s %s", ID, getFirstName().getValue(), getLastName().getValue());
+    return String.format("[%s] %s %s", ID, firstNameProperty().getValue(), lastNameProperty().getValue());
   }
 }

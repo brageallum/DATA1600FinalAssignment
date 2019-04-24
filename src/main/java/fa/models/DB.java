@@ -15,14 +15,14 @@ public class DB implements Serializable {
   private static DB instance;
 
   private final SerializableObservableList<JobSeeker> jobSeekers = new SerializableObservableList<>(jobSeeker -> new Observable[]{
-    jobSeeker.getFirstName(),
-    jobSeeker.getLastName(),
-    jobSeeker.getEmailAddress(),
-    jobSeeker.getPhoneNumber(),
-    jobSeeker.getEducation(),
-    jobSeeker.getWorkExperience(),
-    jobSeeker.getWage(),
-    jobSeeker.getReferences()
+    jobSeeker.firstNameProperty(),
+    jobSeeker.lastNameProperty(),
+    jobSeeker.emailAddressProperty(),
+    jobSeeker.phoneNumberProperty(),
+    jobSeeker.educationProperty(),
+    jobSeeker.workExperienceProperty(),
+    jobSeeker.wageProperty(),
+    jobSeeker.referencesProperty()
   });
 
   private DB() {}

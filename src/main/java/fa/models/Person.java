@@ -22,23 +22,23 @@ abstract class Person implements Serializable {
     this.birthDate = new SerializableProperty<>(birthDate);
   }
 
-  public ObjectProperty<String> getFirstName() {
+  public ObjectProperty<String> firstNameProperty() {
     return firstName.getProperty();
   }
 
-  public ObjectProperty<String> getLastName() {
+  public ObjectProperty<String> lastNameProperty() {
     return lastName.getProperty();
   }
 
-  public ObjectProperty<String> getEmailAddress() {
+  public ObjectProperty<String> emailAddressProperty() {
     return emailAddress.getProperty();
   }
 
-  public ObjectProperty<String> getPhoneNumber() {
+  public ObjectProperty<String> phoneNumberProperty() {
     return phoneNumber.getProperty();
   }
 
-  public ObjectProperty<LocalDate> getBirthDate() {
+  public ObjectProperty<LocalDate> birthDateProperty() {
     return birthDate.getProperty();
   }
 }

@@ -23,15 +23,15 @@ class CSVWriter implements WriteStrategy {
     writer.println(toCSVFormat(new String[]{
       "JobSeeker",
       Integer.toString(jobSeeker.ID),
-      jobSeeker.getFirstName().getValue(),
-      jobSeeker.getLastName().getValue(),
-      jobSeeker.getEmailAddress().getValue(),
-      jobSeeker.getPhoneNumber().getValue(),
-      jobSeeker.getBirthDate().getValue().format(DateTimeFormatter.ISO_LOCAL_DATE),
-      jobSeeker.getEducation().getValue(),
-      jobSeeker.getWorkExperience().getValue(),
-      Integer.toString(jobSeeker.getWage().getValue()),
-      jobSeeker.getReferences().getValue(),
+      jobSeeker.firstNameProperty().getValue(),
+      jobSeeker.lastNameProperty().getValue(),
+      jobSeeker.emailAddressProperty().getValue(),
+      jobSeeker.phoneNumberProperty().getValue(),
+      jobSeeker.birthDateProperty().getValue().format(DateTimeFormatter.ISO_LOCAL_DATE),
+      jobSeeker.educationProperty().getValue(),
+      jobSeeker.workExperienceProperty().getValue(),
+      Integer.toString(jobSeeker.wageProperty().getValue()),
+      jobSeeker.referencesProperty().getValue(),
     }));
   }
 

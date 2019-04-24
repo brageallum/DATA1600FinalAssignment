@@ -32,7 +32,17 @@ public class JobSeekerEditorController {
 
     setFieldValidators();
 
-    editor.setItemsList(DB.getInstance().getJobSeekers());
+    editor.setTableColumn("First name", "firstName");
+    editor.setTableColumn("Last name", "lastName");
+    editor.setTableColumn("Email address", "emailAddress");
+    editor.setTableColumn("Phone number", "phoneNumber");
+    editor.setTableColumn("Birth date", "birthDate");
+    editor.setTableColumn("Education", "education");
+    editor.setTableColumn("Work experience", "workExperience");
+    editor.setTableColumn("Wage", "wage");
+    editor.setTableColumn("References", "references");
+
+    editor.setTableItems(DB.getInstance().getJobSeekers());
     editor.onNewItem((observableValue, oldValue, newValue) -> {
       if (newValue != null) selectItem(newValue);
       else clearForm();
@@ -59,15 +69,15 @@ public class JobSeekerEditorController {
     title.setText("Editing: " + jobSeeker.toString());
     selectedItem = jobSeeker;
 
-    firstNameField.setValue(jobSeeker.getFirstName().getValue());
-    lastNameField.setValue(jobSeeker.getLastName().getValue());
-    emailAddressField.setValue(jobSeeker.getEmailAddress().get());
-    phoneNumberField.setValue(jobSeeker.getPhoneNumber().getValue());
-    birthDateField.setValue(jobSeeker.getBirthDate().getValue());
-    educationField.setValue(jobSeeker.getEducation().get());
-    workExperienceField.setValue(jobSeeker.getWorkExperience().getValue());
-    wageField.setValue(Integer.toString(jobSeeker.getWage().getValue()));
-    referencesField.setValue(jobSeeker.getReferences().getValue());
+    firstNameField.setValue(jobSeeker.firstNameProperty().getValue());
+    lastNameField.setValue(jobSeeker.lastNameProperty().getValue());
+    emailAddressField.setValue(jobSeeker.emailAddressProperty().get());
+    phoneNumberField.setValue(jobSeeker.phoneNumberProperty().getValue());
+    birthDateField.setValue(jobSeeker.birthDateProperty().getValue());
+    educationField.setValue(jobSeeker.educationProperty().get());
+    workExperienceField.setValue(jobSeeker.workExperienceProperty().getValue());
+    wageField.setValue(Integer.toString(jobSeeker.wageProperty().getValue()));
+    referencesField.setValue(jobSeeker.referencesProperty().getValue());
   }
 
   @FXML
@@ -110,15 +120,15 @@ public class JobSeekerEditorController {
   }
 
   private void updateJobSeeker() {
-    selectedItem.getFirstName().set(firstNameField.getValue());
-    selectedItem.getLastName().set(lastNameField.getValue());
-    selectedItem.getEmailAddress().set(emailAddressField.getValue());
-    selectedItem.getPhoneNumber().set(phoneNumberField.getValue());
-    selectedItem.getBirthDate().set(birthDateField.getValue());
-    selectedItem.getEducation().set(educationField.getValue());
-    selectedItem.getWorkExperience().set(workExperienceField.getValue());
-    selectedItem.getWage().set(Integer.parseInt(wageField.getValue()));
-    selectedItem.getReferences().set(referencesField.getValue());
+    selectedItem.firstNameProperty().set(firstNameField.getValue());
+    selectedItem.lastNameProperty().set(lastNameField.getValue());
+    selectedItem.emailAddressProperty().set(emailAddressField.getValue());
+    selectedItem.phoneNumberProperty().set(phoneNumberField.getValue());
+    selectedItem.birthDateProperty().set(birthDateField.getValue());
+    selectedItem.educationProperty().set(educationField.getValue());
+    selectedItem.workExperienceProperty().set(workExperienceField.getValue());
+    selectedItem.wageProperty().set(Integer.parseInt(wageField.getValue()));
+    selectedItem.referencesProperty().set(referencesField.getValue());
   }
 
   private void clearForm() {

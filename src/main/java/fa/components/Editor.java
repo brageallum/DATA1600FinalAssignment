@@ -5,14 +5,16 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.ListView;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
 public class Editor<T> extends SplitPane {
-  @FXML private ListView<T> itemsList;
+  @FXML private TableView<T> itemsTable;
   @FXML private Pane editorFormContainer;
 
   public Editor() {
@@ -31,15 +33,21 @@ public class Editor<T> extends SplitPane {
     return editorFormContainer.getChildren();
   }
 
-  public void setItemsList(ObservableList<T> items) {
-    itemsList.setItems(items);
+  public void setTableColumn(String label, String key) {
+    TableColumn<T, String> tableColumn = new TableColumn<>(label);
+    tableColumn.setCellValueFactory(new PropertyValueFactory<>(key));
+    itemsTable.getColumns().add(tableColumn);
+  }
+
+  public void setTableItems(ObservableList<T> items) {
+    itemsTable.setItems(items);
   }
 
   public void onNewItem(ChangeListener<T> changeListener) {
-    itemsList.getSelectionModel().selectedItemProperty().addListener(changeListener);
+    itemsTable.getSelectionModel().selectedItemProperty().addListener(changeListener);
   }
 
   public void clearSelection() {
-    itemsList.getSelectionModel().clearSelection();
+    itemsTable.getSelectionModel().clearSelection();
   }
 }
