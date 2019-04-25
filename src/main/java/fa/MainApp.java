@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.nio.file.Paths;
@@ -25,7 +24,6 @@ public class MainApp extends Application {
     scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
 
     stage.setTitle("Final Assignment");
-    stage.initStyle(StageStyle.UNDECORATED);
     stage.setMinWidth(600);
     stage.setMinHeight(400);
     stage.setScene(scene);
