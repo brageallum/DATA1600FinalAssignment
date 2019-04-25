@@ -65,6 +65,10 @@ public class JobSeeker extends Person implements Serializable {
     this.references = new SerializableProperty<>(references);
   }
 
+  public int getID() {
+    return ID;
+  }
+
   public ObjectProperty<String> educationProperty() {
     return education.getProperty();
   }

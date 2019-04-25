@@ -32,6 +32,7 @@ public class JobSeekerEditorController {
 
     setFieldValidators();
 
+    editor.setTableColumn("id", "ID");
     editor.setTableColumn("First name", "firstName");
     editor.setTableColumn("Last name", "lastName");
     editor.setTableColumn("Email address", "emailAddress");
