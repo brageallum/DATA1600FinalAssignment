@@ -7,5 +7,5 @@ import java.io.File;
 import java.io.IOException;
 
 interface ReadStrategy {
-  DB readFile(File fileToRead) throws IOException, ClassNotFoundException, ReadException;
+  DB readFile(File fileToRead) throws IOException, ReadException;
 }

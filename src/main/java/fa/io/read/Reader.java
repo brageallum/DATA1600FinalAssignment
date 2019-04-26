@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class Reader {
-  public static DB read(String ext, File file) throws IOException, ClassNotFoundException, ReadException, InvalidExtensionException {
+  public static DB read(String ext, File file) throws IOException, ReadException, InvalidExtensionException {
     switch (ext) {
       case "csv":
         return new CSVReader().readFile(file);
