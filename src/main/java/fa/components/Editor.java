@@ -45,6 +45,11 @@ public class Editor<T> extends SplitPane {
         this.showEditor();
       }
     });
+
+    this.onAddNew(e -> {
+      this.clearSelection();
+      this.showEditor();
+    });
   }
 
   @FXML
