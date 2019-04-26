@@ -1,11 +1,13 @@
 package fa;
 
 import fa.io.FileHandler;
+import fa.models.Store;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -23,6 +25,7 @@ public class AppController {
   @FXML private HBox navigationBar;
   @FXML private ImageView logoImage;
   @FXML private HBox topBar;
+  @FXML private Label globalSnackbar;
 
   @FXML
   private void closeApp(ActionEvent e) {
@@ -86,6 +89,9 @@ public class AppController {
         String.valueOf(getClass().getResource("images/window.png"))
       )
     );
+
+    Store.loadingProperty().addListener((observableValue, oldValue, newValue) -> globalSnackbar.setVisible(newValue));
+    Store.loadingTextProperty().addListener((observableValue, oldValue, newValue) -> globalSnackbar.setText(newValue));
   }
 
   @FXML

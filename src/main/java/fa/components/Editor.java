@@ -2,13 +2,17 @@ package fa.components;
 
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -16,6 +20,8 @@ import java.io.IOException;
 public class Editor<T> extends SplitPane {
   @FXML private TableView<T> itemsTable;
   @FXML private Pane editorFormContainer;
+  @FXML private BorderPane editor;
+  @FXML private Button addNewButton;
 
   public Editor() {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fa/components/Editor.fxml"));
@@ -27,6 +33,29 @@ public class Editor<T> extends SplitPane {
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+    itemsTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+      if (null == newValue) {
+        this.hideEditor();
+      } else {
+        this.showEditor();
+      }
+    });
+  }
+
+  @FXML
+  public void goBack(ActionEvent e) {
+    this.hideEditor();
+  }
+
+  public void showEditor() {
+    editor.setVisible(true);
+    addNewButton.setVisible(false);
+  }
+
+  public void hideEditor() {
+    editor.setVisible(false);
+    addNewButton.setVisible(true);
   }
 
   public ObservableList<Node> getForm() {
@@ -45,6 +74,10 @@ public class Editor<T> extends SplitPane {
 
   public void onNewItem(ChangeListener<T> changeListener) {
     itemsTable.getSelectionModel().selectedItemProperty().addListener(changeListener);
+  }
+
+  public void onAddNew(EventHandler<ActionEvent> e) {
+    addNewButton.setOnAction(e);
   }
 
   public void clearSelection() {

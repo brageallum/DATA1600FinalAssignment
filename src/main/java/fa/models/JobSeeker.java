@@ -16,6 +16,10 @@ public class JobSeeker extends Person implements Serializable {
 
   public final int ID;
 
+  public JobSeeker() {
+    this(null, null, null, null, null, null, null, 0, null);
+  }
+
   public JobSeeker(
     String firstName,
     String lastName,

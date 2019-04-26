@@ -3,6 +3,7 @@ package fa.io;
 import fa.io.read.Reader;
 import fa.io.write.Writer;
 import fa.models.DB;
+import fa.models.Store;
 import javafx.concurrent.Task;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -46,6 +47,7 @@ public class FileHandler {
   public void importData(File file) {
     String extension = getFileExtension(file);
 
+    setLoading("Importing data...");
     Task<DB> task = new Task<>() {
       @Override
       protected DB call() throws Exception {
@@ -55,9 +57,13 @@ public class FileHandler {
       }
     };
 
-    task.setOnSucceeded(eventHandler -> DB.replaceInstance(task.getValue()));
+    task.setOnSucceeded(eventHandler -> {
+      DB.replaceInstance(task.getValue());
+      unsetLoading();
+    });
 
     task.setOnFailed(e -> {
+      unsetLoading();
       task.getException().printStackTrace();
       showErrorDialog(
         "Error while importing data from file: " + file.getName(),
@@ -78,6 +84,7 @@ public class FileHandler {
   public void exportData(File file) {
     String extension = getFileExtension(file);
 
+    setLoading("Exporting data...");
     Task<Void> task = new Task<>() {
       @Override
       protected Void call() throws Exception {
@@ -89,6 +96,7 @@ public class FileHandler {
     };
 
     task.setOnFailed(e -> {
+      unsetLoading();
       task.getException().printStackTrace();
       showErrorDialog(
         "Error while exporting data to file: " + file.getName(),
@@ -96,7 +104,19 @@ public class FileHandler {
       );
     });
 
+    task.setOnSucceeded(e -> unsetLoading());
+
     new Thread(task).start();
+  }
+
+  private void setLoading(String loadingText) {
+    Store.loadingProperty().set(true);
+    Store.loadingTextProperty().set(loadingText);
+  }
+
+  private void unsetLoading() {
+    Store.loadingProperty().set(false);
+    Store.loadingTextProperty().set("");
   }
 
   private void showErrorDialog(String header, String message) {

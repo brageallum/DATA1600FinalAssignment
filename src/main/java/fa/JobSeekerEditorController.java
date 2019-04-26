@@ -48,6 +48,12 @@ public class JobSeekerEditorController {
       if (newValue != null) selectItem(newValue);
       else clearForm();
     });
+    editor.onAddNew(e -> {
+      editor.clearSelection();
+      selectedItem = new JobSeeker();
+      clearForm();
+      editor.showEditor();
+    });
   }
 
   private void setFieldValidators() {
@@ -136,14 +142,14 @@ public class JobSeekerEditorController {
     title.setText("");
     selectedItem = null;
 
-    firstNameField.setValue("");
-    lastNameField.setValue("");
-    emailAddressField.setValue("");
-    phoneNumberField.setValue("");
-    birthDateField.setValue(null);
-    educationField.setValue("");
-    workExperienceField.setValue("");
-    wageField.setValue("");
-    referencesField.setValue("");
+    firstNameField.clear();
+    lastNameField.clear();
+    emailAddressField.clear();
+    phoneNumberField.clear();
+    birthDateField.clear();
+    educationField.clear();
+    workExperienceField.clear();
+    wageField.clear();
+    referencesField.clear();
   }
 }

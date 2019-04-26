@@ -3,10 +3,20 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableView?><?import javafx.scene.layout.BorderPane?><?import javafx.scene.control.Button?>
 <fx:root type="SplitPane" dividerPositions="0.4" xmlns:fx="http://javafx.com/fxml" >
     <TableView fx:id="itemsTable" minWidth="200" />
-    <HBox alignment="CENTER" minWidth="400">
-        <VBox fx:id="editorFormContainer" alignment="CENTER_RIGHT" spacing="15" />
+    <HBox alignment="CENTER" prefWidth="400">
+        <BorderPane fx:id="editor" prefWidth="400" visible="false">
+            <top>
+                <HBox alignment="CENTER_LEFT" styleClass="editor-navbar">
+                    <Button onAction="#goBack">Go bak</Button>
+                </HBox>
+            </top>
+            <center>
+                <VBox fx:id="editorFormContainer" alignment="CENTER_RIGHT" spacing="15" />
+            </center>
+        </BorderPane>
+        <Button fx:id="addNewButton">Add new</Button>
     </HBox>
 </fx:root>
