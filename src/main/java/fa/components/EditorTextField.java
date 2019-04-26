@@ -1,6 +1,7 @@
 package fa.components;
 
 import fa.utils.validation.StringValidator;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -15,6 +16,7 @@ public class EditorTextField extends VBox {
   @FXML private TextField field;
 
   private StringValidator[] validators = new StringValidator[0];
+  private ChangeListener<String> changeListener = (observableValue, oldValue, newValue) -> validate();
 
   public EditorTextField() {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fa/components/EditorTextField.fxml"));
@@ -29,7 +31,7 @@ public class EditorTextField extends VBox {
   }
 
   public void initialize() {
-    field.textProperty().addListener(((observableValue, oldValue, newValue) -> validate()));
+    field.textProperty().addListener(changeListener);
   }
 
   public boolean validate() {
@@ -39,12 +41,19 @@ public class EditorTextField extends VBox {
         return false;
       }
     }
-    errorMsg.setText("");
+    errorMsg.setText(null);
     return true;
   }
 
   public void setValidators(StringValidator... validators) {
     this.validators = validators;
+  }
+
+  public void clear() {
+    field.textProperty().removeListener(changeListener);
+    field.clear();
+    errorMsg.setText(null);
+    field.textProperty().addListener(changeListener);
   }
 
   public void setValue(String s) {

@@ -1,6 +1,7 @@
 package fa.components;
 
 import fa.utils.validation.LocalDateValidator;
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.DatePicker;
@@ -16,6 +17,7 @@ public class EditorDateField extends VBox {
   @FXML private DatePicker field;
 
   private LocalDateValidator[] validators = new LocalDateValidator[0];
+  private ChangeListener changeListener = (observableValue, oldValue, newValue) -> validate();
 
   public EditorDateField() {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fa/components/EditorDateField.fxml"));
@@ -30,7 +32,7 @@ public class EditorDateField extends VBox {
   }
 
   public void initialize() {
-    field.valueProperty().addListener(((observableValue, oldValue, newValue) -> validate()));
+    field.valueProperty().addListener(changeListener);
   }
 
   public boolean validate() {
@@ -40,12 +42,19 @@ public class EditorDateField extends VBox {
         return false;
       }
     }
-    errorMsg.setText("");
+    errorMsg.setText(null);
     return true;
   }
 
   public void setValidators(LocalDateValidator... validators) {
     this.validators = validators;
+  }
+
+  public void clear() {
+    field.valueProperty().removeListener(changeListener);
+    field.setValue(null);
+    errorMsg.setText(null);
+    field.valueProperty().addListener(changeListener);
   }
 
   public void setValue(LocalDate d) {
