@@ -3,17 +3,14 @@ package fa.io.read;
 import fa.io.read.exceptions.ReadSerializedInvalidClassException;
 import fa.models.DB;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 
 class SerializedReader implements ReadStrategy {
   @Override
   public DB readFile(File file) throws IOException, ReadSerializedInvalidClassException {
     try {
       return this.parseObject(file);
-    } catch (ClassNotFoundException e) {
+    } catch (ClassNotFoundException | InvalidClassException e) {
       throw new ReadSerializedInvalidClassException(
         "The file could not be deserialized. A likely cause is that" +
         " the file contains outdated versions of some classes."

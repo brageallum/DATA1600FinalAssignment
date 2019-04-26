@@ -16,7 +16,6 @@ public class Reader {
         return new SerializedReader().readFile(file);
       default:
         throw new InvalidExtensionException(String.format("Invalid file extension \".%s\"", ext));
-
     }
   }
 }
