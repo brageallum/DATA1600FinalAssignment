@@ -36,7 +36,7 @@
           <HBox fx:id="navigationBar" >
             <Button  fx:id="home" userData="view/home.fxml" onAction="#navigateApp" styleClass="button--navigation, isActive">Home</Button>
             <Button fx:id="jobSeekerEditor" userData="view/JobSeekerEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Job seekers</Button>
-            <Button fx:id="workplaceEditor" userData="view/JobSeekerEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Workplace</Button>
+            <Button fx:id="workplaceEditor" userData="view/WorkplaceEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Workplace</Button>
           </HBox>
         </HBox>
       </VBox>

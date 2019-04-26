@@ -39,7 +39,7 @@ public class JobSeekerEditorController {
     editor.setTableColumn("Phone number", "phoneNumber");
     editor.setTableColumn("Birth date", "birthDate");
     editor.setTableColumn("Education", "education");
-    editor.setTableColumn("Work experience", "workExperience");
+    editor.setTableColumn("Workplace experience", "workExperience");
     editor.setTableColumn("Wage", "wage");
     editor.setTableColumn("References", "references");
 

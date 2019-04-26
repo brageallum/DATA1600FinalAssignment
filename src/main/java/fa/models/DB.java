@@ -25,6 +25,22 @@ public class DB implements Serializable {
     jobSeeker.referencesProperty()
   });
 
+  private final SerializableObservableList<Workplace> workplaces = new SerializableObservableList<>(workplace -> new Observable[]{
+    workplace.workplaceProperty(),
+    workplace.employerProperty(),
+    workplace.categoryProperty(),
+    workplace.durationProperty(),
+    workplace.workingHoursProperty(),
+    workplace.descriptionProperty(),
+    workplace.positionProperty(),
+    workplace.qualificationsProperty(),
+    workplace.wageProperty(),
+    workplace.conditionsProperty(),
+    workplace.phoneNumberProperty(),
+    workplace.emailAddressProperty()
+});
+
+
   private DB() {}
 
   public static DB getInstance() {
@@ -43,10 +59,15 @@ public class DB implements Serializable {
       instance = new DB();
     }
     instance.getJobSeekers().setAll(newDb.getJobSeekers());
+    instance.getWorkplaces().setAll(newDb.getWorkplaces());
   }
 
   public ObservableList<JobSeeker> getJobSeekers() {
     return jobSeekers.getObservableList();
+  }
+
+  public ObservableList<Workplace> getWorkplaces() {
+    return workplaces.getObservableList();
   }
 
   @Override

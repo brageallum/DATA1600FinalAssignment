@@ -5,6 +5,7 @@ import fa.io.read.exceptions.ReadCSVInvalidFormatException;
 import fa.io.read.exceptions.ReadCSVInvalidTypeException;
 import fa.models.DB;
 import fa.models.JobSeeker;
+import fa.models.Workplace;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,6 +22,12 @@ class CSVReader implements ReadStrategy {
   private final Pattern jobSeekerFields = getCSVRowPattern(
     "type", "id", "firstName", "lastName", "emailAddress", "phoneNumber",
     "birthDate", "education", "workExperience", "wage", "references"
+  );
+
+  private final Pattern workplaceFields = getCSVRowPattern(
+    "type", "id", "sector", "workplace", "employer", "category", "duration", "workingHours",
+    "position", "qualifications", "wage", "conditions", "phoneNumber", "emailAddress",
+    "description"
   );
 
   private DB detachedDB;
@@ -50,6 +57,9 @@ class CSVReader implements ReadStrategy {
     switch (type) {
       case "JobSeeker":
         detachedDB.getJobSeekers().add(parseJobSeeker(line));
+        break;
+      case "Workplace":
+        detachedDB.getWorkplaces().add(parseWorkplace(line));
         break;
       default:
         throw new ReadCSVInvalidTypeException(
@@ -92,6 +102,30 @@ class CSVReader implements ReadStrategy {
         String.format("[on line %s]: Invalid date format (valid format is yyyy-MM-dd).", line.getLineNumber())
       );
     }
+  }
+
+  private Workplace parseWorkplace(Line line) throws ReadCSVInvalidFormatException {
+    Matcher data = workplaceFields.matcher(line.getText());
+    if (!data.find()) throw new ReadCSVInvalidFormatException(
+      String.format("[on line %s]: Incorrect format for type Workplace.", line.getLineNumber())
+    );
+
+    return new Workplace(
+      Integer.parseInt(data.group("id")),
+      data.group("sector"),
+      data.group("workplace"),
+      data.group("employer"),
+      data.group("category"),
+      data.group("duration"),
+      data.group("workingHours"),
+      data.group("position"),
+      data.group("qualifications"),
+      Integer.parseInt(data.group("wage")),
+      data.group("conditions"),
+      data.group("phoneNumber"),
+      data.group("emailAddress"),
+      data.group("description")
+    );
   }
 
   private Pattern getCSVRowPattern(String... fields) {
