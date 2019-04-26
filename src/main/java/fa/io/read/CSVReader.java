@@ -18,10 +18,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class CSVReader implements ReadStrategy {
-  private final String[] jobSeekerFields = {
+  private final Pattern jobSeekerFields = getCSVRowPattern(
     "type", "id", "firstName", "lastName", "emailAddress", "phoneNumber",
     "birthDate", "education", "workExperience", "wage", "references"
-  };
+  );
 
   private DB detachedDB;
 
@@ -68,7 +68,7 @@ class CSVReader implements ReadStrategy {
   }
 
   private JobSeeker parseJobSeeker(Line line) throws ReadCSVInvalidFormatException {
-    Matcher data = getCSVRowPattern(jobSeekerFields).matcher(line.getText());
+    Matcher data = jobSeekerFields.matcher(line.getText());
     if (!data.find()) throw new ReadCSVInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type JobSeeker.", line.getLineNumber())
     );
@@ -94,7 +94,7 @@ class CSVReader implements ReadStrategy {
     }
   }
 
-  private Pattern getCSVRowPattern(String[] fields) {
+  private Pattern getCSVRowPattern(String... fields) {
     String pattern = Arrays.stream(fields).reduce("^",
       (accumulator, current) -> accumulator + String.format("(?<%s>[^;]+);", current)
     );
