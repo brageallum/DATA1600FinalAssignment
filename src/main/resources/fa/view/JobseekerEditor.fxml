@@ -3,12 +3,10 @@
 <?import fa.components.Editor?>
 <?import fa.components.EditorTextField?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import fa.components.EditorDateField?>
 
 <Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.JobSeekerEditorController">
     <form>
-        <Label fx:id="title" />
         <EditorTextField fx:id="firstNameField" labelText="First name:" />
         <EditorTextField fx:id="lastNameField" labelText="Last name:" />
         <EditorTextField fx:id="emailAddressField" labelText="Email address:" />

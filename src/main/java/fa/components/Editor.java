@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
@@ -19,6 +20,7 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 
 public class Editor<T> extends SplitPane {
+  @FXML private Label editorTitle;
   @FXML private TableView<T> itemsTable;
   @FXML private Pane editorFormContainer;
   @FXML private BorderPane editor;
@@ -49,6 +51,10 @@ public class Editor<T> extends SplitPane {
   public void goBack(ActionEvent e) {
     this.hideEditor();
     this.clearSelection();
+  }
+
+  public void setTitle(String title) {
+    editorTitle.setText(title);
   }
 
   public void showEditor() {

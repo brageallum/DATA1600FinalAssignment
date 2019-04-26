@@ -22,7 +22,8 @@ public class DB implements Serializable {
     jobSeeker.educationProperty(),
     jobSeeker.workExperienceProperty(),
     jobSeeker.wageProperty(),
-    jobSeeker.referencesProperty()
+    jobSeeker.referencesProperty(),
+    jobSeeker.birthDateProperty()
   });
 
   private final SerializableObservableList<Workplace> workplaces = new SerializableObservableList<>(workplace -> new Observable[]{
@@ -38,7 +39,20 @@ public class DB implements Serializable {
     workplace.conditionsProperty(),
     workplace.phoneNumberProperty(),
     workplace.emailAddressProperty()
-});
+  });
+
+  private final SerializableObservableList<Employer> employers = new SerializableObservableList<>(employer -> new Observable[]{
+    employer.firstNameProperty(),
+    employer.lastNameProperty(),
+    employer.sectorProperty(),
+    employer.addressProperty(),
+    employer.industryProperty(),
+    employer.phoneNumberProperty(),
+    employer.emailAddressProperty(),
+    employer.birthDateProperty()
+  });
+
+  private final int h = 1;
 
 
   private DB() {}
@@ -60,6 +74,7 @@ public class DB implements Serializable {
     }
     instance.getJobSeekers().setAll(newDb.getJobSeekers());
     instance.getWorkplaces().setAll(newDb.getWorkplaces());
+    instance.getEmployers().setAll(newDb.getEmployers());
   }
 
   public ObservableList<JobSeeker> getJobSeekers() {
@@ -68,6 +83,10 @@ public class DB implements Serializable {
 
   public ObservableList<Workplace> getWorkplaces() {
     return workplaces.getObservableList();
+  }
+
+  public ObservableList<Employer> getEmployers() {
+    return employers.getObservableList();
   }
 
   @Override

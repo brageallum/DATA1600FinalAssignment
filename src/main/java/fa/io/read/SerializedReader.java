@@ -3,7 +3,11 @@ package fa.io.read;
 import fa.io.read.exceptions.ReadSerializedInvalidClassException;
 import fa.models.DB;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InvalidClassException;
+import java.io.ObjectInputStream;
 
 class SerializedReader implements ReadStrategy {
   @Override

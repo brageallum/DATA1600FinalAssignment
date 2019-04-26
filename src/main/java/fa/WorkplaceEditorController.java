@@ -13,7 +13,6 @@ public class WorkplaceEditorController {
 
   private Workplace selectedItem;
 
-
   public void initialize() {
     System.out.format("[ %s ]: WorkplaceEditorController initialized.\n", new Date());
 

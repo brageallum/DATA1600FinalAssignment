@@ -10,7 +10,7 @@ public class Workplace implements Serializable {
   private static int nextId = 100;
 
   public final int ID;
-  private final SerializableProperty<String> sector;
+  private final SerializableProperty<Enum> sector;
   private final SerializableProperty<String> workplace;
   private final SerializableProperty<String> employer;
   private final SerializableProperty<String> category;
@@ -29,7 +29,7 @@ public class Workplace implements Serializable {
   }
 
   public Workplace(
-    String sector,
+    Enum sector,
     String workplace,
     String employer,
     String category,
@@ -63,7 +63,7 @@ public class Workplace implements Serializable {
 
   public Workplace(
     int ID,
-    String sector,
+    Enum sector,
     String workplace,
     String employer,
     String category,
@@ -99,7 +99,7 @@ public class Workplace implements Serializable {
     return ID;
   }
 
-  public ObjectProperty<String> sectorProperty() {
+  public ObjectProperty<Enum> sectorProperty() {
     return sector.getProperty();
   }
 

@@ -13,13 +13,15 @@ abstract class Person implements Serializable {
   private final SerializableProperty<String> emailAddress;
   private final SerializableProperty<String> phoneNumber;
   private final SerializableProperty<LocalDate> birthDate;
+  private final SerializableProperty<String> address;
 
-  Person(String firstName, String lastName, String emailAddress, String phoneNumber, LocalDate birthDate) {
+  Person(String firstName, String lastName, String emailAddress, String phoneNumber, LocalDate birthDate, String address) {
     this.firstName = new SerializableProperty<>(firstName);
     this.lastName = new SerializableProperty<>(lastName);
     this.emailAddress = new SerializableProperty<>(emailAddress);
     this.phoneNumber = new SerializableProperty<>(phoneNumber);
     this.birthDate = new SerializableProperty<>(birthDate);
+    this.address = new SerializableProperty<>(address);
   }
 
   public ObjectProperty<String> firstNameProperty() {
@@ -40,5 +42,9 @@ abstract class Person implements Serializable {
 
   public ObjectProperty<LocalDate> birthDateProperty() {
     return birthDate.getProperty();
+  }
+
+  public ObjectProperty<String> addressProperty() {
+    return address.getProperty();
   }
 }

@@ -69,6 +69,10 @@
     -fx-font-weight: bold;
     -fx-text-fill: #c0392b;
 }
+.editor--title {
+    -fx-text-fill: #fff;
+    -fx-font-size: 16;
+}
 
 .dialog-pane .button-bar .container {
     -fx-background-color: #fff;
@@ -112,7 +116,9 @@
 }
 
 .goBackButton {
-    -fx-background-color: transparent;
+    -fx-background-insets: 10;
+    -fx-padding: 15;
+    -fx-background-color: #c0392b;
     -fx-border-color: transparent;
     -fx-pref-width: 100;
     -fx-text-fill: #fff;

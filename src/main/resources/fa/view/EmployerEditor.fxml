@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import fa.components.Editor?>
+<?import fa.components.EditorTextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import fa.components.EditorDateField?>
+
+<Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.EmployerEditorController">
+  <form>
+    <Label fx:id="title" />
+    <Label>Button</Label>
+    <Button text="Submit" />
+  </form>
+</Editor>

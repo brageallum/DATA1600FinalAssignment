@@ -13,7 +13,6 @@ import javafx.scene.control.Label;
 import java.util.Date;
 
 public class JobSeekerEditorController {
-  @FXML private Label title;
   @FXML private Editor<JobSeeker> editor;
   @FXML private EditorTextField firstNameField;
   @FXML private EditorTextField lastNameField;
@@ -42,6 +41,7 @@ public class JobSeekerEditorController {
     editor.setTableColumn("Workplace experience", "workExperience");
     editor.setTableColumn("Wage", "wage");
     editor.setTableColumn("References", "references");
+    editor.setTableColumn("Address", "address");
 
     editor.setTableItems(DB.getInstance().getJobSeekers());
     editor.onNewItem((observableValue, oldValue, newValue) -> {
@@ -73,7 +73,7 @@ public class JobSeekerEditorController {
   }
 
   private void selectItem(JobSeeker jobSeeker) {
-    title.setText("Editing: " + jobSeeker.toString());
+    editor.setTitle("Editing: " + jobSeeker.toString());
     selectedItem = jobSeeker;
 
     firstNameField.setValue(jobSeeker.firstNameProperty().getValue());
@@ -122,7 +122,8 @@ public class JobSeekerEditorController {
       educationField.getValue(),
       workExperienceField.getValue(),
       Integer.parseInt(wageField.getValue()),
-      referencesField.getValue()
+      referencesField.getValue(),
+      null
     ));
   }
 
@@ -136,10 +137,11 @@ public class JobSeekerEditorController {
     selectedItem.workExperienceProperty().set(workExperienceField.getValue());
     selectedItem.wageProperty().set(Integer.parseInt(wageField.getValue()));
     selectedItem.referencesProperty().set(referencesField.getValue());
+    selectedItem.addressProperty().set(null);
   }
 
   private void clearForm() {
-    title.setText("");
+    editor.setTitle(null);
     selectedItem = null;
 
     firstNameField.clear();

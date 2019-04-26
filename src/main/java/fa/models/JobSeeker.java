@@ -17,7 +17,7 @@ public class JobSeeker extends Person implements Serializable {
   public final int ID;
 
   public JobSeeker() {
-    this(null, null, null, null, null, null, null, 0, null);
+    this(null, null, null, null, null, null, null, 0, null, null);
   }
 
   public JobSeeker(
@@ -29,7 +29,8 @@ public class JobSeeker extends Person implements Serializable {
     String education,
     String workExperience,
     int wage,
-    String references
+    String references,
+    String address
   ) {
     this(
       nextId,
@@ -41,7 +42,8 @@ public class JobSeeker extends Person implements Serializable {
       education,
       workExperience,
       wage,
-      references
+      references,
+      address
     );
   }
 
@@ -55,10 +57,11 @@ public class JobSeeker extends Person implements Serializable {
     String education,
     String workExperience,
     int wage,
-    String references
+    String references,
+    String address
   ) {
 
-    super(firstName, lastName, emailAddress, phoneNumber, birthDate);
+    super(firstName, lastName, emailAddress, phoneNumber, birthDate, address);
 
     if (ID > nextId) nextId = ID + 1;
 

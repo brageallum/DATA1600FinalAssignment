@@ -4,6 +4,7 @@ import fa.io.read.exceptions.ReadCSVException;
 import fa.io.read.exceptions.ReadCSVInvalidFormatException;
 import fa.io.read.exceptions.ReadCSVInvalidTypeException;
 import fa.models.DB;
+import fa.models.Employer;
 import fa.models.JobSeeker;
 import fa.models.Workplace;
 
@@ -21,7 +22,7 @@ import java.util.regex.Pattern;
 class CSVReader implements ReadStrategy {
   private final Pattern jobSeekerFields = getCSVRowPattern(
     "type", "id", "firstName", "lastName", "emailAddress", "phoneNumber",
-    "birthDate", "education", "workExperience", "wage", "references"
+    "birthDate", "education", "workExperience", "wage", "references", "address"
   );
 
   private final Pattern workplaceFields = getCSVRowPattern(
@@ -29,6 +30,11 @@ class CSVReader implements ReadStrategy {
     "position", "qualifications", "wage", "conditions", "phoneNumber", "emailAddress",
     "description"
   );
+
+  private final Pattern employerFields = getCSVRowPattern(
+    "type", "id", "firstName", "lastName", "sector", "address", "industry", "phoneNumber",
+    "emailAddress", "birthDate"
+    );
 
   private DB detachedDB;
   private BufferedReader reader;
@@ -70,6 +76,9 @@ class CSVReader implements ReadStrategy {
       case "Workplace":
         detachedDB.getWorkplaces().add(parseWorkplace(line));
         break;
+      case "Employer":
+        detachedDB.getEmployers().add(parseEmployer(line));
+        break;
       default:
         throw new ReadCSVInvalidTypeException(
           String.format("[on line %s]: \"%s\" is not a valid data type.", line.getLineNumber(), type)
@@ -103,7 +112,8 @@ class CSVReader implements ReadStrategy {
         data.group("education"),
         data.group("workExperience"),
         Integer.parseInt(data.group("wage")),
-        data.group("references")
+        data.group("references"),
+        data.group("address")
       );
     } catch (DateTimeParseException e) {
       e.printStackTrace();
@@ -111,6 +121,11 @@ class CSVReader implements ReadStrategy {
         String.format("[on line %s]: Invalid date format (valid format is yyyy-MM-dd).", line.getLineNumber())
       );
     }
+  }
+
+  private enum Sector {
+    Private,
+    Public
   }
 
   private Workplace parseWorkplace(Line line) throws ReadCSVInvalidFormatException {
@@ -121,7 +136,7 @@ class CSVReader implements ReadStrategy {
 
     return new Workplace(
       Integer.parseInt(data.group("id")),
-      data.group("sector"),
+      Sector.valueOf(data.group("sector")),
       data.group("workplace"),
       data.group("employer"),
       data.group("category"),
@@ -134,6 +149,25 @@ class CSVReader implements ReadStrategy {
       data.group("phoneNumber"),
       data.group("emailAddress"),
       data.group("description")
+    );
+  }
+
+  private Employer parseEmployer(Line line) throws ReadCSVInvalidFormatException {
+    Matcher data = employerFields.matcher(line.getText());
+    if (!data.find()) throw new ReadCSVInvalidFormatException(
+      String.format("[on line %s]: Incorrect format for type Employer.", line.getLineNumber())
+    );
+
+    return new Employer(
+      Integer.parseInt(data.group("id")),
+      data.group("firstName"),
+      data.group("lastName"),
+      Sector.valueOf(data.group("sector")),
+      data.group("address"),
+      data.group("industry"),
+      data.group("phoneNumber"),
+      data.group("emailAddress"),
+      LocalDate.parse(data.group("birthDate"))
     );
   }
 
