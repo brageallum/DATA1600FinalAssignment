@@ -31,6 +31,7 @@ class CSVReader implements ReadStrategy {
   );
 
   private DB detachedDB;
+  private BufferedReader reader;
 
   @Override
   public DB readFile(File file) throws IOException, ReadCSVException {
@@ -40,8 +41,16 @@ class CSVReader implements ReadStrategy {
       in a DB instance which is detached from the global singleton instance until we return it to the main Thread.
      */
     detachedDB = DB.getDetachedInstance();
-    BufferedReader reader = Files.newBufferedReader(Paths.get(file.getPath()));
+    reader = Files.newBufferedReader(Paths.get(file.getPath()));
 
+    try {
+      return parseLines();
+    } finally {
+      reader.close();
+    }
+  }
+
+  private DB parseLines() throws IOException, ReadCSVException {
     Line line = new Line();
     while (line.nextLine(reader.readLine())) {
       if (line.isEmpty()) continue;
