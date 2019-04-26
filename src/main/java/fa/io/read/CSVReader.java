@@ -124,6 +124,6 @@ class Line {
   }
 
   boolean isEmpty() {
-    return text.matches("^\\s$");
+    return text.matches("^\\s*$");
   }
 }
