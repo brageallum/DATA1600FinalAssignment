@@ -16,7 +16,6 @@
     <top>
       <VBox styleClass="area--top-bar">
         <!-- Tool bar -->
-
         <HBox styleClass="area--tools">
           <MenuBar styleClass="area--menubar">
             <Menu text="File" >
@@ -24,8 +23,6 @@
               <MenuItem text="Export data to file" onAction="#exportData" />
             </Menu>
           </MenuBar>
-          <Region HBox.hgrow="ALWAYS" />
-          <Button onAction="#closeApp" styleClass="button--close-app">✕</Button>
         </HBox>
         <!-- Navigation Bar -->
         <HBox spacing="10" styleClass="area--navigation" fx:id="topBar">
@@ -44,7 +41,6 @@
         </HBox>
       </VBox>
     </top>
-    <Button>Hi</Button>
     <center>
       <!-- Content -->
         <fx:include source="home.fxml" />

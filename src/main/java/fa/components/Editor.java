@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -22,6 +23,7 @@ public class Editor<T> extends SplitPane {
   @FXML private Pane editorFormContainer;
   @FXML private BorderPane editor;
   @FXML private Button addNewButton;
+  @FXML private ScrollPane scrollBox;
 
   public Editor() {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fa/components/Editor.fxml"));
@@ -46,16 +48,23 @@ public class Editor<T> extends SplitPane {
   @FXML
   public void goBack(ActionEvent e) {
     this.hideEditor();
+    this.clearSelection();
   }
 
   public void showEditor() {
     editor.setVisible(true);
+    editor.setManaged(true);
     addNewButton.setVisible(false);
+    addNewButton.setManaged(false);
+    scrollBox.setFitToHeight(false);
   }
 
   public void hideEditor() {
     editor.setVisible(false);
+    editor.setManaged(false);
     addNewButton.setVisible(true);
+    addNewButton.setManaged(true);
+    scrollBox.setFitToHeight(true);
   }
 
   public ObservableList<Node> getForm() {
