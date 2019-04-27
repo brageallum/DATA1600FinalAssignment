@@ -17,10 +17,8 @@ public class EmployerEditorController {
     System.out.format("[ %s ]: EmployerEditorController initialized.\n", new Date());
 
     this.setTableColumns();
-
     this.editor.setTableItems(DB.getInstance().getEmployers());
 
-    System.out.println(DB.getInstance().getEmployers());
     /*
     editor.onNewItem((observableValue, oldValue, newValue) -> {
       if (newValue != null) selectItem(newValue);
@@ -37,7 +35,7 @@ public class EmployerEditorController {
     this.editor.setTableColumn("id", "ID");
     this.editor.setTableColumn("First Name", "firstName");
     this.editor.setTableColumn("Last Name", "lastName");
-    this.editor.setTableColumn("Birthdate", "birthDate");
+    this.editor.setTableColumn("Birth date", "birthDate");
     this.editor.setTableColumn("Sector", "sector");
     this.editor.setTableColumn("Address", "address");
     this.editor.setTableColumn("Industry", "industry");

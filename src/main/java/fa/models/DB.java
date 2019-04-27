@@ -5,6 +5,8 @@ import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This is where all our data is stored. It uses the singleton pattern to make a single instance
@@ -58,6 +60,7 @@ public class DB implements Serializable {
   private DB() {}
 
   public static DB getInstance() {
+    System.out.println("DB INITIALIZED");
     if (instance == null) {
       instance = new DB();
     }
@@ -72,6 +75,7 @@ public class DB implements Serializable {
     if (instance == null) {
       instance = new DB();
     }
+
     instance.getJobSeekers().setAll(newDb.getJobSeekers());
     instance.getWorkplaces().setAll(newDb.getWorkplaces());
     instance.getEmployers().setAll(newDb.getEmployers());
@@ -87,6 +91,35 @@ public class DB implements Serializable {
 
   public ObservableList<Employer> getEmployers() {
     return employers.getObservableList();
+  }
+
+  public JobSeeker getJobSeeker(int id) {
+    List<JobSeeker> jsList = getJobSeekers()
+      .stream()
+      .filter(s -> (s.getID() == id))
+      .collect(Collectors.toList());
+    try {
+      return jsList.get(0);
+    } catch(IndexOutOfBoundsException e) {
+      System.out.println(jsList);
+      throw new Error("Index 0 does not exist");
+    }
+  }
+
+  public Workplace getWorkplace(int id) {
+    return new Workplace();
+  }
+
+  public Employer getEmployer(int id) {
+    List<Employer> empList = getEmployers()
+      .stream()
+      .filter(s -> (s.getID() == id))
+      .collect(Collectors.toList());
+    try {
+      return empList.get(0);
+    } catch(IndexOutOfBoundsException e) {
+      throw new Error("Index 0 does not exist");
+    }
   }
 
   @Override

@@ -6,6 +6,7 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class SerializableObservableList<T> implements Serializable {
     observableList.addListener((ListChangeListener<? super T>) change -> list = toList(observableList));
   }
 
-  private List<T> toList(ObservableList<T> observableList) {
+  public List<T> toList(ObservableList<T> observableList) {
     return new ArrayList<>(observableList);
   }
 }
