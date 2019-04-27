@@ -6,7 +6,9 @@ import fa.io.read.exceptions.ReadCSVInvalidTypeException;
 import fa.models.DB;
 import fa.models.Employer;
 import fa.models.JobSeeker;
+import fa.models.Store;
 import fa.models.Workplace;
+import fa.utils.FetchData;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,8 +18,10 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 class CSVReader implements ReadStrategy {
   private final Pattern jobSeekerFields = getCSVRowPattern(
@@ -33,7 +37,7 @@ class CSVReader implements ReadStrategy {
 
   private final Pattern employerFields = getCSVRowPattern(
     "type", "id", "firstName", "lastName", "sector", "address", "industry", "phoneNumber",
-    "emailAddress", "birthDate"
+    "emailAddress", "birthDate", "workplaces"
     );
 
   private DB detachedDB;
@@ -64,6 +68,7 @@ class CSVReader implements ReadStrategy {
       parseLine(line);
     }
 
+    Store.dbInitializedProperty().set(true);
     return detachedDB;
   }
 
@@ -123,6 +128,7 @@ class CSVReader implements ReadStrategy {
     }
   }
 
+  @SuppressWarnings("unused")
   private enum Sector {
     Private,
     Public
@@ -167,7 +173,8 @@ class CSVReader implements ReadStrategy {
       data.group("industry"),
       data.group("phoneNumber"),
       data.group("emailAddress"),
-      LocalDate.parse(data.group("birthDate"))
+      LocalDate.parse(data.group("birthDate")),
+      FetchData.getWorkplaces(data.group("workplaces"), this.detachedDB)
     );
   }
 
