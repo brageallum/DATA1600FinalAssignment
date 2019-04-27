@@ -33,18 +33,5 @@ public class EmployerEditorController {
     if (Store.dbInitializedProperty().getValue()) {
       System.out.println(DB.getInstance().getEmployer(100));
     }
-
-/*
-    editor.onNewItem((observableValue, oldValue, newValue) -> {
-      if (newValue != null) selectItem(newValue);
-      else clearForm();
-    });
-    editor.onAddNew(e -> {
-      editor.clearSelection();
-      selectedItem = new Workplace();
-      clearForm();
-      editor.showEditor();
-    });
-*/
   }
 }
