@@ -1,12 +1,14 @@
 package fa.models;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-
+import fa.utils.SearchMatcher;
+import fa.utils.Searchable;
 import fa.utils.serialization.SerializableProperty;
 import javafx.beans.property.ObjectProperty;
 
-public class Employer extends Person implements Serializable {
+import java.io.Serializable;
+import java.time.LocalDate;
+
+public class Employer extends Person implements Serializable, Searchable {
 
   public final int ID;
   private static int nextId = 100;
@@ -58,6 +60,14 @@ public class Employer extends Person implements Serializable {
     this.ID = ID;
     this.sector = new SerializableProperty<>(sector);
     this.industry = new SerializableProperty<>(industry);
+  }
+
+  public boolean matchesSearch(String regex) {
+    return super.matchesSearch(regex) || SearchMatcher.matches(
+      regex,
+      sectorProperty().getValue().toString(),
+      industryProperty().getValue()
+    );
   }
 
   public int getID() {

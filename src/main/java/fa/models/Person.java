@@ -1,12 +1,14 @@
 package fa.models;
 
+import fa.utils.SearchMatcher;
+import fa.utils.Searchable;
 import fa.utils.serialization.SerializableProperty;
 import javafx.beans.property.ObjectProperty;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-abstract class Person implements Serializable {
+abstract class Person implements Serializable, Searchable {
 
   private final SerializableProperty<String> firstName;
   private final SerializableProperty<String> lastName;
@@ -22,6 +24,18 @@ abstract class Person implements Serializable {
     this.phoneNumber = new SerializableProperty<>(phoneNumber);
     this.birthDate = new SerializableProperty<>(birthDate);
     this.address = new SerializableProperty<>(address);
+  }
+
+  public boolean matchesSearch(String regex) {
+    return SearchMatcher.matches(
+      regex,
+      this.firstNameProperty().getValue(),
+      this.lastNameProperty().getValue(),
+      this.emailAddressProperty().getValue(),
+      this.phoneNumberProperty().getValue(),
+      this.birthDateProperty().getValue().toString(),
+      this.addressProperty().getValue()
+    );
   }
 
   public ObjectProperty<String> firstNameProperty() {
