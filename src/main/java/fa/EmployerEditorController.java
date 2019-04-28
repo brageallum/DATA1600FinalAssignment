@@ -41,14 +41,6 @@ public class EmployerEditorController extends PersonEditorController {
     this.setTableColumns();
 
     this.editor.setTableItems(DB.getInstance().getEmployers());
-    editor.onNewItem((observableValue, oldValue, newValue) -> {
-      if (newValue != null) selectItem(newValue);
-      else clearForm();
-    });
-    editor.onAddNew(e -> {
-      selectedItem = new Employer();
-      clearForm();
-    });
   }
 
   protected void setTableColumns() {

@@ -66,7 +66,7 @@ public class Employer extends Person implements Serializable, Searchable {
 
     System.out.println("EMPLOYER INITIALIZED");
 
-    if (ID > nextId) nextId = ID + 1;
+    if (ID >= nextId) nextId = ID + 1;
 
     this.ID = ID;
     this.sector = new SerializableProperty<>(sector);

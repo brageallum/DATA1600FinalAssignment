@@ -39,10 +39,16 @@ public abstract class PersonEditorController {
       if (null == newValue) {
         submitButton.setText("Create");
         deleteButton.setVisible(false);
+        this.clearForm();
       } else {
+        this.selectItem(newValue);
         submitButton.setText("Update");
         deleteButton.setVisible(true);
       }
+    });
+    editor.onAddNew(e -> {
+      this.selectedItem = null;
+      this.clearForm();
     });
   }
 
