@@ -1,11 +1,11 @@
 package fa;
 
-import java.util.Date;
-
 import fa.components.Editor;
 import fa.models.DB;
 import fa.models.Workplace;
 import javafx.fxml.FXML;
+
+import java.util.Date;
 
 public class WorkplaceEditorController {
   @FXML
@@ -16,22 +16,9 @@ public class WorkplaceEditorController {
   public void initialize() {
     System.out.format("[ %s ]: WorkplaceEditorController initialized.\n", new Date());
 
-    editor.setTableColumn("id", "ID");
-    editor.setTableColumn("Sector", "sector");
-    editor.setTableColumn("Workplace", "workplace");
-    editor.setTableColumn("Employer", "employer");
-    editor.setTableColumn("Category", "category");
-    editor.setTableColumn("Duration", "duration");
-    editor.setTableColumn("Working Hours", "workingHours");
-    editor.setTableColumn("Description", "description");
-    editor.setTableColumn("Position", "position");
-    editor.setTableColumn("Qualifications", "qualifications");
-    editor.setTableColumn("Wage", "wage");
-    editor.setTableColumn("Conditions", "conditions");
-    editor.setTableColumn("Phone Number", "phoneNumber");
-    editor.setTableColumn("Email Address", "emailAddress");
+    this.setTableColumns();
 
-    editor.setTableItems(DB.getInstance().getWorkplaces());
+    this.editor.setTableItems(DB.getInstance().getWorkplaces());
 
     System.out.println(DB.getInstance().getWorkplaces());
     /*
@@ -40,11 +27,26 @@ public class WorkplaceEditorController {
       else clearForm();
     });
     editor.onAddNew(e -> {
-      editor.clearSelection();
       selectedItem = new Workplace();
       clearForm();
-      editor.showEditor();
     });
     */
+  }
+
+  private void setTableColumns() {
+    this.editor.setTableColumn("id", "ID");
+    this.editor.setTableColumn("Sector", "sector");
+    this.editor.setTableColumn("Workplace", "workplace");
+    this.editor.setTableColumn("Employer", "employer");
+    this.editor.setTableColumn("Category", "category");
+    this.editor.setTableColumn("Duration", "duration");
+    this.editor.setTableColumn("Working Hours", "workingHours");
+    this.editor.setTableColumn("Description", "description");
+    this.editor.setTableColumn("Position", "position");
+    this.editor.setTableColumn("Qualifications", "qualifications");
+    this.editor.setTableColumn("Wage", "wage");
+    this.editor.setTableColumn("Conditions", "conditions");
+    this.editor.setTableColumn("Phone Number", "phoneNumber");
+    this.editor.setTableColumn("Email Address", "emailAddress");
   }
 }

@@ -1,14 +1,14 @@
 package fa.models;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import fa.utils.serialization.SerializableProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Employer extends Person implements Serializable {
 
@@ -17,7 +17,7 @@ public class Employer extends Person implements Serializable {
   private final SerializableProperty<Enum> sector;
   private final SerializableProperty<String> industry;
   private final SerializableProperty<List<Workplace>> workplaces;
-  private transient StringProperty workplacesNames;
+  private final transient StringProperty workplacesNames = new SimpleStringProperty();
 
   public Employer() {
     this(null, null, null, null, null, null, null, null, null);
@@ -72,15 +72,17 @@ public class Employer extends Person implements Serializable {
     this.workplaces = new SerializableProperty<>(workplaces);
     this.setWorkplacesNames();
 
-    this.workplaces.getProperty().addListener((observableValue, oldValue, newValue) -> {
-      this.setWorkplacesNames();
-    });
+    this.workplaces.getProperty().addListener((observableValue, oldValue, newValue) -> this.setWorkplacesNames());
   }
 
   private void setWorkplacesNames() {
-    this.workplacesNames = new SimpleStringProperty(this.workplaces.getProperty().getValue()
+    if (this.workplaces.getProperty().getValue() == null) {
+      this.workplacesNames.set("No workplace(s)");
+      return;
+    }
+    this.workplacesNames.set(this.workplaces.getProperty().getValue()
       .stream()
-      .map(s -> s.workplaceProperty().getValue())
+      .map(s -> null == s.workplaceProperty().getValue() ? s.workplaceProperty().getValue() : "No name set")
       .collect(Collectors.joining(", ")));
   }
 
@@ -102,6 +104,11 @@ public class Employer extends Person implements Serializable {
 
   public StringProperty workplacesNamesProperty() {
     return this.workplacesNames;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("[%s] %s %s", this.ID, this.firstNameProperty().getValue(), this.lastNameProperty().getValue());
   }
 
 }

@@ -5,14 +5,12 @@ import fa.components.EditorDateField;
 import fa.components.EditorTextField;
 import fa.models.DB;
 import fa.models.JobSeeker;
-import fa.utils.validation.LocalDateValidator;
 import fa.utils.validation.StringValidator;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 
 import java.util.Date;
 
-public class JobSeekerEditorController {
+public class JobSeekerEditorController extends PersonEditorController {
   @FXML private Editor<JobSeeker> editor;
   @FXML private EditorTextField firstNameField;
   @FXML private EditorTextField lastNameField;
@@ -29,129 +27,95 @@ public class JobSeekerEditorController {
   public void initialize() {
     System.out.format("[ %s ]: JobSeekerEditorController initialized.\n", new Date());
 
-    setFieldValidators();
+    this.setFieldValidators();
+    this.setTableColumns();
 
-    editor.setTableColumn("id", "ID");
-    editor.setTableColumn("First name", "firstName");
-    editor.setTableColumn("Last name", "lastName");
-    editor.setTableColumn("Email address", "emailAddress");
-    editor.setTableColumn("Phone number", "phoneNumber");
-    editor.setTableColumn("Birth date", "birthDate");
-    editor.setTableColumn("Education", "education");
-    editor.setTableColumn("Workplace experience", "workExperience");
-    editor.setTableColumn("Wage", "wage");
-    editor.setTableColumn("References", "references");
-    editor.setTableColumn("Address", "address");
-
-    editor.setTableItems(DB.getInstance().getJobSeekers());
-    editor.onNewItem((observableValue, oldValue, newValue) -> {
-      if (newValue != null) selectItem(newValue);
-      else clearForm();
+    this.editor.setTableItems(DB.getInstance().getJobSeekers());
+    this.editor.onNewItem((observableValue, oldValue, newValue) -> {
+      if (newValue != null) this.selectItem(newValue);
+      else this.clearForm();
     });
     editor.onAddNew(e -> {
-      editor.clearSelection();
-      selectedItem = new JobSeeker();
-      clearForm();
-      editor.showEditor();
+      System.out.println("Add new!");
+      this.selectedItem = new JobSeeker();
+      this.clearForm();
     });
   }
 
-  private void setFieldValidators() {
+  @Override
+  protected void setTableColumns() {
+    super.setTableColumns();
+    this.editor.setTableColumn("Education", "education");
+    this.editor.setTableColumn("Workplace experience", "workExperience");
+    this.editor.setTableColumn("Wage", "wage");
+    this.editor.setTableColumn("References", "references");
+  }
+
+  @Override
+  protected void setFieldValidators() {
+    super.setFieldValidators();
     StringValidator requireNonEmpty = StringValidator.requireNonEmpty();
     StringValidator requireLettersAndSpaceOnly = StringValidator.requireLettersAndSpaceOnly();
-    StringValidator requireNumbersOnly = StringValidator.requireNumbersOnly();
 
-    firstNameField.setValidators(requireNonEmpty, requireLettersAndSpaceOnly);
-    lastNameField.setValidators(requireNonEmpty, requireLettersAndSpaceOnly);
-    emailAddressField.setValidators(requireNonEmpty, StringValidator.requireValidEmail());
-    phoneNumberField.setValidators(requireNonEmpty, requireNumbersOnly, StringValidator.requireLength(8));
-    birthDateField.setValidators(LocalDateValidator.requireNonEmpty(), LocalDateValidator.requireAge(18));
-    educationField.setValidators(requireNonEmpty, requireLettersAndSpaceOnly);
-    workExperienceField.setValidators(requireNonEmpty, requireLettersAndSpaceOnly);
-    wageField.setValidators(requireNonEmpty, requireNumbersOnly);
-    referencesField.setValidators(requireNonEmpty);
+    this.educationField.setValidators(requireNonEmpty, requireLettersAndSpaceOnly);
+    this.workExperienceField.setValidators(requireNonEmpty, requireLettersAndSpaceOnly);
+    this.wageField.setValidators(requireNonEmpty, StringValidator.requireNumbersOnly());
+    this.referencesField.setValidators(requireNonEmpty);
   }
 
   private void selectItem(JobSeeker jobSeeker) {
-    editor.setTitle("Editing: " + jobSeeker.toString());
-    selectedItem = jobSeeker;
+    super.selectItem(jobSeeker);
+    this.editor.setTitle("Editing: " + jobSeeker.toString());
+    this.selectedItem = jobSeeker;
 
-    firstNameField.setValue(jobSeeker.firstNameProperty().getValue());
-    lastNameField.setValue(jobSeeker.lastNameProperty().getValue());
-    emailAddressField.setValue(jobSeeker.emailAddressProperty().get());
-    phoneNumberField.setValue(jobSeeker.phoneNumberProperty().getValue());
-    birthDateField.setValue(jobSeeker.birthDateProperty().getValue());
-    educationField.setValue(jobSeeker.educationProperty().get());
-    workExperienceField.setValue(jobSeeker.workExperienceProperty().getValue());
-    wageField.setValue(Integer.toString(jobSeeker.wageProperty().getValue()));
-    referencesField.setValue(jobSeeker.referencesProperty().getValue());
+    this.educationField.setValue(jobSeeker.educationProperty().get());
+    this.workExperienceField.setValue(jobSeeker.workExperienceProperty().getValue());
+    this.wageField.setValue(Integer.toString(jobSeeker.wageProperty().getValue()));
+    this.referencesField.setValue(jobSeeker.referencesProperty().getValue());
   }
 
-  @FXML
-  public void submit() {
-    if (fieldsNotValid()) return;
-    if (selectedItem == null) {
-      createNewJobSeeker();
-    } else {
-      updateJobSeeker();
-    }
-    editor.clearSelection();
-  }
-
-  private boolean fieldsNotValid() {
-    return !(
-      firstNameField.validate() &
-      lastNameField.validate() &
-      emailAddressField.validate() &
-      phoneNumberField.validate() &
-      birthDateField.validate() &
-      educationField.validate() &
-      workExperienceField.validate() &
-      wageField.validate() &
-      referencesField.validate()
+  @Override
+  protected boolean fieldsNotValid() {
+    return super.fieldsNotValid() & !(
+      this.educationField.validate() &
+      this.workExperienceField.validate() &
+      this.wageField.validate() &
+      this.referencesField.validate()
     );
   }
 
-  private void createNewJobSeeker() {
+  @Override
+  void createNewItem() {
     DB.getInstance().getJobSeekers().add(new JobSeeker(
-      firstNameField.getValue(),
-      lastNameField.getValue(),
-      emailAddressField.getValue(),
-      phoneNumberField.getValue(),
-      birthDateField.getValue(),
-      educationField.getValue(),
-      workExperienceField.getValue(),
+      this.firstNameField.getValue(),
+      this.lastNameField.getValue(),
+      this.emailAddressField.getValue(),
+      this.phoneNumberField.getValue(),
+      this.birthDateField.getValue(),
+      this.educationField.getValue(),
+      this.workExperienceField.getValue(),
       Integer.parseInt(wageField.getValue()),
-      referencesField.getValue(),
+      this.referencesField.getValue(),
       null
     ));
   }
 
-  private void updateJobSeeker() {
-    selectedItem.firstNameProperty().set(firstNameField.getValue());
-    selectedItem.lastNameProperty().set(lastNameField.getValue());
-    selectedItem.emailAddressProperty().set(emailAddressField.getValue());
-    selectedItem.phoneNumberProperty().set(phoneNumberField.getValue());
-    selectedItem.birthDateProperty().set(birthDateField.getValue());
-    selectedItem.educationProperty().set(educationField.getValue());
-    selectedItem.workExperienceProperty().set(workExperienceField.getValue());
-    selectedItem.wageProperty().set(Integer.parseInt(wageField.getValue()));
-    selectedItem.referencesProperty().set(referencesField.getValue());
-    selectedItem.addressProperty().set(null);
+  @Override
+  protected void updateItem() {
+    super.updateItem();
+    this.selectedItem.educationProperty().set(educationField.getValue());
+    this.selectedItem.workExperienceProperty().set(workExperienceField.getValue());
+    this.selectedItem.wageProperty().set(Integer.parseInt(wageField.getValue()));
+    this.selectedItem.referencesProperty().set(referencesField.getValue());
+    this.selectedItem.addressProperty().set(null);
   }
 
-  private void clearForm() {
-    editor.setTitle(null);
-    selectedItem = null;
-
-    firstNameField.clear();
-    lastNameField.clear();
-    emailAddressField.clear();
-    phoneNumberField.clear();
-    birthDateField.clear();
-    educationField.clear();
-    workExperienceField.clear();
-    wageField.clear();
-    referencesField.clear();
+  @Override
+  protected void clearForm() {
+    super.clearForm();
+    this.educationField.clear();
+    this.workExperienceField.clear();
+    this.wageField.clear();
+    this.referencesField.clear();
   }
 }
