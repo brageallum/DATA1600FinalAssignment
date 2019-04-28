@@ -65,7 +65,7 @@ public class JobSeekerEditorController extends PersonEditorController {
 
   private void selectItem(JobSeeker jobSeeker) {
     super.selectItem(jobSeeker);
-    this.editor.setTitle("Editing: " + jobSeeker.toString());
+    this.editor.setTitle(jobSeeker.toString());
     this.selectedItem = jobSeeker;
 
     this.educationField.setValue(jobSeeker.educationProperty().get());

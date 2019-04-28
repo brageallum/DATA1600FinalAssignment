@@ -61,7 +61,7 @@ public class EmployerEditorController extends PersonEditorController {
   private void selectItem(Employer employer) {
     super.selectItem(employer);
 
-    this.editor.setTitle("Editing: " + employer.toString());
+    this.editor.setTitle(employer.toString());
     this.selectedItem = employer;
 
 //    this.sectorField.setValue(employer.sectorProperty().get().toString());
@@ -76,7 +76,6 @@ public class EmployerEditorController extends PersonEditorController {
   }
 
   protected void createNewItem() {
-    System.out.println("inside createNewItem");
     DB.getInstance().getEmployers().add(new Employer(
       this.firstNameField.getValue(),
       this.lastNameField.getValue(),

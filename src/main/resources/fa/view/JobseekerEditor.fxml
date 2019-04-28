@@ -17,6 +17,6 @@
         <EditorTextField fx:id="workExperienceField" labelText="Work experience:" />
         <EditorTextField fx:id="wageField" labelText="Wage:" />
         <EditorTextField fx:id="referencesField" labelText="References:" />
-        <Button onAction="#submit" text="Submit" />
+        <Button onAction="#submit" text="Update" />
     </form>
 </Editor>

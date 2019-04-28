@@ -15,6 +15,6 @@
     <EditorTextField fx:id="phoneNumberField" labelText="Phone number:" />
     <EditorTextField fx:id="sectorField" labelText="Sector:" />
     <EditorTextField fx:id="industryField" labelText="Industry:" />
-    <Button onAction="#submit" text="Submit" />
+    <Button onAction="#submit" text="Update" />
   </form>
 </Editor>
