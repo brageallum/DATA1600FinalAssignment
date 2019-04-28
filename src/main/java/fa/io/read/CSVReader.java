@@ -1,13 +1,9 @@
 package fa.io.read;
 
-import fa.io.read.exceptions.ReadCSVException;
-import fa.io.read.exceptions.ReadCSVInvalidFormatException;
-import fa.io.read.exceptions.ReadCSVInvalidTypeException;
-import fa.models.DB;
-import fa.models.Employer;
-import fa.models.JobSeeker;
-import fa.models.Store;
-import fa.models.Workplace;
+import fa.io.read.exceptions.CSVReaderInvalidFormatException;
+import fa.io.read.exceptions.CSVReaderInvalidTypeException;
+import fa.io.read.exceptions.ReaderException;
+import fa.models.*;
 import fa.utils.FetchData;
 
 import java.io.BufferedReader;
@@ -18,10 +14,8 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 class CSVReader implements ReadStrategy {
   private final Pattern jobSeekerFields = getCSVRowPattern(
@@ -44,7 +38,7 @@ class CSVReader implements ReadStrategy {
   private BufferedReader reader;
 
   @Override
-  public DB readFile(File file) throws IOException, ReadCSVException {
+  public DB readFile(File file) throws IOException, ReaderException {
     /*
       Since JavaFX does not allow for changing the UI from another Thread then the main Thread,
       and making changes to the DB singleton instance automatically updates the UI, we store the newly read data
@@ -60,7 +54,7 @@ class CSVReader implements ReadStrategy {
     }
   }
 
-  private DB parseLines() throws IOException, ReadCSVException {
+  private DB parseLines() throws IOException, ReaderException {
     Line line = new Line();
     while (line.nextLine(reader.readLine())) {
       if (line.isEmpty()) continue;
@@ -72,7 +66,7 @@ class CSVReader implements ReadStrategy {
     return detachedDB;
   }
 
-  private void parseLine(Line line) throws ReadCSVException {
+  private void parseLine(Line line) throws ReaderException {
     String type = getType(line);
     switch (type) {
       case "JobSeeker":
@@ -85,7 +79,7 @@ class CSVReader implements ReadStrategy {
         detachedDB.getEmployers().add(parseEmployer(line));
         break;
       default:
-        throw new ReadCSVInvalidTypeException(
+        throw new CSVReaderInvalidTypeException(
           String.format("[on line %s]: \"%s\" is not a valid data type.", line.getLineNumber(), type)
         );
     }
@@ -100,9 +94,9 @@ class CSVReader implements ReadStrategy {
     }
   }
 
-  private JobSeeker parseJobSeeker(Line line) throws ReadCSVInvalidFormatException {
+  private JobSeeker parseJobSeeker(Line line) throws CSVReaderInvalidFormatException {
     Matcher data = jobSeekerFields.matcher(line.getText());
-    if (!data.find()) throw new ReadCSVInvalidFormatException(
+    if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type JobSeeker.", line.getLineNumber())
     );
 
@@ -122,7 +116,7 @@ class CSVReader implements ReadStrategy {
       );
     } catch (DateTimeParseException e) {
       e.printStackTrace();
-      throw new ReadCSVInvalidFormatException(
+      throw new CSVReaderInvalidFormatException(
         String.format("[on line %s]: Invalid date format (valid format is yyyy-MM-dd).", line.getLineNumber())
       );
     }
@@ -134,9 +128,9 @@ class CSVReader implements ReadStrategy {
     Public
   }
 
-  private Workplace parseWorkplace(Line line) throws ReadCSVInvalidFormatException {
+  private Workplace parseWorkplace(Line line) throws CSVReaderInvalidFormatException {
     Matcher data = workplaceFields.matcher(line.getText());
-    if (!data.find()) throw new ReadCSVInvalidFormatException(
+    if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type Workplace.", line.getLineNumber())
     );
 
@@ -158,9 +152,9 @@ class CSVReader implements ReadStrategy {
     );
   }
 
-  private Employer parseEmployer(Line line) throws ReadCSVInvalidFormatException {
+  private Employer parseEmployer(Line line) throws CSVReaderInvalidFormatException {
     Matcher data = employerFields.matcher(line.getText());
-    if (!data.find()) throw new ReadCSVInvalidFormatException(
+    if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type Employer.", line.getLineNumber())
     );
 
