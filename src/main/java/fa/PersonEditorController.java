@@ -3,7 +3,6 @@ package fa;
 import fa.components.Editor;
 import fa.components.EditorDateField;
 import fa.components.EditorTextField;
-import fa.models.JobSeeker;
 import fa.models.Person;
 import fa.utils.validation.LocalDateValidator;
 import fa.utils.validation.StringValidator;
@@ -11,7 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
 public abstract class PersonEditorController {
-  @FXML private Editor<JobSeeker> editor;
+  @FXML private Editor<Person> editor;
   @FXML private EditorTextField firstNameField;
   @FXML private EditorTextField lastNameField;
   @FXML private EditorTextField addressField;
