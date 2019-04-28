@@ -22,4 +22,14 @@ public class Store {
   public static BooleanProperty dbInitializedProperty() {
     return Store.dbInitialized;
   }
+
+  public static void setLoading(String loadingText) {
+    Store.loadingProperty().set(true);
+    Store.loadingTextProperty().set(loadingText);
+  }
+
+  public static void unsetLoading() {
+    Store.loadingProperty().set(false);
+    Store.loadingTextProperty().set("");
+  }
 }
