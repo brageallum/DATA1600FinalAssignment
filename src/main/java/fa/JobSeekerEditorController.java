@@ -39,14 +39,6 @@ public class JobSeekerEditorController extends PersonEditorController {
     this.setTableColumns();
 
     this.editor.setTableItems(DB.getInstance().getJobSeekers());
-    this.editor.onNewItem((observableValue, oldValue, newValue) -> {
-      if (newValue != null) this.selectItem(newValue);
-      else this.clearForm();
-    });
-    editor.onAddNew(e -> {
-      this.selectedItem = new JobSeeker();
-      this.clearForm();
-    });
   }
 
   @Override

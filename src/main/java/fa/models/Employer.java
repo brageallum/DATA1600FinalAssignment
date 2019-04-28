@@ -58,7 +58,7 @@ public class Employer extends Person implements Serializable, Searchable {
 
     System.out.println("Before: " + nextId);
 
-    if (ID > nextId) nextId = ID + 1;
+    if (ID >= nextId) nextId = ID + 1;
 
     System.out.println("After: " + nextId);
 
