@@ -16,6 +16,11 @@ import java.util.stream.Collectors;
 public class DB implements Serializable {
   private static DB instance;
 
+  public enum sectorChoice {
+    Private,
+    Public
+  }
+
   private final SerializableObservableList<JobSeeker> jobSeekers = new SerializableObservableList<>(jobSeeker -> new Observable[]{
     jobSeeker.firstNameProperty(),
     jobSeeker.lastNameProperty(),
@@ -54,13 +59,14 @@ public class DB implements Serializable {
     employer.birthDateProperty()
   });
 
-  private final int h = 1;
-
+  private final SerializableObservableList<EmployerWorkplace> employerWorkplaces = new SerializableObservableList<>(employerWorkplace -> new Observable[]{
+    employerWorkplace.employerProperty(),
+    employerWorkplace.workplacesProperty()
+  });
 
   private DB() {}
 
   public static DB getInstance() {
-    System.out.println("DB INITIALIZED");
     if (instance == null) {
       instance = new DB();
     }
@@ -79,6 +85,7 @@ public class DB implements Serializable {
     instance.getJobSeekers().setAll(newDb.getJobSeekers());
     instance.getWorkplaces().setAll(newDb.getWorkplaces());
     instance.getEmployers().setAll(newDb.getEmployers());
+    instance.getEmployerWorkplaces().setAll(newDb.getEmployerWorkplaces());
   }
 
   public ObservableList<JobSeeker> getJobSeekers() {
@@ -91,6 +98,10 @@ public class DB implements Serializable {
 
   public ObservableList<Employer> getEmployers() {
     return employers.getObservableList();
+  }
+
+  public ObservableList<EmployerWorkplace> getEmployerWorkplaces() {
+    return employerWorkplaces.getObservableList();
   }
 
   public JobSeeker getJobSeeker(int id) {

@@ -78,7 +78,7 @@ public class Workplace implements Serializable, Searchable {
     String emailAddress,
     String description
   ) {
-    if (ID > nextId) nextId = ID + 1;
+    if (ID >= nextId) nextId = ID + 1;
 
     this.ID = ID;
     this.sector = new SerializableProperty<>(sector);
@@ -154,7 +154,7 @@ public class Workplace implements Serializable, Searchable {
 
   @Override
   public String toString() {
-    return String.format("[%s] %s %s", ID, workplaceProperty().getValue(), employerProperty().getValue());
+    return String.format("[%s] %s", ID, workplaceProperty().getValue());
   }
 
   @Override
