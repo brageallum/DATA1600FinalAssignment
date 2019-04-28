@@ -1,14 +1,14 @@
 package fa.models;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import fa.utils.serialization.SerializableProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Employer extends Person implements Serializable {
 
@@ -72,9 +72,7 @@ public class Employer extends Person implements Serializable {
     this.workplaces = new SerializableProperty<>(workplaces);
     this.setWorkplacesNames();
 
-    this.workplaces.getProperty().addListener((observableValue, oldValue, newValue) -> {
-      this.setWorkplacesNames();
-    });
+    this.workplaces.getProperty().addListener((observableValue, oldValue, newValue) -> this.setWorkplacesNames());
   }
 
   private void setWorkplacesNames() {
@@ -102,6 +100,11 @@ public class Employer extends Person implements Serializable {
 
   public StringProperty workplacesNamesProperty() {
     return this.workplacesNames;
+  }
+
+  @Override
+  public String toString() {
+    return String.format("[%s] %s %s", this.ID, this.firstNameProperty().getValue(), this.lastNameProperty().getValue());
   }
 
 }
