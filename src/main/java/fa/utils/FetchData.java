@@ -13,25 +13,19 @@ public class FetchData {
 
   public static Workplace toWorkplace(int id, DB db) {
     return db.getWorkplaces()
-      .stream()
-      .filter(s -> (s.getID() == id))
-      .collect(Collectors.toList())
+      .filtered(s -> (s.getID() == id))
       .get(0);
   }
 
   public static Employer toEmployer(int id, DB db) {
     return db.getEmployers()
-      .stream()
-      .filter(s -> (s.getID() == id))
-      .collect(Collectors.toList())
+      .filtered(s -> (s.getID() == id))
       .get(0);
   }
 
   public static JobSeeker toJobSeeker(int id, DB db) {
     return db.getJobSeekers()
-      .stream()
-      .filter(s -> (s.getID() == id))
-      .collect(Collectors.toList())
+      .filtered(s -> (s.getID() == id))
       .get(0);
   }
 
