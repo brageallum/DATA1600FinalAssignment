@@ -7,6 +7,7 @@ import fa.models.DB;
 import fa.models.Employer;
 import fa.models.Workplace;
 import fa.utils.validation.StringValidator;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import java.util.ArrayList;
@@ -26,7 +27,14 @@ public class EmployerEditorController extends PersonEditorController {
 
   private Employer selectedItem;
 
+  @FXML
+  public void delete(ActionEvent event) {
+    DB.getInstance().getEmployers().remove(selectedItem);
+  }
+
+  @Override
   public void initialize() {
+    super.initialize();
     System.out.format("[ %s ]: EmployerEditorController initialized.\n", new Date());
 
     this.setFieldValidators();

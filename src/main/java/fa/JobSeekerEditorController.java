@@ -6,6 +6,7 @@ import fa.components.EditorTextField;
 import fa.models.DB;
 import fa.models.JobSeeker;
 import fa.utils.validation.StringValidator;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import java.util.Date;
@@ -24,7 +25,14 @@ public class JobSeekerEditorController extends PersonEditorController {
 
   private JobSeeker selectedItem;
 
+  @FXML
+  public void delete(ActionEvent event) {
+    DB.getInstance().getJobSeekers().remove(selectedItem);
+  }
+
+  @Override
   public void initialize() {
+    super.initialize();
     System.out.format("[ %s ]: JobSeekerEditorController initialized.\n", new Date());
 
     this.setFieldValidators();
@@ -36,7 +44,6 @@ public class JobSeekerEditorController extends PersonEditorController {
       else this.clearForm();
     });
     editor.onAddNew(e -> {
-      System.out.println("Add new!");
       this.selectedItem = new JobSeeker();
       this.clearForm();
     });

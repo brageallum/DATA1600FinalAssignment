@@ -8,6 +8,7 @@ import fa.models.Person;
 import fa.utils.validation.LocalDateValidator;
 import fa.utils.validation.StringValidator;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 public abstract class PersonEditorController {
   @FXML private Editor<JobSeeker> editor;
@@ -18,7 +19,33 @@ public abstract class PersonEditorController {
   @FXML private EditorTextField phoneNumberField;
   @FXML private EditorDateField birthDateField;
 
+  @FXML private Button submitButton;
+  @FXML private Button deleteButton;
+
   private Person selectedItem;
+
+  @FXML
+  public void submit() {
+    if (fieldsNotValid()) return;
+    if (null == selectedItem) {
+      createNewItem();
+    } else {
+      updateItem();
+    }
+    editor.clearSelection();
+  }
+
+  public void initialize() {
+    this.editor.onNewItem((observableValue, oldValue, newValue) -> {
+      if (null == newValue) {
+        submitButton.setText("Create");
+        deleteButton.setVisible(false);
+      } else {
+        submitButton.setText("Update");
+        deleteButton.setVisible(true);
+      }
+    });
+  }
 
   protected void setTableColumns() {
     this.editor.setTableColumn("id", "ID");
@@ -53,17 +80,6 @@ public abstract class PersonEditorController {
     this.emailAddressField.setValue(person.emailAddressProperty().get());
     this.phoneNumberField.setValue(person.phoneNumberProperty().getValue());
     this.birthDateField.setValue(person.birthDateProperty().getValue());
-  }
-
-  @FXML
-  public void submit() {
-    if (fieldsNotValid()) return;
-    if (selectedItem == null) {
-      createNewItem();
-    } else {
-      updateItem();
-    }
-    editor.clearSelection();
   }
 
   protected boolean fieldsNotValid() {
