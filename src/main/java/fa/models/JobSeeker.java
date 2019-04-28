@@ -1,12 +1,14 @@
 package fa.models;
 
+import fa.utils.SearchMatcher;
+import fa.utils.Searchable;
 import fa.utils.serialization.SerializableProperty;
 import javafx.beans.property.ObjectProperty;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class JobSeeker extends Person implements Serializable {
+public class JobSeeker extends Person implements Serializable, Searchable {
   private static int nextId = 100;
 
   private final SerializableProperty<String> education;
@@ -95,5 +97,17 @@ public class JobSeeker extends Person implements Serializable {
   @Override
   public String toString() {
     return String.format("[%s] %s %s", ID, firstNameProperty().getValue(), lastNameProperty().getValue());
+  }
+
+  @Override
+  public boolean matchesSearch(String regex) {
+    return super.matchesSearch(regex) || SearchMatcher.matches(
+        regex,
+        Integer.toString(this.ID),
+        this.educationProperty().getValue(),
+        this.workExperienceProperty().getValue(),
+        this.wageProperty().getValue().toString(),
+        this.referencesProperty().getValue()
+      );
   }
 }

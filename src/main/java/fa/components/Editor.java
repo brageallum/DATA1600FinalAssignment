@@ -1,5 +1,6 @@
 package fa.components;
 
+import fa.utils.Searchable;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,7 +16,8 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class Editor<T> extends SplitPane {
+public class Editor<T extends Searchable> extends SplitPane {
+  @FXML private TextField searchBar;
   @FXML private Label editorTitle;
   @FXML private TableView<T> itemsTable;
   @FXML private Pane editorFormContainer;
@@ -23,6 +25,7 @@ public class Editor<T> extends SplitPane {
   @FXML private Button addNewButton;
   @FXML private ScrollPane scrollBox;
 
+  private ObservableList<T> items;
   private final ArrayList<EventHandler<ActionEvent>> onAddNewActions = new ArrayList<>();
 
   public Editor() {
@@ -56,6 +59,11 @@ public class Editor<T> extends SplitPane {
     this.clearSelection();
   }
 
+  @FXML
+  public void search(ActionEvent e) {
+    itemsTable.setItems(items.filtered(item -> item.matchesSearch(searchBar.getText())));
+  }
+
   public void setTitle(String title) {
     editorTitle.setText(title);
   }
@@ -87,6 +95,7 @@ public class Editor<T> extends SplitPane {
   }
 
   public void setTableItems(ObservableList<T> items) {
+    this.items = items;
     itemsTable.setItems(items);
   }
 

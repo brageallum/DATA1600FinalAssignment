@@ -1,5 +1,7 @@
 package fa.models;
 
+import fa.utils.SearchMatcher;
+import fa.utils.Searchable;
 import fa.utils.serialization.SerializableProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Employer extends Person implements Serializable {
+public class Employer extends Person implements Serializable, Searchable {
 
   private final int ID;
   private static int nextId = 100;
@@ -84,6 +86,14 @@ public class Employer extends Person implements Serializable {
       .stream()
       .map(s -> null == s.workplaceProperty().getValue() ? s.workplaceProperty().getValue() : "No name set")
       .collect(Collectors.joining(", ")));
+  }
+
+  public boolean matchesSearch(String regex) {
+    return super.matchesSearch(regex) || SearchMatcher.matches(
+      regex,
+      sectorProperty().getValue().toString(),
+      industryProperty().getValue()
+    );
   }
 
   public int getID() {

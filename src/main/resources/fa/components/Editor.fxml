@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.Label?>
-
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <fx:root type="SplitPane" dividerPositions="0.4" xmlns:fx="http://javafx.com/fxml" styleClass="editorPane">
-    <TableView fx:id="itemsTable" minWidth="200" prefWidth="700" />
+    <VBox>
+        <TextField onAction="#search" fx:id="searchBar" promptText="Search (matches for data in a single column)" />
+        <TableView fx:id="itemsTable" minWidth="200" prefWidth="700" VBox.vgrow="ALWAYS" />
+    </VBox>
     <ScrollPane fx:id="scrollBox" maxWidth="400" prefWidth="400" fitToWidth="true" fitToHeight="true">
         <HBox alignment="CENTER" maxWidth="400" prefWidth="400">
             <StackPane prefWidth="400">
