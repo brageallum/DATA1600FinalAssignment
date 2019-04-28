@@ -17,7 +17,7 @@ public class Employer extends Person implements Serializable {
   private final SerializableProperty<Enum> sector;
   private final SerializableProperty<String> industry;
   private final SerializableProperty<List<Workplace>> workplaces;
-  private transient StringProperty workplacesNames;
+  private final transient StringProperty workplacesNames = new SimpleStringProperty();
 
   public Employer() {
     this(null, null, null, null, null, null, null, null, null);
@@ -76,9 +76,13 @@ public class Employer extends Person implements Serializable {
   }
 
   private void setWorkplacesNames() {
-    this.workplacesNames = new SimpleStringProperty(this.workplaces.getProperty().getValue()
+    if (this.workplaces.getProperty().getValue() == null) {
+      this.workplacesNames.set("No workplace(s)");
+      return;
+    }
+    this.workplacesNames.set(this.workplaces.getProperty().getValue()
       .stream()
-      .map(s -> s.workplaceProperty().getValue())
+      .map(s -> null == s.workplaceProperty().getValue() ? s.workplaceProperty().getValue() : "No name set")
       .collect(Collectors.joining(", ")));
   }
 

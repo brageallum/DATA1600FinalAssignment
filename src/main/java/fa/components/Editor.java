@@ -7,17 +7,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Editor<T> extends SplitPane {
   @FXML private Label editorTitle;
@@ -26,6 +22,8 @@ public class Editor<T> extends SplitPane {
   @FXML private BorderPane editor;
   @FXML private Button addNewButton;
   @FXML private ScrollPane scrollBox;
+
+  private final ArrayList<EventHandler<ActionEvent>> onAddNewActions = new ArrayList<>();
 
   public Editor() {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fa/components/Editor.fxml"));
@@ -96,8 +94,15 @@ public class Editor<T> extends SplitPane {
     itemsTable.getSelectionModel().selectedItemProperty().addListener(changeListener);
   }
 
+  @FXML
+  public void addNewButtonActions(ActionEvent e) {
+    for (EventHandler<ActionEvent> eh : onAddNewActions) {
+      eh.handle(e);
+    }
+  }
+
   public void onAddNew(EventHandler<ActionEvent> e) {
-    addNewButton.setOnAction(e);
+    this.onAddNewActions.add(e);
   }
 
   public void clearSelection() {
