@@ -37,7 +37,7 @@ public class StringValidator extends Validator<String> {
 
   public static StringValidator requireValidEmail() {
     return new StringValidator(
-      val -> val.matches("^\\w+@\\w+\\.[a-z]+$"),
+      val -> val.matches("^[\\w.-]+@\\w+\\.[A-Za-z]+$"),
       "Not a valid email"
     );
   }
