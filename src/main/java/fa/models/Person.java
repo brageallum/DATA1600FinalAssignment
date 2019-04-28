@@ -8,8 +8,7 @@ import javafx.beans.property.ObjectProperty;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-abstract class Person implements Serializable, Searchable {
-
+public abstract class Person implements Serializable, Searchable {
   private final SerializableProperty<String> firstName;
   private final SerializableProperty<String> lastName;
   private final SerializableProperty<String> emailAddress;
@@ -17,7 +16,7 @@ abstract class Person implements Serializable, Searchable {
   private final SerializableProperty<LocalDate> birthDate;
   private final SerializableProperty<String> address;
 
-  Person(String firstName, String lastName, String emailAddress, String phoneNumber, LocalDate birthDate, String address) {
+  public Person(String firstName, String lastName, String emailAddress, String phoneNumber, LocalDate birthDate, String address) {
     this.firstName = new SerializableProperty<>(firstName);
     this.lastName = new SerializableProperty<>(lastName);
     this.emailAddress = new SerializableProperty<>(emailAddress);

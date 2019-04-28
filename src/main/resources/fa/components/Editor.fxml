@@ -10,7 +10,7 @@
     <ScrollPane fx:id="scrollBox" maxWidth="400" prefWidth="400" fitToWidth="true" fitToHeight="true">
         <HBox alignment="CENTER" maxWidth="400" prefWidth="400">
             <StackPane prefWidth="400">
-                <Button fx:id="addNewButton" styleClass="addNewButton">+ ADD NEW</Button>
+                <Button fx:id="addNewButton" styleClass="addNewButton" onAction="#addNewButtonActions">+ ADD NEW</Button>
                 <BorderPane fx:id="editor" prefWidth="300" visible="false" managed="false">
                     <top>
                         <HBox alignment="CENTER_LEFT" styleClass="editor-navbar">

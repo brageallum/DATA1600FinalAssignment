@@ -9,6 +9,7 @@ public class Store {
 
   private static BooleanProperty loading = new SimpleBooleanProperty(false);
   private static StringProperty loadingText = new SimpleStringProperty("");
+  private static BooleanProperty dbInitialized = new SimpleBooleanProperty(false);
 
   public static BooleanProperty loadingProperty() {
     return Store.loading;
@@ -18,4 +19,7 @@ public class Store {
     return Store.loadingText;
   }
 
+  public static BooleanProperty dbInitializedProperty() {
+    return Store.dbInitialized;
+  }
 }
