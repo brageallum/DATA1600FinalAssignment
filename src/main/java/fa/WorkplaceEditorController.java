@@ -6,13 +6,9 @@ import fa.components.EditorTextField;
 import fa.models.DB;
 import fa.models.Workplace;
 import fa.utils.validation.StringValidator;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
-import java.util.Arrays;
 import java.util.Date;
-import java.util.stream.Collectors;
 
 public class WorkplaceEditorController extends EditorController<Workplace> {
   @FXML private Editor<Workplace> editor;
@@ -34,8 +30,7 @@ public class WorkplaceEditorController extends EditorController<Workplace> {
   public void initialize() {
     super.initialize();
     System.out.format("[ %s ]: WorkplaceEditorController initialized.\n", new Date());
-    ObservableList<String> sectorOptions = FXCollections.observableArrayList(Arrays.stream(DB.sectorOptions.values()).map(Enum::toString).collect(Collectors.toList()));
-    sectorField.setOptions(sectorOptions);
+    sectorField.setOptions(DB.sectorOptions.values());
   }
 
   @Override

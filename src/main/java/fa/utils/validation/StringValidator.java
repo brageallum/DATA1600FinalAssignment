@@ -1,8 +1,5 @@
 package fa.utils.validation;
 
-import fa.models.DB;
-
-import java.util.Arrays;
 import java.util.function.Function;
 
 public class StringValidator extends Validator<String> {
@@ -42,13 +39,6 @@ public class StringValidator extends Validator<String> {
     return new StringValidator(
       val -> val.matches("^[\\w.-]+@\\w+\\.[A-Za-z]+$"),
       "Not a valid email"
-    );
-  }
-
-  public static StringValidator requireValidSector() {
-    return new StringValidator(
-      val -> Arrays.stream(DB.sectorOptions.values()).anyMatch(t -> t.name().equals(val)),
-      "Not a valid sector"
     );
   }
 }

@@ -1,6 +1,7 @@
 package fa;
 
 import fa.components.Editor;
+import fa.components.EditorChoiceField;
 import fa.components.EditorDateField;
 import fa.components.EditorTextField;
 import fa.models.DB;
@@ -19,8 +20,8 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
     addressField,
     emailAddressField,
     phoneNumberField,
-    sectorField,
     industryField;
+  @FXML private EditorChoiceField sectorField;
   @FXML private EditorDateField birthDateField;
   @FXML private ListView<fa.models.Workplace> workplacesField;
   @FXML private Label workplacesLabel;
@@ -30,6 +31,7 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
     super.initialize();
     workplacesField.setFocusTraversable(false);
     workplacesField.setMouseTransparent(true);
+    sectorField.setOptions(DB.sectorOptions.values());
   }
 
   @Override
@@ -47,12 +49,7 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
   @Override
   protected void setFieldValidators() {
     super.setFieldValidators();
-    StringValidator requireNonEmpty = StringValidator.requireNonEmpty();
-    StringValidator requireLettersAndSpaceOnly = StringValidator.requireLettersAndSpaceOnly();
-    StringValidator requireValidSector = StringValidator.requireValidSector();
-
-    this.sectorField.setValidators(requireNonEmpty, requireLettersAndSpaceOnly, requireValidSector);
-    this.industryField.setValidators(requireNonEmpty, requireLettersAndSpaceOnly);
+    this.industryField.setValidators(StringValidator.requireNonEmpty(), StringValidator.requireLettersAndSpaceOnly());
   }
 
   @Override
@@ -96,10 +93,7 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
 
   @Override
   protected boolean fieldsNotValid() {
-    return super.fieldsNotValid() & !(
-      this.sectorField.validate() &
-      this.emailAddressField.validate()
-    );
+    return super.fieldsNotValid() & !this.emailAddressField.validate();
   }
 
   @Override
@@ -124,7 +118,7 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
   @Override
   protected void clearForm() {
     super.clearForm();
-    this.sectorField.clear();
+    this.sectorField.setToDefault();
     this.industryField.clear();
   }
 }

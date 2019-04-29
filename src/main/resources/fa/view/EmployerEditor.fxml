@@ -14,7 +14,7 @@
     <EditorDateField fx:id="birthDateField" labelText="Birth date:" />
     <EditorTextField fx:id="addressField" labelText="Address:" />
     <EditorTextField fx:id="phoneNumberField" labelText="Phone number:" />
-    <EditorTextField fx:id="sectorField" labelText="Sector:" />
+    <EditorChoiceField fx:id="sectorField" labelText="Sector:" />
     <EditorTextField fx:id="industryField" labelText="Industry:" />
     <HBox>
       <Label fx:id="workplacesLabel" styleClass="workplacesLabel" visible="false" managed="false">Workplaces</Label>
