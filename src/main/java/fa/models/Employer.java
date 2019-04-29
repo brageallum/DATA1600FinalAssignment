@@ -75,6 +75,10 @@ public class Employer extends Person implements Serializable, Searchable {
     return this.ID;
   }
 
+  public int getNextId() {
+    return nextId;
+  }
+
   public ObjectProperty<Enum> sectorProperty() {
     return this.sector.getProperty();
   }

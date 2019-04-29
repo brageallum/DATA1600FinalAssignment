@@ -2,7 +2,10 @@
 
 <?import fa.components.*?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.HBox?><?import javafx.scene.control.ListView?><?import javafx.scene.control.Label?><?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Region?>
 <Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.EmployerEditorController">
   <form>
     <EditorTextField fx:id="firstNameField" labelText="First name:" />
@@ -13,8 +16,10 @@
     <EditorTextField fx:id="phoneNumberField" labelText="Phone number:" />
     <EditorTextField fx:id="sectorField" labelText="Sector:" />
     <EditorTextField fx:id="industryField" labelText="Industry:" />
-    <Label>Workplaces</Label>
-    <ListView fx:id="workplacesField" prefHeight="150"></ListView>
+    <HBox>
+      <Label fx:id="workplacesLabel" styleClass="workplacesLabel" visible="false" managed="false">Workplaces</Label>
+    </HBox>
+    <ListView fx:id="workplacesField" visible="false" managed="false" />
     <HBox alignment="CENTER_RIGHT" spacing="10">
         <Button fx:id="deleteButton" onAction="#delete" visible="false" text="Delete" />
         <Button fx:id="submitButton" onAction="#submit" text="Create" />

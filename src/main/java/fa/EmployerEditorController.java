@@ -5,10 +5,13 @@ import fa.components.EditorDateField;
 import fa.components.EditorTextField;
 import fa.models.DB;
 import fa.models.Employer;
+import fa.models.Workplace;
 import fa.utils.FetchData;
 import fa.utils.validation.StringValidator;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 import java.util.Date;
@@ -24,6 +27,9 @@ public class EmployerEditorController extends PersonEditorController {
   @FXML private EditorTextField sectorField;
   @FXML private EditorTextField industryField;
   @FXML private ListView<fa.models.Workplace> workplacesField;
+  @FXML private Label workplacesLabel;
+
+  private static int lastCreatedId;
 
   private Employer selectedItem;
 
@@ -40,14 +46,21 @@ public class EmployerEditorController extends PersonEditorController {
     this.setFieldValidators();
     this.setTableColumns();
 
+    workplacesField.setFocusTraversable(false);
+    workplacesField.setMouseTransparent(true);
+
     this.editor.setTableItems(DB.getInstance().getEmployers());
     editor.onNewItem((observableValue, oldValue, newValue) -> {
       if (newValue != null) selectItem(newValue);
       else clearForm();
     });
     editor.onAddNew(e -> {
-      this.selectedItem = new Employer();
       editor.setTitle("Create a new Employer");
+      editor.setEditorID(0);
+      workplacesField.setVisible(false);
+      workplacesField.setManaged(false);
+      workplacesLabel.setVisible(false);
+      workplacesLabel.setManaged(false);
       this.clearForm();
     });
   }
@@ -80,9 +93,20 @@ public class EmployerEditorController extends PersonEditorController {
     this.industryField.setValue(employer.industryProperty().getValue());
 
     try {
-      this.workplacesField.setItems(DB.getInstance().getWorkplacesFromEmployer(
-        this.selectedItem.getID()).workplacesObservable()
-      );
+      ObservableList<Workplace> list = DB.getInstance().getWorkplacesFromEmployer(this.selectedItem.getID()).workplacesObservable();
+      this.workplacesField.setItems(list);
+
+      int colSize = 24;
+      int borderSize = 2;
+
+      if (0 < list.size()) {
+        workplacesField.setVisible(true);
+        workplacesField.setManaged(true);
+        workplacesLabel.setVisible(true);
+        workplacesLabel.setManaged(true);
+        workplacesLabel.setText(String.format("WORKPLACES (%s)", list.size()));
+        this.workplacesField.setPrefHeight(list.size() * colSize);
+      }
     } catch(IndexOutOfBoundsException e) {
         this.workplacesField.setItems(null);
     }
@@ -97,6 +121,8 @@ public class EmployerEditorController extends PersonEditorController {
   }
 
   protected void createNewItem() {
+    this.selectedItem = new Employer();
+
     this.selectedItem.firstNameProperty().set(this.firstNameField.getValue());
     this.selectedItem.lastNameProperty().set(this.lastNameField.getValue());
     this.selectedItem.sectorProperty().set(DB.sectorChoice.valueOf(this.sectorField.getValue()));
@@ -107,6 +133,8 @@ public class EmployerEditorController extends PersonEditorController {
     this.selectedItem.birthDateProperty().set(this.birthDateField.getValue());
 
     DB.getInstance().getEmployers().add(this.selectedItem);
+
+    EmployerEditorController.lastCreatedId = this.selectedItem.getNextId();
   }
 
   protected void updateItem() {
