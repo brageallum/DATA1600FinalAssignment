@@ -10,15 +10,16 @@ import javafx.fxml.FXML;
 
 public class JobSeekerEditorController extends PersonEditorController<JobSeeker> {
   @FXML private Editor<JobSeeker> editor;
-  @FXML private EditorTextField firstNameField;
-  @FXML private EditorTextField lastNameField;
-  @FXML private EditorTextField emailAddressField;
-  @FXML private EditorTextField phoneNumberField;
+  @FXML private EditorTextField firstNameField,
+    lastNameField,
+    emailAddressField,
+    addressField,
+    phoneNumberField,
+    educationField,
+    workExperienceField,
+    wageField,
+    referencesField;
   @FXML private EditorDateField birthDateField;
-  @FXML private EditorTextField educationField;
-  @FXML private EditorTextField workExperienceField;
-  @FXML private EditorTextField wageField;
-  @FXML private EditorTextField referencesField;
 
   @Override
   protected void setTableColumns() {
@@ -77,7 +78,7 @@ public class JobSeekerEditorController extends PersonEditorController<JobSeeker>
     this.selectedItem.emailAddressProperty().set(this.emailAddressField.getValue());
     this.selectedItem.phoneNumberProperty().set(this.phoneNumberField.getValue());
     this.selectedItem.birthDateProperty().set(this.birthDateField.getValue());
-    // this.selectedItem.addressProperty().set(this.addressField.getValue());
+    this.selectedItem.addressProperty().set(this.addressField.getValue());
     this.selectedItem.workExperienceProperty().set(this.workExperienceField.getValue());
     this.selectedItem.referencesProperty().set(this.referencesField.getValue());
     this.selectedItem.wageProperty().set(Integer.parseInt(this.wageField.getValue()));
@@ -92,7 +93,6 @@ public class JobSeekerEditorController extends PersonEditorController<JobSeeker>
     this.selectedItem.workExperienceProperty().set(workExperienceField.getValue());
     this.selectedItem.wageProperty().set(Integer.parseInt(wageField.getValue()));
     this.selectedItem.referencesProperty().set(referencesField.getValue());
-    this.selectedItem.addressProperty().set(null);
   }
 
   @Override

@@ -14,14 +14,14 @@ import javafx.scene.control.ListView;
 
 public class EmployerEditorController extends PersonEditorController<Employer> {
   @FXML private Editor<Employer> editor;
-  @FXML private EditorTextField firstNameField;
-  @FXML private EditorTextField lastNameField;
-  @FXML private EditorTextField addressField;
-  @FXML private EditorTextField emailAddressField;
-  @FXML private EditorTextField phoneNumberField;
+  @FXML private EditorTextField firstNameField,
+    lastNameField,
+    addressField,
+    emailAddressField,
+    phoneNumberField,
+    sectorField,
+    industryField;
   @FXML private EditorDateField birthDateField;
-  @FXML private EditorTextField sectorField;
-  @FXML private EditorTextField industryField;
   @FXML private ListView<fa.models.Workplace> workplacesField;
   @FXML private Label workplacesLabel;
 

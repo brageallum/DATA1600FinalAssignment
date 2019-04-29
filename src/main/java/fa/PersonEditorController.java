@@ -10,11 +10,11 @@ import javafx.fxml.FXML;
 
 public abstract class PersonEditorController<T extends Person> extends EditorController<T> {
   @FXML private Editor<Person> editor;
-  @FXML private EditorTextField firstNameField;
-  @FXML private EditorTextField lastNameField;
-  @FXML private EditorTextField addressField;
-  @FXML private EditorTextField emailAddressField;
-  @FXML private EditorTextField phoneNumberField;
+  @FXML private EditorTextField firstNameField,
+    lastNameField,
+    addressField,
+    emailAddressField,
+    phoneNumberField;
   @FXML private EditorDateField birthDateField;
 
   protected void setTableColumns() {
