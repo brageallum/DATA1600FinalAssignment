@@ -76,6 +76,7 @@
 .editor--title {
     -fx-text-fill: #fff;
     -fx-font-size: 16;
+    -fx-padding: 0 5 0 0;
 }
 .editor--id-title {
     -fx-text-fill: #ccc;
@@ -133,7 +134,7 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-text-fill: #ccc;
-    -fx-padding: 0 13 0 0;
+    -fx-padding: 0 18 0 5;
     -fx-font-size: 2em;
 }
 
@@ -166,9 +167,10 @@
 
 #searchBar {
     -fx-background-radius: 0;
-    -fx-pref-height: 30;
+    -fx-pref-height: 35;
     -fx-border-width: 0;
     -fx-border-color: transparent;
+    -fx-font-size: 14;
 }
 
 .dateField, .textField {
