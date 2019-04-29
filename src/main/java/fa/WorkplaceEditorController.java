@@ -121,9 +121,7 @@ public class WorkplaceEditorController extends EditorController<Workplace> {
   @Override
   void createNewItem() {
     this.selectedItem = new Workplace();
-
     this.updateItem();
-
     DB.getInstance().getWorkplaces().add(this.selectedItem);
   }
 

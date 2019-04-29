@@ -34,13 +34,15 @@ public abstract class EditorController<T extends Searchable> {
     this.setFieldValidators();
     this.setTableColumns();
     this.setTableItems();
-    this.editor.onNewItem((observableValue, oldValue, newValue) -> {
-      if (null == newValue) {
-        this.showCreationForm();
-      } else {
-        this.showEditForm(newValue);
-      }
-    });
+    this.editor.onNewItem((observableValue, oldValue, newValue) -> this.toggleFormType(newValue));
+  }
+
+  private void toggleFormType(T item) {
+    if (null == item) {
+      this.showCreationForm();
+    } else {
+      this.showEditForm(item);
+    }
   }
 
   protected void showCreationForm() {
