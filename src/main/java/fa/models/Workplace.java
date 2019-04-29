@@ -30,7 +30,7 @@ public class Workplace implements Serializable, Searchable {
   }
 
   public Workplace(
-    Enum sector,
+    DB.sectorOptions sector,
     String workplace,
     String employer,
     String category,
@@ -64,7 +64,7 @@ public class Workplace implements Serializable, Searchable {
 
   public Workplace(
     int ID,
-    Enum sector,
+    DB.sectorOptions sector,
     String workplace,
     String employer,
     String category,

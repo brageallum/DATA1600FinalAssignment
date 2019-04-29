@@ -3,13 +3,8 @@ package fa.io.read;
 import fa.io.read.exceptions.CSVReaderInvalidFormatException;
 import fa.io.read.exceptions.CSVReaderInvalidTypeException;
 import fa.io.read.exceptions.ReaderException;
-import fa.models.DB;
-import fa.models.Employer;
-import fa.models.EmployerWorkplace;
-import fa.models.JobSeeker;
-import fa.models.Store;
-import fa.models.Workplace;
-import fa.utils.FetchData;
+import fa.models.*;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -133,12 +128,6 @@ class CSVReader implements ReadStrategy {
     }
   }
 
-  @SuppressWarnings("unused")
-  private enum Sector {
-    Private,
-    Public
-  }
-
   private Workplace parseWorkplace(Line line) throws CSVReaderInvalidFormatException {
     System.out.println("Workplace Parse");
     Matcher data = workplaceFields.matcher(line.getText());
@@ -148,7 +137,7 @@ class CSVReader implements ReadStrategy {
 
     return new Workplace(
       Integer.parseInt(data.group("id")),
-      Sector.valueOf(data.group("sector")),
+      DB.sectorOptions.valueOf(data.group("sector")),
       data.group("workplace"),
       data.group("employer"),
       data.group("category"),
@@ -175,7 +164,7 @@ class CSVReader implements ReadStrategy {
       Integer.parseInt(data.group("id")),
       data.group("firstName"),
       data.group("lastName"),
-      Sector.valueOf(data.group("sector")),
+      DB.sectorOptions.valueOf(data.group("sector")),
       data.group("address"),
       data.group("industry"),
       data.group("phoneNumber"),

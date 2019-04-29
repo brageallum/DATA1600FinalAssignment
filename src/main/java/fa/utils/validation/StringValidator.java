@@ -1,9 +1,9 @@
 package fa.utils.validation;
 
+import fa.models.DB;
+
 import java.util.Arrays;
 import java.util.function.Function;
-
-import fa.models.DB;
 
 public class StringValidator extends Validator<String> {
   public StringValidator(Function<String, Boolean> validator, String errorText) {
@@ -47,7 +47,7 @@ public class StringValidator extends Validator<String> {
 
   public static StringValidator requireValidSector() {
     return new StringValidator(
-      val -> Arrays.stream(DB.sectorChoice.values()).anyMatch(t -> t.name().equals(val)),
+      val -> Arrays.stream(DB.sectorOptions.values()).anyMatch(t -> t.name().equals(val)),
       "Not a valid sector"
     );
   }

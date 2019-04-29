@@ -23,7 +23,7 @@ public class Employer extends Person implements Serializable, Searchable {
   public Employer(
     String firstName,
     String lastName,
-    Enum sector,
+    DB.sectorOptions sector,
     String address,
     String industry,
     String phoneNumber,
@@ -47,7 +47,7 @@ public class Employer extends Person implements Serializable, Searchable {
     int ID,
     String firstName,
     String lastName,
-    Enum sector,
+    DB.sectorOptions sector,
     String address,
     String industry,
     String phoneNumber,

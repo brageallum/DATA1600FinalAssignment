@@ -1,15 +1,20 @@
 package fa;
 
 import fa.components.Editor;
+import fa.components.EditorChoiceField;
 import fa.models.DB;
 import fa.models.Workplace;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
+import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 public class WorkplaceEditorController {
-  @FXML
-  private Editor<Workplace> editor;
+  @FXML private Editor<Workplace> editor;
+  @FXML private EditorChoiceField sectorField;
 
   private Workplace selectedItem;
 
@@ -21,6 +26,8 @@ public class WorkplaceEditorController {
     this.editor.setTableItems(DB.getInstance().getWorkplaces());
 
     System.out.println(DB.getInstance().getWorkplaces());
+    ObservableList<String> sectorOptions = FXCollections.observableArrayList(Arrays.stream(DB.sectorOptions.values()).map(Enum::toString).collect(Collectors.toList()));
+    sectorField.setOptions(sectorOptions);
     /*
     editor.onNewItem((observableValue, oldValue, newValue) -> {
       if (newValue != null) selectItem(newValue);

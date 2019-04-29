@@ -1,6 +1,5 @@
 package fa.models;
 
-import fa.utils.FetchData;
 import fa.utils.serialization.SerializableObservableList;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 public class DB implements Serializable {
   private static DB instance;
 
-  public enum sectorChoice {
+  public enum sectorOptions {
     Private,
     Public
   }

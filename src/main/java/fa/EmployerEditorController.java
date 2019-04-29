@@ -6,7 +6,6 @@ import fa.components.EditorTextField;
 import fa.models.DB;
 import fa.models.Employer;
 import fa.models.Workplace;
-import fa.utils.FetchData;
 import fa.utils.validation.StringValidator;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -125,7 +124,7 @@ public class EmployerEditorController extends PersonEditorController {
 
     this.selectedItem.firstNameProperty().set(this.firstNameField.getValue());
     this.selectedItem.lastNameProperty().set(this.lastNameField.getValue());
-    this.selectedItem.sectorProperty().set(DB.sectorChoice.valueOf(this.sectorField.getValue()));
+    this.selectedItem.sectorProperty().set(DB.sectorOptions.valueOf(this.sectorField.getValue()));
     this.selectedItem.addressProperty().set(this.addressField.getValue());
     this.selectedItem.industryProperty().set(this.industryField.getValue());
     this.selectedItem.phoneNumberProperty().set(this.phoneNumberField.getValue());
@@ -139,7 +138,7 @@ public class EmployerEditorController extends PersonEditorController {
 
   protected void updateItem() {
     super.updateItem();
-    this.selectedItem.sectorProperty().set(DB.sectorChoice.valueOf(sectorField.getValue()));
+    this.selectedItem.sectorProperty().set(DB.sectorOptions.valueOf(sectorField.getValue()));
     this.selectedItem.industryProperty().set(industryField.getValue());
   }
 

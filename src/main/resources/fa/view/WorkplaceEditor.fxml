@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import fa.components.Editor?>
+<?import fa.components.*?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.WorkplaceEditorController">
   <form>
-    <Label fx:id="title" />
-    <Label>Button</Label>
-    <Button text="Update" />
+    <!--<EditorTextField fx:id="firstNameField" labelText="First name:" />-->
+    <!--<EditorTextField fx:id="lastNameField" labelText="Last name:" />-->
+    <!--<EditorTextField fx:id="emailAddressField" labelText="Email address:" />-->
+    <!--<EditorTextField fx:id="phoneNumberField" labelText="Phone number:" />-->
+    <!--<EditorDateField fx:id="birthDateField" labelText="Birth date:" />-->
+    <!--<EditorTextField fx:id="addressField" labelText="Address:" />-->
+    <!--<EditorTextField fx:id="educationField" labelText="Education:" />-->
+    <!--<EditorTextField fx:id="workExperienceField" labelText="Work experience:" />-->
+    <!--<EditorTextField fx:id="wageField" labelText="Wage:" />-->
+    <!--<EditorTextField fx:id="referencesField" labelText="References:" />-->
+    <EditorChoiceField fx:id="sectorField" labelText="Sector:"/>
+    <!--<HBox alignment="CENTER_RIGHT" spacing="10">-->
+      <!--<Button fx:id="deleteButton" onAction="#delete" visible="false" text="Delete" />-->
+      <!--<Button fx:id="submitButton" onAction="#submit" text="Create" />-->
+    <!--</HBox>-->
   </form>
 </Editor>
