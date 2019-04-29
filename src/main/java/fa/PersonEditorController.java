@@ -7,9 +7,8 @@ import fa.models.Person;
 import fa.utils.validation.LocalDateValidator;
 import fa.utils.validation.StringValidator;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
-public abstract class PersonEditorController {
+public abstract class PersonEditorController<T extends Person> extends EditorController<T> {
   @FXML private Editor<Person> editor;
   @FXML private EditorTextField firstNameField;
   @FXML private EditorTextField lastNameField;
@@ -17,40 +16,6 @@ public abstract class PersonEditorController {
   @FXML private EditorTextField emailAddressField;
   @FXML private EditorTextField phoneNumberField;
   @FXML private EditorDateField birthDateField;
-
-  @FXML private Button submitButton;
-  @FXML private Button deleteButton;
-
-  private Person selectedItem;
-
-  @FXML
-  public void submit() {
-    if (fieldsNotValid()) return;
-    if (null == selectedItem) {
-      createNewItem();
-    } else {
-      updateItem();
-    }
-    editor.clearSelection();
-  }
-
-  public void initialize() {
-    this.editor.onNewItem((observableValue, oldValue, newValue) -> {
-      if (null == newValue) {
-        submitButton.setText("Create");
-        deleteButton.setVisible(false);
-        this.clearForm();
-      } else {
-        this.selectItem(newValue);
-        submitButton.setText("Update");
-        deleteButton.setVisible(true);
-      }
-    });
-    editor.onAddNew(e -> {
-      this.selectedItem = null;
-      this.clearForm();
-    });
-  }
 
   protected void setTableColumns() {
     this.editor.setTableColumn("id", "ID");
@@ -75,9 +40,8 @@ public abstract class PersonEditorController {
     this.birthDateField.setValidators(LocalDateValidator.requireNonEmpty(), LocalDateValidator.requireAge(18));
   }
 
-  protected void selectItem(Person person) {
-    this.editor.setTitle("Editing: " + person.toString());
-    this.selectedItem = person;
+  protected void selectItem(T person) {
+    super.selectItem(person);
 
     this.firstNameField.setValue(person.firstNameProperty().getValue());
     this.lastNameField.setValue(person.lastNameProperty().getValue());
@@ -98,8 +62,6 @@ public abstract class PersonEditorController {
     );
   }
 
-  abstract void createNewItem();
-
   protected void updateItem() {
     this.selectedItem.firstNameProperty().set(firstNameField.getValue());
     this.selectedItem.lastNameProperty().set(lastNameField.getValue());
@@ -110,8 +72,7 @@ public abstract class PersonEditorController {
   }
 
   protected void clearForm() {
-    this.editor.setTitle(null);
-    this.selectedItem = null;
+    super.clearForm();
 
     this.firstNameField.clear();
     this.lastNameField.clear();

@@ -4,7 +4,6 @@ import fa.utils.Searchable;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,7 +13,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class Editor<T extends Searchable> extends SplitPane {
   @FXML private TextField searchBar;
@@ -27,7 +25,6 @@ public class Editor<T extends Searchable> extends SplitPane {
   @FXML private ScrollPane scrollBox;
 
   private ObservableList<T> items;
-  private final ArrayList<EventHandler<ActionEvent>> onAddNewActions = new ArrayList<>();
 
   public Editor() {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fa/components/Editor.fxml"));
@@ -46,11 +43,6 @@ public class Editor<T extends Searchable> extends SplitPane {
       } else {
         this.showEditor();
       }
-    });
-
-    this.onAddNew(e -> {
-      this.clearSelection();
-      this.showEditor();
     });
   }
 
@@ -73,6 +65,7 @@ public class Editor<T extends Searchable> extends SplitPane {
     editorID.setText(String.format("#%s", id));
   }
 
+  @FXML
   public void showEditor() {
     editor.setVisible(true);
     editor.setManaged(true);
@@ -106,17 +99,6 @@ public class Editor<T extends Searchable> extends SplitPane {
 
   public void onNewItem(ChangeListener<T> changeListener) {
     itemsTable.getSelectionModel().selectedItemProperty().addListener(changeListener);
-  }
-
-  @FXML
-  public void addNewButtonActions(ActionEvent e) {
-    for (EventHandler<ActionEvent> eh : onAddNewActions) {
-      eh.handle(e);
-    }
-  }
-
-  public void onAddNew(EventHandler<ActionEvent> e) {
-    this.onAddNewActions.add(e);
   }
 
   public void clearSelection() {

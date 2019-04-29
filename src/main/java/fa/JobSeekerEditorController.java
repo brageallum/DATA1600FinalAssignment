@@ -4,15 +4,11 @@ import fa.components.Editor;
 import fa.components.EditorDateField;
 import fa.components.EditorTextField;
 import fa.models.DB;
-import fa.models.Employer;
 import fa.models.JobSeeker;
 import fa.utils.validation.StringValidator;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
-import java.util.Date;
-
-public class JobSeekerEditorController extends PersonEditorController {
+public class JobSeekerEditorController extends PersonEditorController<JobSeeker> {
   @FXML private Editor<JobSeeker> editor;
   @FXML private EditorTextField firstNameField;
   @FXML private EditorTextField lastNameField;
@@ -24,33 +20,6 @@ public class JobSeekerEditorController extends PersonEditorController {
   @FXML private EditorTextField wageField;
   @FXML private EditorTextField referencesField;
 
-  private JobSeeker selectedItem;
-
-  @FXML
-  public void delete() {
-    DB.getInstance().getJobSeekers().remove(selectedItem);
-  }
-
-  @Override
-  public void initialize() {
-    super.initialize();
-    System.out.format("[ %s ]: JobSeekerEditorController initialized.\n", new Date());
-
-    this.setFieldValidators();
-    this.setTableColumns();
-
-    this.editor.setTableItems(DB.getInstance().getJobSeekers());
-    editor.onNewItem((observableValue, oldValue, newValue) -> {
-      if (newValue != null) selectItem(newValue);
-      else clearForm();
-    });
-    editor.onAddNew(e -> {
-      this.selectedItem = new JobSeeker();
-      editor.setTitle("Create a new Job Seeker");
-      this.clearForm();
-    });
-  }
-
   @Override
   protected void setTableColumns() {
     super.setTableColumns();
@@ -58,6 +27,11 @@ public class JobSeekerEditorController extends PersonEditorController {
     this.editor.setTableColumn("Workplace experience", "workExperience");
     this.editor.setTableColumn("Wage", "wage");
     this.editor.setTableColumn("References", "references");
+  }
+
+  @Override
+  protected void setTableItems() {
+    this.editor.setTableItems(DB.getInstance().getJobSeekers());
   }
 
   @Override
@@ -72,7 +46,8 @@ public class JobSeekerEditorController extends PersonEditorController {
     this.referencesField.setValidators(requireNonEmpty);
   }
 
-  private void selectItem(JobSeeker jobSeeker) {
+  @Override
+  protected void selectItem(JobSeeker jobSeeker) {
     super.selectItem(jobSeeker);
     this.editor.setTitle(jobSeeker.toString());
     this.editor.setEditorID(jobSeeker.getID());
@@ -118,6 +93,11 @@ public class JobSeekerEditorController extends PersonEditorController {
     this.selectedItem.wageProperty().set(Integer.parseInt(wageField.getValue()));
     this.selectedItem.referencesProperty().set(referencesField.getValue());
     this.selectedItem.addressProperty().set(null);
+  }
+
+  @Override
+  protected void deleteItem() {
+    DB.getInstance().getJobSeekers().remove(this.selectedItem);
   }
 
   @Override

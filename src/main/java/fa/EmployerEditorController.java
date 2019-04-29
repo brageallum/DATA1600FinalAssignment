@@ -8,14 +8,11 @@ import fa.models.Employer;
 import fa.models.Workplace;
 import fa.utils.validation.StringValidator;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
-import java.util.Date;
-
-public class EmployerEditorController extends PersonEditorController {
+public class EmployerEditorController extends PersonEditorController<Employer> {
   @FXML private Editor<Employer> editor;
   @FXML private EditorTextField firstNameField;
   @FXML private EditorTextField lastNameField;
@@ -28,48 +25,26 @@ public class EmployerEditorController extends PersonEditorController {
   @FXML private ListView<fa.models.Workplace> workplacesField;
   @FXML private Label workplacesLabel;
 
-  private static int lastCreatedId;
-
-  private Employer selectedItem;
-
-  @FXML
-  public void delete(ActionEvent event) {
-    DB.getInstance().getEmployers().remove(selectedItem);
-  }
-
   @Override
   public void initialize() {
     super.initialize();
-    System.out.format("[ %s ]: EmployerEditorController initialized.\n", new Date());
-
-    this.setFieldValidators();
-    this.setTableColumns();
-
     workplacesField.setFocusTraversable(false);
     workplacesField.setMouseTransparent(true);
-
-    this.editor.setTableItems(DB.getInstance().getEmployers());
-    editor.onNewItem((observableValue, oldValue, newValue) -> {
-      if (newValue != null) selectItem(newValue);
-      else clearForm();
-    });
-    editor.onAddNew(e -> {
-      editor.setTitle("Create a new Employer");
-      editor.setEditorID(0);
-      workplacesField.setVisible(false);
-      workplacesField.setManaged(false);
-      workplacesLabel.setVisible(false);
-      workplacesLabel.setManaged(false);
-      this.clearForm();
-    });
   }
 
+  @Override
   protected void setTableColumns() {
     super.setTableColumns();
     this.editor.setTableColumn("Sector", "sector");
     this.editor.setTableColumn("Industry", "industry");
   }
 
+  @Override
+  protected void setTableItems() {
+    this.editor.setTableItems(DB.getInstance().getEmployers());
+  }
+
+  @Override
   protected void setFieldValidators() {
     super.setFieldValidators();
     StringValidator requireNonEmpty = StringValidator.requireNonEmpty();
@@ -80,7 +55,17 @@ public class EmployerEditorController extends PersonEditorController {
     this.industryField.setValidators(requireNonEmpty, requireLettersAndSpaceOnly);
   }
 
-  private void selectItem(Employer employer) {
+  @Override
+  protected void showCreationForm() {
+    super.showCreationForm();
+    this.workplacesField.setVisible(false);
+    this.workplacesField.setManaged(false);
+    this.workplacesLabel.setVisible(false);
+    this.workplacesLabel.setManaged(false);
+  }
+
+  @Override
+  protected void selectItem(Employer employer) {
     super.selectItem(employer);
 
     this.editor.setTitle(employer.toString());
@@ -99,11 +84,11 @@ public class EmployerEditorController extends PersonEditorController {
       int borderSize = 2;
 
       if (0 < list.size()) {
-        workplacesField.setVisible(true);
-        workplacesField.setManaged(true);
-        workplacesLabel.setVisible(true);
-        workplacesLabel.setManaged(true);
-        workplacesLabel.setText(String.format("WORKPLACES (%s)", list.size()));
+        this.workplacesField.setVisible(true);
+        this.workplacesField.setManaged(true);
+        this.workplacesLabel.setVisible(true);
+        this.workplacesLabel.setManaged(true);
+        this.workplacesLabel.setText(String.format("WORKPLACES (%s)", list.size()));
         this.workplacesField.setPrefHeight(list.size() * colSize);
       }
     } catch(IndexOutOfBoundsException e) {
@@ -112,6 +97,7 @@ public class EmployerEditorController extends PersonEditorController {
 
   }
 
+  @Override
   protected boolean fieldsNotValid() {
     return super.fieldsNotValid() & !(
       this.sectorField.validate() &
@@ -119,6 +105,7 @@ public class EmployerEditorController extends PersonEditorController {
     );
   }
 
+  @Override
   protected void createNewItem() {
     this.selectedItem = new Employer();
 
@@ -132,16 +119,21 @@ public class EmployerEditorController extends PersonEditorController {
     this.selectedItem.birthDateProperty().set(this.birthDateField.getValue());
 
     DB.getInstance().getEmployers().add(this.selectedItem);
-
-    EmployerEditorController.lastCreatedId = this.selectedItem.getNextId();
   }
 
+  @Override
   protected void updateItem() {
     super.updateItem();
-    this.selectedItem.sectorProperty().set(DB.sectorOptions.valueOf(sectorField.getValue()));
-    this.selectedItem.industryProperty().set(industryField.getValue());
+    this.selectedItem.sectorProperty().set(DB.sectorOptions.valueOf(this.sectorField.getValue()));
+    this.selectedItem.industryProperty().set(this.industryField.getValue());
   }
 
+  @Override
+  protected void deleteItem() {
+    DB.getInstance().getEmployers().remove(this.selectedItem);
+  }
+
+  @Override
   protected void clearForm() {
     super.clearForm();
     this.sectorField.clear();
