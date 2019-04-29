@@ -4,6 +4,7 @@ import fa.components.Editor;
 import fa.components.EditorDateField;
 import fa.components.EditorTextField;
 import fa.models.DB;
+import fa.models.Employer;
 import fa.models.JobSeeker;
 import fa.utils.validation.StringValidator;
 import javafx.event.ActionEvent;
@@ -26,7 +27,7 @@ public class JobSeekerEditorController extends PersonEditorController {
   private JobSeeker selectedItem;
 
   @FXML
-  public void delete(ActionEvent event) {
+  public void delete() {
     DB.getInstance().getJobSeekers().remove(selectedItem);
   }
 
@@ -39,6 +40,15 @@ public class JobSeekerEditorController extends PersonEditorController {
     this.setTableColumns();
 
     this.editor.setTableItems(DB.getInstance().getJobSeekers());
+    editor.onNewItem((observableValue, oldValue, newValue) -> {
+      if (newValue != null) selectItem(newValue);
+      else clearForm();
+    });
+    editor.onAddNew(e -> {
+      this.selectedItem = new JobSeeker();
+      editor.setTitle("Create a new Job Seeker");
+      this.clearForm();
+    });
   }
 
   @Override
@@ -65,6 +75,8 @@ public class JobSeekerEditorController extends PersonEditorController {
   private void selectItem(JobSeeker jobSeeker) {
     super.selectItem(jobSeeker);
     this.editor.setTitle(jobSeeker.toString());
+    this.editor.setEditorID(jobSeeker.getID());
+
     this.selectedItem = jobSeeker;
 
     this.educationField.setValue(jobSeeker.educationProperty().get());
@@ -85,18 +97,17 @@ public class JobSeekerEditorController extends PersonEditorController {
 
   @Override
   void createNewItem() {
-    DB.getInstance().getJobSeekers().add(new JobSeeker(
-      this.firstNameField.getValue(),
-      this.lastNameField.getValue(),
-      this.emailAddressField.getValue(),
-      this.phoneNumberField.getValue(),
-      this.birthDateField.getValue(),
-      this.educationField.getValue(),
-      this.workExperienceField.getValue(),
-      Integer.parseInt(wageField.getValue()),
-      this.referencesField.getValue(),
-      null
-    ));
+    this.selectedItem.firstNameProperty().set(this.firstNameField.getValue());
+    this.selectedItem.lastNameProperty().set(this.lastNameField.getValue());
+    this.selectedItem.emailAddressProperty().set(this.emailAddressField.getValue());
+    this.selectedItem.phoneNumberProperty().set(this.phoneNumberField.getValue());
+    this.selectedItem.birthDateProperty().set(this.birthDateField.getValue());
+    // this.selectedItem.addressProperty().set(this.addressField.getValue());
+    this.selectedItem.workExperienceProperty().set(this.workExperienceField.getValue());
+    this.selectedItem.referencesProperty().set(this.referencesField.getValue());
+    this.selectedItem.wageProperty().set(Integer.parseInt(this.wageField.getValue()));
+
+    DB.getInstance().getJobSeekers().add(this.selectedItem);
   }
 
   @Override

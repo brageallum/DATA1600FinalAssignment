@@ -47,6 +47,7 @@ public class EmployerEditorController extends PersonEditorController {
     });
     editor.onAddNew(e -> {
       this.selectedItem = new Employer();
+      editor.setTitle("Create a new Employer");
       this.clearForm();
     });
   }
@@ -71,18 +72,19 @@ public class EmployerEditorController extends PersonEditorController {
     super.selectItem(employer);
 
     this.editor.setTitle(employer.toString());
+    this.editor.setEditorID(employer.getID());
+
     this.selectedItem = employer;
 
     this.sectorField.setValue(employer.sectorProperty().get().toString());
     this.industryField.setValue(employer.industryProperty().getValue());
 
     try {
-      this.workplacesField.setItems(FetchData.getWorkplacesFromEmployer(
-        this.selectedItem.getID(),
-        DB.getInstance()).workplacesObservable()
+      this.workplacesField.setItems(DB.getInstance().getWorkplacesFromEmployer(
+        this.selectedItem.getID()).workplacesObservable()
       );
     } catch(IndexOutOfBoundsException e) {
-      System.out.println("No workplaces for current employer");
+        this.workplacesField.setItems(null);
     }
 
   }
@@ -95,16 +97,16 @@ public class EmployerEditorController extends PersonEditorController {
   }
 
   protected void createNewItem() {
-    DB.getInstance().getEmployers().add(new Employer(
-      this.firstNameField.getValue(),
-      this.lastNameField.getValue(),
-      DB.sectorChoice.valueOf(this.sectorField.getValue()),
-      this.addressField.getValue(),
-      this.industryField.getValue(),
-      this.phoneNumberField.getValue(),
-      this.emailAddressField.getValue(),
-      this.birthDateField.getValue()
-    ));
+    this.selectedItem.firstNameProperty().set(this.firstNameField.getValue());
+    this.selectedItem.lastNameProperty().set(this.lastNameField.getValue());
+    this.selectedItem.sectorProperty().set(DB.sectorChoice.valueOf(this.sectorField.getValue()));
+    this.selectedItem.addressProperty().set(this.addressField.getValue());
+    this.selectedItem.industryProperty().set(this.industryField.getValue());
+    this.selectedItem.phoneNumberProperty().set(this.phoneNumberField.getValue());
+    this.selectedItem.emailAddressProperty().set(this.emailAddressField.getValue());
+    this.selectedItem.birthDateProperty().set(this.birthDateField.getValue());
+
+    DB.getInstance().getEmployers().add(this.selectedItem);
   }
 
   protected void updateItem() {

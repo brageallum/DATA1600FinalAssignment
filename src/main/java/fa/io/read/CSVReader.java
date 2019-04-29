@@ -70,7 +70,6 @@ class CSVReader implements ReadStrategy {
       parseLine(line);
     }
 
-    Store.dbInitializedProperty().set(true);
     return detachedDB;
   }
 
@@ -106,6 +105,7 @@ class CSVReader implements ReadStrategy {
   }
 
   private JobSeeker parseJobSeeker(Line line) throws CSVReaderInvalidFormatException {
+    System.out.println("Job Seeker Parse");
     Matcher data = jobSeekerFields.matcher(line.getText());
     if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type JobSeeker.", line.getLineNumber())
@@ -140,6 +140,7 @@ class CSVReader implements ReadStrategy {
   }
 
   private Workplace parseWorkplace(Line line) throws CSVReaderInvalidFormatException {
+    System.out.println("Workplace Parse");
     Matcher data = workplaceFields.matcher(line.getText());
     if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type Workplace.", line.getLineNumber())
@@ -164,6 +165,7 @@ class CSVReader implements ReadStrategy {
   }
 
   private Employer parseEmployer(Line line) throws CSVReaderInvalidFormatException {
+    System.out.println("Employer Parse");
     Matcher data = employerFields.matcher(line.getText());
     if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type Employer.", line.getLineNumber())
@@ -183,14 +185,15 @@ class CSVReader implements ReadStrategy {
   }
 
   private EmployerWorkplace parseEmployerWorkplace(Line line) throws CSVReaderInvalidFormatException {
+    System.out.println("EmployerWorkplace Parse");
     Matcher data = employerWorkplaceFields.matcher(line.getText());
     if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type EmployerWorkplace.", line.getLineNumber())
     );
 
     return new EmployerWorkplace(
-      FetchData.getEmployer(Integer.parseInt(data.group("employer")), this.detachedDB),
-      FetchData.getWorkplaces(data.group("workplaces"), this.detachedDB)
+      this.detachedDB.getEmployer(Integer.parseInt(data.group("employer"))),
+      this.detachedDB.getWorkplaces(data.group("workplaces"))
     );
   }
 

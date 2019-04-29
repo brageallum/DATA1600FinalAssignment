@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FetchData {
-
+/*
   public static Workplace getWorkplace(int id, DB db) {
     try {
       return db.getWorkplaces()
@@ -57,5 +57,6 @@ public class FetchData {
       .map(s -> FetchData.getWorkplace(Integer.parseInt(s), db))
       .collect(Collectors.toList());
   }
+  */
 
 }

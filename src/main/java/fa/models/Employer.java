@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public class Employer extends Person implements Serializable, Searchable {
 
-  private static int nextId = 99;
+  private static int nextId = 100;
 
   private final SerializableProperty<Enum> sector;
   private final SerializableProperty<String> industry;
@@ -56,11 +56,7 @@ public class Employer extends Person implements Serializable, Searchable {
   ) {
     super(firstName,lastName,emailAddress,phoneNumber,birthDate,address);
 
-    System.out.println("Before: " + nextId);
-
     if (ID >= nextId) nextId = ID + 1;
-
-    System.out.println("After: " + nextId);
 
     this.ID = ID;
     this.sector = new SerializableProperty<>(sector);
@@ -89,7 +85,7 @@ public class Employer extends Person implements Serializable, Searchable {
 
   @Override
   public String toString() {
-    return String.format("[%s] %s %s", this.ID, this.firstNameProperty().getValue(), this.lastNameProperty().getValue());
+    return String.format("%s %s", this.firstNameProperty().getValue(), this.lastNameProperty().getValue());
   }
 
 }

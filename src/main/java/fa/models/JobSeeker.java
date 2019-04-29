@@ -64,9 +64,9 @@ public class JobSeeker extends Person implements Serializable, Searchable {
 
     super(firstName, lastName, emailAddress, phoneNumber, birthDate, address);
 
-    if (ID >= nextId) nextId = ID + 1;
+    if (ID > nextId) nextId = ID + 1;
 
-    this.ID = ID;
+    this.ID = nextId;
     this.education = new SerializableProperty<>(education);
     this.workExperience = new SerializableProperty<>(workExperience);
     this.wage = new SerializableProperty<>(wage);
@@ -74,28 +74,28 @@ public class JobSeeker extends Person implements Serializable, Searchable {
   }
 
   public int getID() {
-    return ID;
+    return this.ID;
   }
 
   public ObjectProperty<String> educationProperty() {
-    return education.getProperty();
+    return this.education.getProperty();
   }
 
   public ObjectProperty<String> workExperienceProperty() {
-    return workExperience.getProperty();
+    return this.workExperience.getProperty();
   }
 
   public ObjectProperty<Integer> wageProperty() {
-    return wage.getProperty();
+    return this.wage.getProperty();
   }
 
   public ObjectProperty<String> referencesProperty() {
-    return references.getProperty();
+    return this.references.getProperty();
   }
 
   @Override
   public String toString() {
-    return String.format("[%s] %s %s", ID, firstNameProperty().getValue(), lastNameProperty().getValue());
+    return String.format("%s %s", this.firstNameProperty().getValue(), this.lastNameProperty().getValue());
   }
 
   @Override

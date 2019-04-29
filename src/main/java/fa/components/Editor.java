@@ -19,6 +19,7 @@ import java.util.ArrayList;
 public class Editor<T extends Searchable> extends SplitPane {
   @FXML private TextField searchBar;
   @FXML private Label editorTitle;
+  @FXML private Label editorID;
   @FXML private TableView<T> itemsTable;
   @FXML private Pane editorFormContainer;
   @FXML private BorderPane editor;
@@ -66,6 +67,10 @@ public class Editor<T extends Searchable> extends SplitPane {
 
   public void setTitle(String title) {
     editorTitle.setText(title);
+  }
+
+  public void setEditorID(int id) {
+    editorID.setText(String.format("#%s", id));
   }
 
   public void showEditor() {

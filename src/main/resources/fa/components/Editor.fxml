@@ -16,6 +16,7 @@
                         <HBox alignment="CENTER_LEFT" styleClass="editor-navbar">
                             <Button onAction="#goBack" styleClass="goBackButton">GO BACK</Button>
                             <Label fx:id="editorTitle" styleClass="editor--title">Editing no one</Label>
+                            <Label fx:id="editorID" styleClass="editor--id-title">#000</Label>
                         </HBox>
                     </top>
                     <center>

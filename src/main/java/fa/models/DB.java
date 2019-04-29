@@ -1,10 +1,12 @@
 package fa.models;
 
+import fa.utils.FetchData;
 import fa.utils.serialization.SerializableObservableList;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -104,41 +106,49 @@ public class DB implements Serializable {
     return employerWorkplaces.getObservableList();
   }
 
-  public JobSeeker getJobSeeker(int id) {
-    List<JobSeeker> jsList = getJobSeekers()
-      .stream()
-      .filter(s -> (s.getID() == id))
-      .collect(Collectors.toList());
-    try {
-      return jsList.get(0);
-    } catch(IndexOutOfBoundsException e) {
-      System.out.println(jsList);
-      throw new Error("Index 0 does not exist");
-    }
-  }
-
   public Workplace getWorkplace(int id) {
-    return new Workplace();
+    try {
+      return this.getWorkplaces()
+        .filtered(s -> (s.getID() == id))
+        .get(0);
+    } catch(IndexOutOfBoundsException e) {
+      // TODO: Add custom error
+      throw new Error("No workplace found for this field.");
+    }
   }
 
   public Employer getEmployer(int id) {
-    List<Employer> empList = getEmployers()
-      .stream()
-      .filter(s -> (s.getID() == id))
-      .collect(Collectors.toList());
     try {
-      return empList.get(0);
+      return this.getEmployers()
+        .filtered(s -> (s.getID() == id))
+        .get(0);
     } catch(IndexOutOfBoundsException e) {
-      throw new Error("Index 0 does not exist");
+      // TODO: Add custom error
+      throw new Error("No employer found for this field.");
+    }
+
+  }
+
+  public JobSeeker toJobSeeker(int id) {
+    try {
+      return this.getJobSeekers()
+        .filtered(s -> (s.getID() == id))
+        .get(0);
+    } catch(IndexOutOfBoundsException e) {
+      // TODO: Add custom error
+      throw new Error("No job seeker found for this field.");
     }
   }
 
-  @Override
-  public String toString() {
-    StringBuilder returnData = new StringBuilder();
-    for (JobSeeker seeker : this.jobSeekers.getObservableList()) {
-      returnData.append(seeker.toString());
-    }
-    return returnData.toString();
+  public EmployerWorkplace getWorkplacesFromEmployer(int id) throws IndexOutOfBoundsException {
+    return this.getEmployerWorkplaces()
+      .filtered(s -> (s.employerProperty().getValue().getID() == id))
+      .get(0);
+  }
+
+  public List<Workplace> getWorkplaces(String data) {
+    return Arrays.stream(data.split(","))
+      .map(s -> this.getWorkplace(Integer.parseInt(s)))
+      .collect(Collectors.toList());
   }
 }
