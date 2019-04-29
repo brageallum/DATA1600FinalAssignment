@@ -1,3 +1,7 @@
+.root {
+    -fx-focus-color: transparent;
+}
+
 .area--page {
     -fx-padding: 30px;
 }
@@ -126,16 +130,20 @@
 
 .goBackButton {
     -fx-background-insets: 10;
-    -fx-padding: 15;
-    -fx-background-color: #c0392b;
+    -fx-background-color: transparent;
     -fx-border-color: transparent;
-    -fx-pref-width: 100;
-    -fx-text-fill: #fff;
-    -fx-font-size: 12;
+    -fx-text-fill: #ccc;
+    -fx-padding: 0 13 0 0;
+    -fx-font-size: 2em;
 }
 
 .editorPane {
     -fx-padding: 0;
+}
+
+.editorPane .split-pane-divider {
+    -fx-pref-width: 0;
+    -fx-background-color: transparent;
 }
 
 .addNewButton {
@@ -145,4 +153,41 @@
     -fx-border-width: 0;
     -fx-pref-height: 100;
     -fx-pref-width: 200;
+}
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color:  #333;
+}
+.table-view .column-header .label{
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+}
+
+#searchBar {
+    -fx-background-radius: 0;
+    -fx-pref-height: 30;
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+}
+
+.dateField, .textField {
+    -fx-pref-width: 170;
+    -fx-background-color: #fff;
+    -fx-effect: none;
+    -fx-border-color: #e7e7e7;
+    -fx-border-width: 1;
+    -fx-background-insets: 0;
+}
+
+.dateField .text-field {
+    -fx-background-color: #fff;
+    -fx-background-insets: 0;
+    -fx-border-width: 0;
+}
+.dateField .arrow-button {
+    -fx-background-color: #e7e7e7;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-border-width: 0;
 }

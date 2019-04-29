@@ -5,7 +5,7 @@
 <fx:root type="SplitPane" dividerPositions="0.4" xmlns:fx="http://javafx.com/fxml" styleClass="editorPane">
     <VBox>
         <TextField onAction="#search" fx:id="searchBar" promptText="Search (matches for data in a single column)" />
-        <TableView fx:id="itemsTable" minWidth="200" prefWidth="700" VBox.vgrow="ALWAYS" />
+        <TableView fx:id="itemsTable" styleClass="table-view" minWidth="200" prefWidth="700" VBox.vgrow="ALWAYS" />
     </VBox>
     <ScrollPane fx:id="scrollBox" maxWidth="400" prefWidth="400" fitToWidth="true" fitToHeight="true">
         <HBox alignment="CENTER" maxWidth="400" prefWidth="400">
@@ -14,7 +14,7 @@
                 <BorderPane fx:id="editor" prefWidth="300" visible="false" managed="false">
                     <top>
                         <HBox alignment="CENTER_LEFT" styleClass="editor-navbar">
-                            <Button onAction="#goBack" styleClass="goBackButton">GO BACK</Button>
+                            <Button onAction="#goBack" styleClass="goBackButton">〈</Button>
                             <Label fx:id="editorTitle" styleClass="editor--title">Editing no one</Label>
                             <Label fx:id="editorID" styleClass="editor--id-title">#000</Label>
                         </HBox>
