@@ -105,16 +105,7 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
   @Override
   protected void createNewItem() {
     this.selectedItem = new Employer();
-
-    this.selectedItem.firstNameProperty().set(this.firstNameField.getValue());
-    this.selectedItem.lastNameProperty().set(this.lastNameField.getValue());
-    this.selectedItem.sectorProperty().set(DB.sectorOptions.valueOf(this.sectorField.getValue()));
-    this.selectedItem.addressProperty().set(this.addressField.getValue());
-    this.selectedItem.industryProperty().set(this.industryField.getValue());
-    this.selectedItem.phoneNumberProperty().set(this.phoneNumberField.getValue());
-    this.selectedItem.emailAddressProperty().set(this.emailAddressField.getValue());
-    this.selectedItem.birthDateProperty().set(this.birthDateField.getValue());
-
+    this.updateItem();
     DB.getInstance().getEmployers().add(this.selectedItem);
   }
 

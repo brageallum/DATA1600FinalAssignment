@@ -70,16 +70,8 @@ public class JobSeekerEditorController extends PersonEditorController<JobSeeker>
 
   @Override
   void createNewItem() {
-    this.selectedItem.firstNameProperty().set(this.firstNameField.getValue());
-    this.selectedItem.lastNameProperty().set(this.lastNameField.getValue());
-    this.selectedItem.emailAddressProperty().set(this.emailAddressField.getValue());
-    this.selectedItem.phoneNumberProperty().set(this.phoneNumberField.getValue());
-    this.selectedItem.birthDateProperty().set(this.birthDateField.getValue());
-    this.selectedItem.addressProperty().set(this.addressField.getValue());
-    this.selectedItem.workExperienceProperty().set(this.workExperienceField.getValue());
-    this.selectedItem.referencesProperty().set(this.referencesField.getValue());
-    this.selectedItem.wageProperty().set(Integer.parseInt(this.wageField.getValue()));
-
+    this.selectedItem = new JobSeeker();
+    this.updateItem();
     DB.getInstance().getJobSeekers().add(this.selectedItem);
   }
 
