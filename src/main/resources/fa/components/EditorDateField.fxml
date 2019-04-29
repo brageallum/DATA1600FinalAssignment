@@ -9,7 +9,7 @@
     <HBox spacing="10" alignment="CENTER_RIGHT">
         <Label styleClass="editor-field__label" fx:id="label"/>
         <Region HBox.hgrow="ALWAYS" />
-        <DatePicker fx:id="field" />
+        <DatePicker fx:id="field" styleClass="dateField" />
     </HBox>
     <Label styleClass="editor-field__error" fx:id="errorMsg" />
 </fx:root>
