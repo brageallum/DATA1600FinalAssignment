@@ -57,7 +57,7 @@ public class FileHandler {
   private FileChooser getFileChooser() {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setInitialDirectory(new File(InitialDirectory));
-    fileChooser.getExtensionFilters().addAll(allowedExt, csvExt, jobjExt);
+    fileChooser.getExtensionFilters().addAll(csvExt, jobjExt, allowedExt);
 
     return fileChooser;
   }

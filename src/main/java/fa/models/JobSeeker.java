@@ -4,7 +4,6 @@ import fa.utils.SearchMatcher;
 import fa.utils.Searchable;
 import fa.utils.serialization.SerializableProperty;
 import javafx.beans.property.ObjectProperty;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 
