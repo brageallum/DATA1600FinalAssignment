@@ -68,10 +68,7 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
   protected void selectItem(Employer employer) {
     super.selectItem(employer);
 
-    this.editor.setTitle(employer.toString());
     this.editor.setEditorID(employer.getID());
-
-    this.selectedItem = employer;
 
     this.sectorField.setValue(employer.sectorProperty().get().toString());
     this.industryField.setValue(employer.industryProperty().getValue());

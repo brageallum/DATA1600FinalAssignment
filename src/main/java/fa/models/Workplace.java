@@ -154,7 +154,7 @@ public class Workplace implements Serializable, Searchable {
 
   @Override
   public String toString() {
-    return String.format("[%s] %s", ID, workplaceProperty().getValue());
+    return workplaceProperty().getValue();
   }
 
   @Override

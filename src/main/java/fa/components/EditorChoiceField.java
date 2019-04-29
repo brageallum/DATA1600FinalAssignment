@@ -27,6 +27,10 @@ public class EditorChoiceField extends VBox {
 
   public void setOptions(ObservableList<String> options) {
     field.setItems(options);
+    this.setToDefault();
+  }
+
+  public void setToDefault() {
     field.getSelectionModel().selectFirst();
   }
 
