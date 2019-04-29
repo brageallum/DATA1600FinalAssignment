@@ -66,7 +66,7 @@ public class JobSeeker extends Person implements Serializable, Searchable {
 
     if (ID > nextId) nextId = ID + 1;
 
-    this.ID = nextId;
+    this.ID = ID;
     this.education = new SerializableProperty<>(education);
     this.workExperience = new SerializableProperty<>(workExperience);
     this.wage = new SerializableProperty<>(wage);
