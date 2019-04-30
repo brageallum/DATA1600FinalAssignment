@@ -1,5 +1,6 @@
 package fa.models;
 
+import fa.utils.Identifiable;
 import fa.utils.SearchMatcher;
 import fa.utils.Searchable;
 import fa.utils.serialization.SerializableProperty;
@@ -7,7 +8,7 @@ import javafx.beans.property.ObjectProperty;
 
 import java.io.Serializable;
 
-public class Workplace implements Serializable, Searchable {
+public class Workplace implements Serializable, Searchable, Identifiable {
   private static int nextId = 100;
 
   public final int ID;

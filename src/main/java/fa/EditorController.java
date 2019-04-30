@@ -1,12 +1,13 @@
 package fa;
 
 import fa.components.Editor;
+import fa.utils.Identifiable;
 import fa.utils.Searchable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public abstract class EditorController<T extends Searchable> {
+public abstract class EditorController<T extends Searchable & Identifiable> {
   @FXML private Editor<T> editor;
   @FXML private Button submitButton;
   @FXML private Button deleteButton;
@@ -67,6 +68,7 @@ public abstract class EditorController<T extends Searchable> {
 
   protected void selectItem(T item) {
     this.editor.setTitle(item.toString());
+    this.editor.setEditorID(item.getID());
     this.selectedItem = item;
   }
 

@@ -1,5 +1,6 @@
 package fa.models;
 
+import fa.utils.Identifiable;
 import fa.utils.SearchMatcher;
 import fa.utils.Searchable;
 import fa.utils.serialization.SerializableProperty;
@@ -7,7 +8,7 @@ import javafx.beans.property.ObjectProperty;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Employer extends Person implements Serializable, Searchable {
+public class Employer extends Person implements Serializable, Searchable, Identifiable {
 
   private static int nextId = 100;
 
@@ -73,10 +74,6 @@ public class Employer extends Person implements Serializable, Searchable {
 
   public int getID() {
     return this.ID;
-  }
-
-  public int getNextId() {
-    return nextId;
   }
 
   public ObjectProperty<Enum> sectorProperty() {

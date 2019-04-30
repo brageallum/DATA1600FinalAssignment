@@ -96,8 +96,6 @@ public class WorkplaceEditorController extends EditorController<Workplace> {
   protected void selectItem(Workplace item) {
     super.selectItem(item);
 
-    this.editor.setEditorID(item.getID());
-
     this.sectorField.setValue(item.sectorProperty().getValue().toString());
     this.workplaceField.setValue(item.workplaceProperty().getValue());
     this.employerField.setValue(item.employerProperty().getValue());
