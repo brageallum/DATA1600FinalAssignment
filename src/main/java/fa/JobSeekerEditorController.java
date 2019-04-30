@@ -50,7 +50,6 @@ public class JobSeekerEditorController extends PersonEditorController<JobSeeker>
   @Override
   protected void selectItem(JobSeeker jobSeeker) {
     super.selectItem(jobSeeker);
-    this.editor.setEditorID(jobSeeker.getID());
 
     this.educationField.setValue(jobSeeker.educationProperty().get());
     this.workExperienceField.setValue(jobSeeker.workExperienceProperty().getValue());

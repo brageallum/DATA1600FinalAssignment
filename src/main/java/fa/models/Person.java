@@ -1,5 +1,6 @@
 package fa.models;
 
+import fa.utils.Identifiable;
 import fa.utils.SearchMatcher;
 import fa.utils.Searchable;
 import fa.utils.serialization.SerializableProperty;
@@ -8,7 +9,7 @@ import javafx.beans.property.ObjectProperty;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Person extends Model implements Serializable, Searchable {
+public abstract class Person extends Model implements Serializable, Searchable, Identifiable {
   private final SerializableProperty<String> firstName;
   private final SerializableProperty<String> lastName;
   private final SerializableProperty<String> emailAddress;
