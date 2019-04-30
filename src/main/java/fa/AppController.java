@@ -86,7 +86,7 @@ public class AppController {
     logoImage.setFitWidth(25.0);
     logoImage.setImage(
       new Image(
-        String.valueOf(getClass().getResource("images/window.png"))
+        String.valueOf(getClass().getResource("images/code.png"))
       )
     );
 

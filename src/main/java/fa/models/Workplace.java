@@ -7,7 +7,7 @@ import javafx.beans.property.ObjectProperty;
 
 import java.io.Serializable;
 
-public class Workplace implements Serializable, Searchable {
+public class Workplace extends Model implements Serializable, Searchable {
   private static int nextId = 100;
 
   public final int ID;

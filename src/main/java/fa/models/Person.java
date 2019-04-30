@@ -8,7 +8,7 @@ import javafx.beans.property.ObjectProperty;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Person implements Serializable, Searchable {
+public abstract class Person extends Model implements Serializable, Searchable {
   private final SerializableProperty<String> firstName;
   private final SerializableProperty<String> lastName;
   private final SerializableProperty<String> emailAddress;

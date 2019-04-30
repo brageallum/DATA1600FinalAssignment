@@ -38,6 +38,7 @@
             <Button fx:id="jobSeekerEditor" userData="view/JobSeekerEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Job seekers</Button>
             <Button fx:id="workplaceEditor" userData="view/WorkplaceEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Workplaces</Button>
             <Button fx:id="employerEditor" userData="view/EmployerEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Employers</Button>
+            <Button fx:id="employment" userData="view/Employment.fxml" onAction="#navigateApp" styleClass="button--navigation">Assign to workplace</Button>
           </HBox>
         </HBox>
       </VBox>

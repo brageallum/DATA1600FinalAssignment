@@ -5,6 +5,7 @@ import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -128,7 +129,7 @@ public class DB implements Serializable {
 
   }
 
-  public JobSeeker toJobSeeker(int id) {
+  public JobSeeker getJobSeeker(int id) {
     try {
       return this.getJobSeekers()
         .filtered(s -> (s.getID() == id))
@@ -137,6 +138,11 @@ public class DB implements Serializable {
       // TODO: Add custom error
       throw new Error("No job seeker found for this field.");
     }
+  }
+
+  public List<JobSeeker> getJobSeekersFromWorkplace(int id) throws IndexOutOfBoundsException {
+    // TODO: ADD LOGIC
+    return new ArrayList<JobSeeker>();
   }
 
   public EmployerWorkplace getWorkplacesFromEmployer(int id) throws IndexOutOfBoundsException {
