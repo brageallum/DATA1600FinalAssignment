@@ -1,6 +1,7 @@
 package fa;
 
 import fa.components.Editor;
+import fa.models.Store;
 import fa.utils.Identifiable;
 import fa.utils.Searchable;
 import javafx.event.ActionEvent;
@@ -36,6 +37,7 @@ public abstract class EditorController<T extends Searchable & Identifiable> {
     this.setTableColumns();
     this.setTableItems();
     this.editor.onNewItem((observableValue, oldValue, newValue) -> this.toggleFormType(newValue));
+    Store.loadingProperty().addListener((observableValue, wasLoading, isLoading) -> this.disableButtonsWhenLoading(isLoading));
   }
 
   private void toggleFormType(T item) {
@@ -58,6 +60,11 @@ public abstract class EditorController<T extends Searchable & Identifiable> {
     this.selectItem(item);
     this.submitButton.setText("Update");
     this.deleteButton.setVisible(true);
+  }
+
+  private void disableButtonsWhenLoading(boolean isLoading) {
+    submitButton.setDisable(isLoading);
+    deleteButton.setDisable(isLoading);
   }
 
   protected abstract void setTableColumns();
