@@ -98,7 +98,7 @@ public class TemporaryPositionEditorController extends EditorController<Temporar
 
     this.sectorField.setValue(item.sectorProperty().getValue());
     this.workplaceField.setValue(item.workplaceProperty().getValue());
-    this.employerField.setValue(DB.getInstance().getEmployer(Integer.parseInt(item.employerProperty().getValue())));
+    this.employerField.setValue(item.employerProperty().getValue());
     this.categoryField.setValue(item.categoryProperty().getValue());
     this.durationField.setValue(item.durationProperty().getValue());
     this.workingHoursField.setValue(item.workingHoursProperty().getValue());
@@ -122,7 +122,7 @@ public class TemporaryPositionEditorController extends EditorController<Temporar
   protected void updateItem() {
     this.selectedItem.sectorProperty().set(this.sectorField.getValue());
     this.selectedItem.workplaceProperty().set(this.workplaceField.getValue());
-    this.selectedItem.employerProperty().set(Integer.toString(this.employerField.getValue().getID()));
+    this.selectedItem.employerProperty().set(this.employerField.getValue());
     this.selectedItem.categoryProperty().set(this.categoryField.getValue());
     this.selectedItem.durationProperty().set(this.durationField.getValue());
     this.selectedItem.workingHoursProperty().set(this.workingHoursField.getValue());

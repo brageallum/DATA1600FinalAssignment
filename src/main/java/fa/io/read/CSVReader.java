@@ -139,7 +139,7 @@ class CSVReader implements ReadStrategy {
       Integer.parseInt(data.group("id")),
       DB.sectorOptions.valueOf(data.group("sector")),
       data.group("workplace"),
-      data.group("employer"),
+      this.detachedDB.getEmployer(Integer.parseInt(data.group("employer"))),
       data.group("category"),
       data.group("duration"),
       data.group("workingHours"),

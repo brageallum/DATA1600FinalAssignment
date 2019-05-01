@@ -21,7 +21,6 @@ public class AppController {
   private static String currentPage = "home";
 
   @FXML private BorderPane rootContainer;
-  @FXML private HBox navigationBar;
   @FXML private ImageView logoImage;
   @FXML private HBox topBar;
   @FXML private Label globalSnackbar;
@@ -63,7 +62,7 @@ public class AppController {
   }
 
   private void unhighlightAllNavigationLinks() {
-    for (Node link : navigationBar.getChildren()) {
+    for (Node link : topBar.getChildren()) {
       link.getStyleClass().remove("isActive");
     }
   }
@@ -75,13 +74,6 @@ public class AppController {
   public void initialize() {
     System.out.format("[ %s ]: AppController initialized.\n", new Date());
     topBar.setAlignment(Pos.CENTER_LEFT);
-    logoImage.setFitHeight(25.0);
-    logoImage.setFitWidth(25.0);
-    logoImage.setImage(
-      new Image(
-        String.valueOf(getClass().getResource("images/code.png"))
-      )
-    );
 
     Store.loadingProperty().addListener((observableValue, oldValue, newValue) -> globalSnackbar.setVisible(newValue));
     Store.loadingTextProperty().addListener((observableValue, oldValue, newValue) -> globalSnackbar.setText(newValue));

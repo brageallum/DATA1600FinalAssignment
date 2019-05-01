@@ -3,6 +3,7 @@ package fa.models;
 import fa.utils.SearchMatcher;
 import fa.utils.serialization.SerializableProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 import java.io.Serializable;
 
@@ -12,7 +13,7 @@ public class TemporaryPosition extends Model implements Serializable {
   public final int ID;
   private final SerializableProperty<DB.sectorOptions> sector;
   private final SerializableProperty<String> workplace;
-  private final SerializableProperty<String> employer;
+  private final SerializableProperty<Employer> employer;
   private final SerializableProperty<String> category;
   private final SerializableProperty<String> duration;
   private final SerializableProperty<String> workingHours;
@@ -31,7 +32,7 @@ public class TemporaryPosition extends Model implements Serializable {
   public TemporaryPosition(
     DB.sectorOptions sector,
     String workplace,
-    String employer,
+    Employer employer,
     String category,
     String duration,
     String workingHours,
@@ -65,7 +66,7 @@ public class TemporaryPosition extends Model implements Serializable {
     int ID,
     DB.sectorOptions sector,
     String workplace,
-    String employer,
+    Employer employer,
     String category,
     String duration,
     String workingHours,
@@ -107,7 +108,7 @@ public class TemporaryPosition extends Model implements Serializable {
     return workplace.getProperty();
   }
 
-  public ObjectProperty<String> employerProperty() {
+  public ObjectProperty<Employer> employerProperty() {
     return employer.getProperty();
   }
 
@@ -151,6 +152,10 @@ public class TemporaryPosition extends Model implements Serializable {
     return description.getProperty();
   }
 
+  public ObjectProperty<String> employerNameProperty() {
+    return new SimpleObjectProperty<>(employer.getProperty().toString());
+  }
+
   @Override
   public String toString() {
     return String.format("%s @%s", this.categoryProperty().getValue(), this.workplaceProperty().getValue());
@@ -163,7 +168,7 @@ public class TemporaryPosition extends Model implements Serializable {
       Integer.toString(this.ID),
       this.sectorProperty().getValue().toString(),
       this.workplaceProperty().getValue(),
-      this.employerProperty().getValue(),
+      this.employerProperty().getValue().firstNameProperty().getValue(),
       this.categoryProperty().getValue(),
       this.durationProperty().getValue(),
       this.workingHoursProperty().getValue(),
