@@ -1,14 +1,13 @@
 package fa;
 
 import fa.components.Editor;
+import fa.models.Model;
 import fa.models.Store;
-import fa.utils.Identifiable;
-import fa.utils.Searchable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public abstract class EditorController<T extends Searchable & Identifiable> {
+public abstract class EditorController<T extends Model> {
   @FXML private Editor<T> editor;
   @FXML private Button submitButton;
   @FXML private Button deleteButton;

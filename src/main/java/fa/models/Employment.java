@@ -1,14 +1,12 @@
 package fa.models;
 
-import fa.utils.Identifiable;
 import fa.utils.SearchMatcher;
-import fa.utils.Searchable;
 import fa.utils.serialization.SerializableProperty;
 import javafx.beans.property.ObjectProperty;
 
 import java.io.Serializable;
 
-public class Employment implements Serializable, Searchable, Identifiable {
+public class Employment extends Model implements Serializable {
   private static int nextId = 100;
 
   private final SerializableProperty<JobSeeker> jobSeeker;

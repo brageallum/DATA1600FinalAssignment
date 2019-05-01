@@ -1,7 +1,8 @@
 package fa.models;
 
-public abstract class Model {
-  public boolean isValidModel() {
-    return true;
-  }
+import java.io.Serializable;
+
+public abstract class Model implements Serializable {
+  public abstract int getID();
+  public abstract boolean matchesSearch(String pattern);
 }

@@ -1,6 +1,6 @@
 package fa.components;
 
-import fa.utils.Searchable;
+import fa.models.Model;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +14,7 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-public class Editor<T extends Searchable> extends SplitPane {
+public class Editor<T extends Model> extends SplitPane {
   @FXML private TextField searchBar;
   @FXML private Label editorTitle;
   @FXML private Label editorID;
