@@ -68,25 +68,31 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
     this.sectorField.setValue(DB.sectorOptions.valueOf(employer.sectorProperty().get().toString()));
     this.industryField.setValue(employer.industryProperty().getValue());
 
+    this.createTemporaryPositionsList();
+  }
+
+  private void createTemporaryPositionsList() {
     try {
       ObservableList<TemporaryPosition> list = DB.getInstance().getWorkplacesFromEmployer(this.selectedItem.getID()).workplacesObservable();
       this.workplacesField.setItems(list);
 
-      int colSize = 24;
-      int borderSize = 2;
+      int singleItemHeight = 24;
 
       if (0 < list.size()) {
-        this.workplacesField.setVisible(true);
-        this.workplacesField.setManaged(true);
-        this.workplacesLabel.setVisible(true);
-        this.workplacesLabel.setManaged(true);
+        this.showTemporaryPositionsList();
         this.workplacesLabel.setText(String.format("Responsible for temporary positions (%s)", list.size()));
-        this.workplacesField.setPrefHeight(list.size() * colSize);
+        this.workplacesField.setPrefHeight(list.size() * singleItemHeight);
       }
     } catch(IndexOutOfBoundsException e) {
         this.workplacesField.setItems(null);
     }
+  }
 
+  private void showTemporaryPositionsList() {
+    this.workplacesField.setVisible(true);
+    this.workplacesField.setManaged(true);
+    this.workplacesLabel.setVisible(true);
+    this.workplacesLabel.setManaged(true);
   }
 
   @Override
