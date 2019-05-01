@@ -36,7 +36,7 @@ public class DB implements Serializable {
   });
 
   private final SerializableObservableList<TemporaryPosition> temporaryPositions = new SerializableObservableList<>(temporaryPosition -> new Observable[]{
-    temporaryPosition.temporaryPositionProperty(),
+    temporaryPosition.workplaceProperty(),
     temporaryPosition.employerProperty(),
     temporaryPosition.categoryProperty(),
     temporaryPosition.durationProperty(),

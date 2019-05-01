@@ -1,31 +1,24 @@
 package fa.controllers;
 
-import fa.components.Editor;
-import fa.components.EditorDateField;
-import fa.components.EditorTextField;
 import fa.DB;
+import fa.components.Editor;
+import fa.components.EditorTextField;
 import fa.models.Substitute;
 import fa.utils.validation.StringValidator;
 import javafx.fxml.FXML;
 
-public class JobSeekerEditorController extends PersonEditorController<Substitute> {
+public class SubstituteEditorController extends PersonEditorController<Substitute> {
   @FXML private Editor<Substitute> editor;
-  @FXML private EditorTextField firstNameField,
-    lastNameField,
-    emailAddressField,
-    addressField,
-    phoneNumberField,
-    educationField,
+  @FXML private EditorTextField educationField,
     workExperienceField,
     wageField,
     referencesField;
-  @FXML private EditorDateField birthDateField;
 
   @Override
   protected void setTableColumns() {
     super.setTableColumns();
     this.editor.setTableColumn("Education", "education");
-    this.editor.setTableColumn("TemporaryPosition experience", "workExperience");
+    this.editor.setTableColumn("Work experience", "workExperience");
     this.editor.setTableColumn("Wage", "wage");
     this.editor.setTableColumn("References", "references");
   }

@@ -1,10 +1,9 @@
 package fa.controllers;
 
+import fa.DB;
 import fa.components.Editor;
 import fa.components.EditorChoiceField;
-import fa.components.EditorDateField;
 import fa.components.EditorTextField;
-import fa.DB;
 import fa.models.Employer;
 import fa.models.TemporaryPosition;
 import fa.utils.validation.StringValidator;
@@ -15,14 +14,8 @@ import javafx.scene.control.ListView;
 
 public class EmployerEditorController extends PersonEditorController<Employer> {
   @FXML private Editor<Employer> editor;
-  @FXML private EditorTextField firstNameField,
-    lastNameField,
-    addressField,
-    emailAddressField,
-    phoneNumberField,
-    industryField;
+  @FXML private EditorTextField emailAddressField, industryField;
   @FXML private EditorChoiceField<DB.sectorOptions> sectorField;
-  @FXML private EditorDateField birthDateField;
   @FXML private ListView<TemporaryPosition> temporaryPositionsField;
   @FXML private Label temporaryPositionsLabel;
 

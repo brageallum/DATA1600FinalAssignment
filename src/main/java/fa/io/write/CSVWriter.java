@@ -67,7 +67,7 @@ class CSVWriter implements WriteStrategy {
       "TemporaryPosition",
       Integer.toString(temporaryPosition.getID()),
       temporaryPosition.sectorProperty().getValue().toString(),
-      temporaryPosition.temporaryPositionProperty().getValue(),
+      temporaryPosition.workplaceProperty().getValue(),
       Integer.toString(temporaryPosition.employerProperty().getValue().getID()),
       temporaryPosition.categoryProperty().getValue(),
       temporaryPosition.durationProperty().getValue(),
