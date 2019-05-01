@@ -76,7 +76,9 @@ public class Editor<T extends Model> extends SplitPane {
     this.addNewButton.setVisible(false);
     this.addNewButton.setManaged(false);
     this.scrollBox.setFitToHeight(false);
-    this.onShowEditorListener.run();
+    if (this.onShowEditorListener != null) {
+      this.onShowEditorListener.run();
+    }
   }
 
   public void hideEditor() {

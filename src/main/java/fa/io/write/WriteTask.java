@@ -1,7 +1,7 @@
 package fa.io.write;
 
-import fa.io.InvalidExtensionException;
 import fa.Store;
+import fa.io.InvalidExtensionException;
 import fa.utils.DialogHandler;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -19,6 +19,16 @@ public class WriteTask extends Task<Void> {
     this.mainThreadSetup();
   }
 
+  private void mainThreadSetup() {
+    Store.setLoading("Exporting data...");
+  }
+
+  @Override
+  protected Void call() throws Exception {
+    this.write();
+    return null;
+  }
+
   private void write() throws IOException, InvalidExtensionException {
     switch (this.extension) {
       case "csv":
@@ -32,30 +42,26 @@ public class WriteTask extends Task<Void> {
     }
   }
 
-  private void mainThreadSetup() {
-    Store.setLoading("Exporting data...");
-  }
-
-  @Override
-  protected Void call() throws Exception {
-    this.write();
-    return null;
-  }
-
   @Override
   protected void succeeded() {
-    Platform.runLater(Store::unsetLoading);
+    Platform.runLater(this::onSucceeded);
+  }
+
+  private void onSucceeded() {
+    Store.unsetLoading();
   }
 
   @Override
   protected void failed() {
-    Platform.runLater(() -> {
-      Store.unsetLoading();
-      this.getException().printStackTrace();
-      DialogHandler.showErrorDialog(
-        "Error while exporting data to file: " + this.file.getName(),
-        this.getException().getMessage()
-      );
-    });
+    Platform.runLater(this::onFailed);
+  }
+
+  private void onFailed() {
+    Store.unsetLoading();
+    this.getException().printStackTrace();
+    DialogHandler.showErrorDialog(
+      "Error while exporting data to file: " + this.file.getName(),
+      this.getException().getMessage()
+    );
   }
 }

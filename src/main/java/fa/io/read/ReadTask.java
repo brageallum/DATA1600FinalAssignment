@@ -1,10 +1,11 @@
 package fa.io.read;
 
-import fa.io.InvalidExtensionException;
-import fa.io.read.exceptions.ReaderException;
 import fa.DB;
 import fa.Store;
+import fa.io.InvalidExtensionException;
+import fa.io.read.exceptions.ReaderException;
 import fa.utils.DialogHandler;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 
 import java.io.File;
@@ -20,6 +21,15 @@ public class ReadTask extends Task<DB> {
     this.mainThreadSetup();
   }
 
+  private void mainThreadSetup() {
+    Store.setLoading("Importing data...");
+  }
+
+  @Override
+  protected DB call() throws Exception {
+    return this.read();
+  }
+
   private DB read() throws IOException, ReaderException, InvalidExtensionException {
     switch (this.extension) {
       case "csv":
@@ -31,23 +41,22 @@ public class ReadTask extends Task<DB> {
     }
   }
 
-  private void mainThreadSetup() {
-    Store.setLoading("Importing data...");
-  }
-
-  @Override
-  protected DB call() throws Exception {
-    return this.read();
-  }
-
   @Override
   protected void succeeded() {
+    Platform.runLater(this::onSucceeded);
+  }
+
+  private void onSucceeded() {
     DB.replaceInstance(this.getValue());
     Store.unsetLoading();
   }
 
   @Override
   protected void failed() {
+    Platform.runLater(this::onFailed);
+  }
+
+  private void onFailed() {
     Store.unsetLoading();
     this.getException().printStackTrace();
     DialogHandler.showErrorDialog(

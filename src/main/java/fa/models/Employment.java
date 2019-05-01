@@ -46,4 +46,13 @@ public class Employment extends Model implements Serializable {
   public boolean matchesSearch(String pattern) {
     return SearchMatcher.matches(pattern, Integer.toString(this.ID), this.jobSeeker.toString(), this.temporaryPosition.toString());
   }
+
+  @Override
+  public String toString() {
+    return String.format(
+      "%s | %s",
+      this.jobSeekerProperty().getValue().toString(),
+      this.temporaryPositionProperty().getValue().toString()
+    );
+  }
 }
