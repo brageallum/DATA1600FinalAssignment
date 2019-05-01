@@ -101,7 +101,6 @@ class CSVReader implements ReadStrategy {
   }
 
   private Substitute parseJobSeeker(Line line) throws CSVReaderInvalidFormatException {
-    System.out.println("Job Seeker Parse");
     Matcher data = jobSeekerFields.matcher(line.getText());
     if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type Substitute.", line.getLineNumber())
@@ -155,7 +154,6 @@ class CSVReader implements ReadStrategy {
   }
 
   private Employer parseEmployer(Line line) throws CSVReaderInvalidFormatException {
-    System.out.println("Employer Parse");
     Matcher data = employerFields.matcher(line.getText());
     if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type Employer.", line.getLineNumber())
@@ -175,7 +173,6 @@ class CSVReader implements ReadStrategy {
   }
 
   private EmployerWorkplace parseEmployerWorkplace(Line line) throws CSVReaderInvalidFormatException {
-    System.out.println("EmployerWorkplace Parse");
     Matcher data = employerWorkplaceFields.matcher(line.getText());
     if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type EmployerWorkplace.", line.getLineNumber())

@@ -15,7 +15,7 @@ public class MainApp extends Application {
   @Override
   public void start(Stage stage) throws Exception {
 
-    File DBInit = new File(Paths.get("./src/main/resources/fa/data/db.csv").toAbsolutePath().normalize().toString());
+    File DBInit = new File(Paths.get("./src/main/resources/fa/data/db-init.csv").toAbsolutePath().normalize().toString());
     new FileHandler().importData(DBInit);
 
     Parent root = FXMLLoader.load(getClass().getResource("view/App.fxml"));

@@ -27,6 +27,7 @@ public class ReadTask extends Task<DB> {
 
   @Override
   protected DB call() throws Exception {
+    Thread.sleep(5000);
     return this.read();
   }
 

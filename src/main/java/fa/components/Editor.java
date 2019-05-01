@@ -58,7 +58,7 @@ public class Editor<T extends Model> extends SplitPane {
   }
 
   public void setEditorID(int id) {
-    this.editorID.setText(String.format("#%s", id));
+    this.editorID.setText("#" + id);
   }
 
   public void setEditorVisible(boolean visible) {

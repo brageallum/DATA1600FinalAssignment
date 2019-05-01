@@ -25,6 +25,7 @@ public class WriteTask extends Task<Void> {
 
   @Override
   protected Void call() throws Exception {
+    Thread.sleep(5000);
     this.write();
     return null;
   }
