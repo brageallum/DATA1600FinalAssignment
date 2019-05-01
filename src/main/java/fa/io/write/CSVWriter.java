@@ -2,6 +2,7 @@ package fa.io.write;
 
 import fa.DB;
 import fa.models.Employer;
+import fa.models.Employment;
 import fa.models.Substitute;
 import fa.models.TemporaryPosition;
 
@@ -23,6 +24,8 @@ class CSVWriter implements WriteStrategy {
     DB.getInstance().getEmployers().forEach(this::writeEmployer);
     this.writer.write("\n");
     DB.getInstance().getTemporaryPositions().forEach(this::writeTemporaryPosition);
+    this.writer.write("\n");
+    DB.getInstance().getEmployments().forEach(this::writeEmployment);
 
     this.writer.close();
   }
@@ -76,6 +79,15 @@ class CSVWriter implements WriteStrategy {
       temporaryPosition.phoneNumberProperty().getValue(),
       temporaryPosition.emailAddressProperty().getValue(),
       temporaryPosition.descriptionProperty().getValue()
+    }));
+  }
+
+  private void writeEmployment(Employment employment) {
+    this.writer.println(toCSVFormat(new String[]{
+      "Employment",
+      Integer.toString(employment.getID()),
+      Integer.toString(employment.substituteProperty().getValue().getID()),
+      Integer.toString(employment.temporaryPositionProperty().getValue().getID())
     }));
   }
 

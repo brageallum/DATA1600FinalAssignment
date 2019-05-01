@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Employment extends Model implements Serializable {
   private static int nextId = 100;
 
-  private final SerializableProperty<Substitute> jobSeeker;
+  private final SerializableProperty<Substitute> substitute;
   private final SerializableProperty<TemporaryPosition> temporaryPosition;
 
   private final int ID;
@@ -18,19 +18,19 @@ public class Employment extends Model implements Serializable {
     this(null, null);
   }
 
-  public Employment(Substitute jobseeker, TemporaryPosition temporaryPosition) {
-    this(nextId, jobseeker, temporaryPosition);
+  public Employment(Substitute substitute, TemporaryPosition temporaryPosition) {
+    this(nextId, substitute, temporaryPosition);
   }
 
-  public Employment(int ID, Substitute jobseeker, TemporaryPosition temporaryPosition) {
+  public Employment(int ID, Substitute substitute, TemporaryPosition temporaryPosition) {
     if (ID >= nextId) nextId = ID + 1;
     this.ID = ID;
-    this.jobSeeker = new SerializableProperty<>(jobseeker);
+    this.substitute = new SerializableProperty<>(substitute);
     this.temporaryPosition = new SerializableProperty<>(temporaryPosition);
   }
 
-  public ObjectProperty<Substitute> jobSeekerProperty() {
-    return this.jobSeeker.getProperty();
+  public ObjectProperty<Substitute> substituteProperty() {
+    return this.substitute.getProperty();
   }
 
   public ObjectProperty<TemporaryPosition> temporaryPositionProperty() {
@@ -44,14 +44,14 @@ public class Employment extends Model implements Serializable {
 
   @Override
   public boolean matchesSearch(String pattern) {
-    return SearchMatcher.matches(pattern, Integer.toString(this.ID), this.jobSeeker.toString(), this.temporaryPosition.toString());
+    return SearchMatcher.matches(pattern, Integer.toString(this.ID), this.substitute.toString(), this.temporaryPosition.toString());
   }
 
   @Override
   public String toString() {
     return String.format(
       "%s | %s",
-      this.jobSeekerProperty().getValue().toString(),
+      this.substituteProperty().getValue().toString(),
       this.temporaryPositionProperty().getValue().toString()
     );
   }

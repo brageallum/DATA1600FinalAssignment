@@ -1,14 +1,14 @@
 package fa;
 
-import fa.models.*;
+import fa.models.Employer;
+import fa.models.Employment;
+import fa.models.Substitute;
+import fa.models.TemporaryPosition;
 import fa.utils.serialization.SerializableObservableList;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * This is where all our data is stored. It uses the singleton pattern to make a single instance
@@ -23,16 +23,16 @@ public class DB implements Serializable {
     Public
   }
 
-  private final SerializableObservableList<Substitute> substitute = new SerializableObservableList<>(jobSeeker -> new Observable[]{
-    jobSeeker.firstNameProperty(),
-    jobSeeker.lastNameProperty(),
-    jobSeeker.emailAddressProperty(),
-    jobSeeker.phoneNumberProperty(),
-    jobSeeker.educationProperty(),
-    jobSeeker.workExperienceProperty(),
-    jobSeeker.wageProperty(),
-    jobSeeker.referencesProperty(),
-    jobSeeker.birthDateProperty()
+  private final SerializableObservableList<Substitute> substitute = new SerializableObservableList<>(substitute -> new Observable[]{
+    substitute.firstNameProperty(),
+    substitute.lastNameProperty(),
+    substitute.emailAddressProperty(),
+    substitute.phoneNumberProperty(),
+    substitute.educationProperty(),
+    substitute.workExperienceProperty(),
+    substitute.wageProperty(),
+    substitute.referencesProperty(),
+    substitute.birthDateProperty()
   });
 
   private final SerializableObservableList<TemporaryPosition> temporaryPositions = new SerializableObservableList<>(workplace -> new Observable[]{
@@ -62,7 +62,7 @@ public class DB implements Serializable {
   });
 
   private final SerializableObservableList<Employment> employments = new SerializableObservableList<>(employment -> new Observable[]{
-    employment.jobSeekerProperty(),
+    employment.substituteProperty(),
     employment.temporaryPositionProperty()
   });
 
@@ -117,6 +117,17 @@ public class DB implements Serializable {
     }
   }
 
+  public Substitute getSubstitute(int id) {
+    try {
+      return this.getSubstitutes()
+        .filtered(s -> (s.getID() == id))
+        .get(0);
+    } catch(IndexOutOfBoundsException e) {
+      // TODO: Add custom error
+      throw new Error("No workplace found for this field.");
+    }
+  }
+
   public Employer getEmployer(int id) {
     try {
       return this.getEmployers()
@@ -126,7 +137,6 @@ public class DB implements Serializable {
       // TODO: Add custom error
       throw new Error("No employer found for this field.");
     }
-
   }
 
   public ObservableList<TemporaryPosition> getTemporaryPositionFromEmployer(Employer employer) throws IndexOutOfBoundsException {
@@ -134,11 +144,5 @@ public class DB implements Serializable {
       .filtered(
         tp -> tp.employerProperty().getValue().equals(employer)
       );
-  }
-
-  public List<TemporaryPosition> getTemporaryPositions(String data) {
-    return Arrays.stream(data.split(","))
-      .map(s -> this.getTemporaryPosition(Integer.parseInt(s)))
-      .collect(Collectors.toList());
   }
 }

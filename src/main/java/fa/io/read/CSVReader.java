@@ -18,7 +18,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class CSVReader implements ReadStrategy {
-  private final Pattern jobSeekerFields = getCSVRowPattern(
+  private final Pattern substituteFields = getCSVRowPattern(
     "type", "id", "firstName", "lastName", "emailAddress", "phoneNumber",
     "birthDate", "education", "workExperience", "wage", "references", "address"
   );
@@ -34,8 +34,8 @@ class CSVReader implements ReadStrategy {
   "emailAddress", "birthDate"
   );
 
-  private final Pattern employerWorkplaceFields = getCSVRowPattern(
-    "type", "employer", "workplaces"
+  private final Pattern employmentFields = getCSVRowPattern(
+    "type", "id", "employer", "temporaryPosition"
     );
 
   private DB detachedDB;
@@ -81,6 +81,9 @@ class CSVReader implements ReadStrategy {
       case "Employer":
         detachedDB.getEmployers().add(parseEmployer(line));
         break;
+      case "Employment":
+        detachedDB.getEmployments().add(parseEmployment(line));
+        break;
       default:
         throw new CSVReaderInvalidTypeException(
           String.format("[on line %s]: \"%s\" is not a valid data type.", line.getLineNumber(), type)
@@ -98,7 +101,7 @@ class CSVReader implements ReadStrategy {
   }
 
   private Substitute parseJobSeeker(Line line) throws CSVReaderInvalidFormatException {
-    Matcher data = jobSeekerFields.matcher(line.getText());
+    Matcher data = substituteFields.matcher(line.getText());
     if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type Substitute.", line.getLineNumber())
     );
@@ -126,7 +129,6 @@ class CSVReader implements ReadStrategy {
   }
 
   private TemporaryPosition parseWorkplace(Line line) throws CSVReaderInvalidFormatException {
-    System.out.println("TemporaryPosition Parse");
     Matcher data = workplaceFields.matcher(line.getText());
     if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type TemporaryPosition.", line.getLineNumber())
@@ -166,6 +168,19 @@ class CSVReader implements ReadStrategy {
       data.group("phoneNumber"),
       data.group("emailAddress"),
       LocalDate.parse(data.group("birthDate"))
+    );
+  }
+
+  private Employment parseEmployment(Line line) throws CSVReaderInvalidFormatException {
+    Matcher data = this.employmentFields.matcher(line.getText());
+    if (!data.find()) throw new CSVReaderInvalidFormatException(
+      String.format("[on line %s]: Incorrect format for type Employment.", line.getLineNumber())
+    );
+
+    return new Employment(
+      Integer.parseInt(data.group("id")),
+      this.detachedDB.getSubstitute(Integer.parseInt(data.group("id"))),
+      this.detachedDB.getTemporaryPosition(Integer.parseInt(data.group("id")))
     );
   }
 

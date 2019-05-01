@@ -12,14 +12,14 @@ import java.util.stream.Collectors;
 
 public class EmploymentEditorController extends EditorController<Employment> {
   @FXML private Editor<Employment> editor;
-  @FXML private EditorChoiceField<Substitute> jobSeekerField;
+  @FXML private EditorChoiceField<Substitute> substituteField;
   @FXML private EditorChoiceField<TemporaryPosition> temporaryPositionField;
 
   @Override
   public void initialize() {
     super.initialize();
     this.editor.onShowEditor(() -> {
-      this.jobSeekerField.setOptions(DB.getInstance().getSubstitutes());
+      this.substituteField.setOptions(DB.getInstance().getSubstitutes());
       this.temporaryPositionField.setOptions(DB.getInstance().getTemporaryPositions().filtered(
         tp -> !DB.getInstance().getEmployments()
         .stream()
@@ -33,7 +33,7 @@ public class EmploymentEditorController extends EditorController<Employment> {
   @Override
   protected void setTableColumns() {
     this.editor.setTableColumn("id", "ID");
-    this.editor.setTableColumn("Employee", "jobSeeker");
+    this.editor.setTableColumn("Substitute", "substitute");
     this.editor.setTableColumn("Temporary position", "temporaryPosition");
   }
 
@@ -60,7 +60,7 @@ public class EmploymentEditorController extends EditorController<Employment> {
 
   @Override
   protected void updateItem() {
-    this.selectedItem.jobSeekerProperty().setValue(jobSeekerField.getValue());
+    this.selectedItem.substituteProperty().setValue(substituteField.getValue());
     this.selectedItem.temporaryPositionProperty().setValue(temporaryPositionField.getValue());
   }
 
