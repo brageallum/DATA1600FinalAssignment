@@ -26,6 +26,8 @@ public class Editor<T extends Model> extends SplitPane {
 
   private ObservableList<T> items;
 
+  private Runnable onShowEditorListener;
+
   public Editor() {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fa/components/Editor.fxml"));
     fxmlLoader.setRoot(this);
@@ -37,7 +39,7 @@ public class Editor<T extends Model> extends SplitPane {
       e.printStackTrace();
     }
 
-    itemsTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> this.setEditorVisible(null == newValue));
+    this.itemsTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> this.setEditorVisible(null == newValue));
   }
 
   @FXML
@@ -48,15 +50,15 @@ public class Editor<T extends Model> extends SplitPane {
 
   @FXML
   public void search(ActionEvent e) {
-    itemsTable.setItems(items.filtered(item -> item.matchesSearch(searchBar.getText())));
+    this.itemsTable.setItems(this.items.filtered(item -> item.matchesSearch(this.searchBar.getText())));
   }
 
   public void setTitle(String title) {
-    editorTitle.setText(title);
+    this.editorTitle.setText(title);
   }
 
   public void setEditorID(int id) {
-    editorID.setText(String.format("#%s", id));
+    this.editorID.setText(String.format("#%s", id));
   }
 
   public void setEditorVisible(boolean visible) {
@@ -69,41 +71,46 @@ public class Editor<T extends Model> extends SplitPane {
 
   @FXML
   public void showEditor() {
-    editor.setVisible(true);
-    editor.setManaged(true);
-    addNewButton.setVisible(false);
-    addNewButton.setManaged(false);
-    scrollBox.setFitToHeight(false);
+    this.editor.setVisible(true);
+    this.editor.setManaged(true);
+    this.addNewButton.setVisible(false);
+    this.addNewButton.setManaged(false);
+    this.scrollBox.setFitToHeight(false);
+    this.onShowEditorListener.run();
   }
 
   public void hideEditor() {
-    editor.setVisible(false);
-    editor.setManaged(false);
-    addNewButton.setVisible(true);
-    addNewButton.setManaged(true);
-    scrollBox.setFitToHeight(true);
+    this.editor.setVisible(false);
+    this.editor.setManaged(false);
+    this.addNewButton.setVisible(true);
+    this.addNewButton.setManaged(true);
+    this.scrollBox.setFitToHeight(true);
   }
 
   public ObservableList<Node> getForm() {
-    return editorFormContainer.getChildren();
+    return this.editorFormContainer.getChildren();
   }
 
   public void setTableColumn(String label, String key) {
     TableColumn<T, String> tableColumn = new TableColumn<>(label);
     tableColumn.setCellValueFactory(new PropertyValueFactory<>(key));
-    itemsTable.getColumns().add(tableColumn);
+    this.itemsTable.getColumns().add(tableColumn);
   }
 
   public void setTableItems(ObservableList<T> items) {
     this.items = items;
-    itemsTable.setItems(items);
+    this.itemsTable.setItems(items);
+  }
+
+  public void onShowEditor(Runnable runnable) {
+    this.onShowEditorListener = runnable;
   }
 
   public void onNewItem(ChangeListener<T> changeListener) {
-    itemsTable.getSelectionModel().selectedItemProperty().addListener(changeListener);
+    this.itemsTable.getSelectionModel().selectedItemProperty().addListener(changeListener);
   }
 
   public void clearSelection() {
-    itemsTable.getSelectionModel().clearSelection();
+    this.itemsTable.getSelectionModel().clearSelection();
   }
 }

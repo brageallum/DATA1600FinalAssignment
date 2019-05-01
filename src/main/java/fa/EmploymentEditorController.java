@@ -8,6 +8,8 @@ import fa.models.JobSeeker;
 import fa.models.TemporaryPosition;
 import javafx.fxml.FXML;
 
+import java.util.stream.Collectors;
+
 public class EmploymentEditorController extends EditorController<Employment> {
   @FXML private Editor<Employment> editor;
   @FXML private EditorChoiceField<JobSeeker> jobSeekerField;
@@ -16,8 +18,16 @@ public class EmploymentEditorController extends EditorController<Employment> {
   @Override
   public void initialize() {
     super.initialize();
-    jobSeekerField.setOptions(DB.getInstance().getJobSeekers());
-    temporaryPositionField.setOptions(DB.getInstance().getTemporaryPositions());
+    this.editor.onShowEditor(() -> {
+      this.jobSeekerField.setOptions(DB.getInstance().getJobSeekers());
+      this.temporaryPositionField.setOptions(DB.getInstance().getTemporaryPositions().filtered(
+        tp -> !DB.getInstance().getEmployments()
+        .stream()
+        .map(emp -> emp.temporaryPositionProperty().getValue())
+        .collect(Collectors.toList())
+        .contains(tp)
+      ));
+    });
   }
 
   @Override
