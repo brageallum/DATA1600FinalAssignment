@@ -23,6 +23,8 @@ public abstract class EditorController<T extends Searchable & Identifiable> {
     } else {
       this.updateItem();
     }
+    this.clearForm();
+    this.editor.hideEditor();
     this.editor.clearSelection();
   }
 

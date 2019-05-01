@@ -75,7 +75,7 @@ class CSVReader implements ReadStrategy {
         detachedDB.getJobSeekers().add(parseJobSeeker(line));
         break;
       case "TemporaryPosition":
-        detachedDB.getWorkplaces().add(parseWorkplace(line));
+        detachedDB.getTemporaryPositions().add(parseWorkplace(line));
         break;
       case "Employer":
         detachedDB.getEmployers().add(parseEmployer(line));
@@ -182,7 +182,7 @@ class CSVReader implements ReadStrategy {
 
     return new EmployerWorkplace(
       this.detachedDB.getEmployer(Integer.parseInt(data.group("employer"))),
-      this.detachedDB.getWorkplaces(data.group("workplaces"))
+      this.detachedDB.getTemporaryPositions(data.group("workplaces"))
     );
   }
 

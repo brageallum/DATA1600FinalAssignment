@@ -35,7 +35,7 @@ public class DB implements Serializable {
     jobSeeker.birthDateProperty()
   });
 
-  private final SerializableObservableList<TemporaryPosition> workplaces = new SerializableObservableList<>(workplace -> new Observable[]{
+  private final SerializableObservableList<TemporaryPosition> temporaryPositions = new SerializableObservableList<>(workplace -> new Observable[]{
     workplace.workplaceProperty(),
     workplace.employerProperty(),
     workplace.categoryProperty(),
@@ -66,6 +66,11 @@ public class DB implements Serializable {
     employerWorkplace.workplacesProperty()
   });
 
+  private final SerializableObservableList<Employment> employments = new SerializableObservableList<>(employment -> new Observable[]{
+    employment.jobSeekerProperty(),
+    employment.temporaryPositionProperty()
+  });
+
   private DB() {}
 
   public static DB getInstance() {
@@ -85,17 +90,18 @@ public class DB implements Serializable {
     }
 
     instance.getJobSeekers().setAll(newDb.getJobSeekers());
-    instance.getWorkplaces().setAll(newDb.getWorkplaces());
+    instance.getTemporaryPositions().setAll(newDb.getTemporaryPositions());
     instance.getEmployers().setAll(newDb.getEmployers());
     instance.getEmployerWorkplaces().setAll(newDb.getEmployerWorkplaces());
+    instance.getEmployments().setAll(newDb.getEmployments());
   }
 
   public ObservableList<JobSeeker> getJobSeekers() {
     return jobSeekers.getObservableList();
   }
 
-  public ObservableList<TemporaryPosition> getWorkplaces() {
-    return workplaces.getObservableList();
+  public ObservableList<TemporaryPosition> getTemporaryPositions() {
+    return temporaryPositions.getObservableList();
   }
 
   public ObservableList<Employer> getEmployers() {
@@ -106,9 +112,13 @@ public class DB implements Serializable {
     return employerWorkplaces.getObservableList();
   }
 
-  public TemporaryPosition getWorkplace(int id) {
+  public ObservableList<Employment> getEmployments() {
+    return employments.getObservableList();
+  }
+
+  public TemporaryPosition getTemporaryPosition(int id) {
     try {
-      return this.getWorkplaces()
+      return this.getTemporaryPositions()
         .filtered(s -> (s.getID() == id))
         .get(0);
     } catch(IndexOutOfBoundsException e) {
@@ -140,7 +150,7 @@ public class DB implements Serializable {
     }
   }
 
-  public List<JobSeeker> getJobSeekersFromWorkplace(int id) throws IndexOutOfBoundsException {
+  public List<JobSeeker> getJobSeekersFromTemporaryPosition(int id) throws IndexOutOfBoundsException {
     // TODO: ADD LOGIC
     return new ArrayList<JobSeeker>();
   }
@@ -151,9 +161,9 @@ public class DB implements Serializable {
       .get(0);
   }
 
-  public List<TemporaryPosition> getWorkplaces(String data) {
+  public List<TemporaryPosition> getTemporaryPositions(String data) {
     return Arrays.stream(data.split(","))
-      .map(s -> this.getWorkplace(Integer.parseInt(s)))
+      .map(s -> this.getTemporaryPosition(Integer.parseInt(s)))
       .collect(Collectors.toList());
   }
 }

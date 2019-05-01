@@ -2,9 +2,9 @@ package fa.utils;
 
 public class FetchData {
 /*
-  public static TemporaryPosition getWorkplace(int id, DB db) {
+  public static TemporaryPosition getTemporaryPosition(int id, DB db) {
     try {
-      return db.getWorkplaces()
+      return db.getTemporaryPositions()
         .filtered(s -> (s.getID() == id))
         .get(0);
     } catch(IndexOutOfBoundsException e) {
@@ -42,9 +42,9 @@ public class FetchData {
       .get(0);
   }
 
-  public static List<TemporaryPosition> getWorkplaces(String data, DB db) {
+  public static List<TemporaryPosition> getTemporaryPositions(String data, DB db) {
     return Arrays.stream(data.split(","))
-      .map(s -> FetchData.getWorkplace(Integer.parseInt(s), db))
+      .map(s -> FetchData.getTemporaryPosition(Integer.parseInt(s), db))
       .collect(Collectors.toList());
   }
   */

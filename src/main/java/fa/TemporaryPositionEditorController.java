@@ -56,7 +56,7 @@ public class TemporaryPositionEditorController extends EditorController<Temporar
   @Override
   protected void setTableItems() {
     System.out.println("Set table items");
-    this.editor.setTableItems(DB.getInstance().getWorkplaces());
+    this.editor.setTableItems(DB.getInstance().getTemporaryPositions());
   }
 
   @Override
@@ -115,7 +115,7 @@ public class TemporaryPositionEditorController extends EditorController<Temporar
   void createNewItem() {
     this.selectedItem = new TemporaryPosition();
     this.updateItem();
-    DB.getInstance().getWorkplaces().add(this.selectedItem);
+    DB.getInstance().getTemporaryPositions().add(this.selectedItem);
   }
 
   @Override
@@ -137,7 +137,7 @@ public class TemporaryPositionEditorController extends EditorController<Temporar
 
   @Override
   protected void deleteItem() {
-    DB.getInstance().getWorkplaces().remove(this.selectedItem);
+    DB.getInstance().getTemporaryPositions().remove(this.selectedItem);
   }
 
   @Override

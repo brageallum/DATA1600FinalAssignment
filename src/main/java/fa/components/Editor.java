@@ -37,13 +37,7 @@ public class Editor<T extends Searchable> extends SplitPane {
       e.printStackTrace();
     }
 
-    itemsTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
-      if (null == newValue) {
-        this.hideEditor();
-      } else {
-        this.showEditor();
-      }
-    });
+    itemsTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> this.setEditorVisible(null == newValue));
   }
 
   @FXML
@@ -63,6 +57,14 @@ public class Editor<T extends Searchable> extends SplitPane {
 
   public void setEditorID(int id) {
     editorID.setText(String.format("#%s", id));
+  }
+
+  public void setEditorVisible(boolean visible) {
+    if (visible) {
+      this.hideEditor();
+    } else {
+      this.showEditor();
+    }
   }
 
   @FXML
