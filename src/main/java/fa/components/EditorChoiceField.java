@@ -9,13 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class EditorChoiceField extends VBox {
+public class EditorChoiceField<T> extends VBox {
   @FXML private Label label;
-  @FXML private ChoiceBox<String> field;
+  @FXML private ChoiceBox<T> field;
 
   public EditorChoiceField() {
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fa/components/EditorChoiceField.fxml"));
@@ -29,28 +27,29 @@ public class EditorChoiceField extends VBox {
     }
   }
 
-  public void setOptions(ObservableList<String> options) {
+  public void setOptions(T[] options) {
+    this.setOptions(FXCollections.observableArrayList(options));
+  }
+
+  public void setOptions(List<T> options) {
+    this.setOptions(FXCollections.observableArrayList(options));
+  }
+
+  public void setOptions(ObservableList<T> options) {
     field.setItems(options);
     this.setToDefault();
   }
 
-  public <E extends Enum<E>> void setOptions(E[] options) {
-    List<String> sectorOptions = Arrays.stream(options)
-      .map(Enum::toString)
-      .collect(Collectors.toList());
-    ObservableList<String> observableSectorOptions = FXCollections.observableArrayList(sectorOptions);
-    this.setOptions(observableSectorOptions);
-  }
 
   public void setToDefault() {
     field.getSelectionModel().selectFirst();
   }
 
-  public void setValue(String s) {
+  public void setValue(T s) {
     field.setValue(s);
   }
 
-  public String getValue() {
+  public T getValue() {
     return field.getValue();
   }
 

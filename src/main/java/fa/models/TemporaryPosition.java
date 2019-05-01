@@ -12,7 +12,7 @@ public class TemporaryPosition extends Model implements Serializable, Searchable
   private static int nextId = 100;
 
   public final int ID;
-  private final SerializableProperty<Enum> sector;
+  private final SerializableProperty<DB.sectorOptions> sector;
   private final SerializableProperty<String> workplace;
   private final SerializableProperty<String> employer;
   private final SerializableProperty<String> category;
@@ -101,7 +101,7 @@ public class TemporaryPosition extends Model implements Serializable, Searchable
     return ID;
   }
 
-  public ObjectProperty<Enum> sectorProperty() {
+  public ObjectProperty<DB.sectorOptions> sectorProperty() {
     return sector.getProperty();
   }
 

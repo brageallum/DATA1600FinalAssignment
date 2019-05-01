@@ -21,7 +21,7 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
     emailAddressField,
     phoneNumberField,
     industryField;
-  @FXML private EditorChoiceField sectorField;
+  @FXML private EditorChoiceField<DB.sectorOptions> sectorField;
   @FXML private EditorDateField birthDateField;
   @FXML private ListView<TemporaryPosition> workplacesField;
   @FXML private Label workplacesLabel;
@@ -65,7 +65,7 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
   protected void selectItem(Employer employer) {
     super.selectItem(employer);
 
-    this.sectorField.setValue(employer.sectorProperty().get().toString());
+    this.sectorField.setValue(DB.sectorOptions.valueOf(employer.sectorProperty().get().toString()));
     this.industryField.setValue(employer.industryProperty().getValue());
 
     try {
@@ -104,7 +104,7 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
   @Override
   protected void updateItem() {
     super.updateItem();
-    this.selectedItem.sectorProperty().set(DB.sectorOptions.valueOf(this.sectorField.getValue()));
+    this.selectedItem.sectorProperty().set(this.sectorField.getValue());
     this.selectedItem.industryProperty().set(this.industryField.getValue());
   }
 

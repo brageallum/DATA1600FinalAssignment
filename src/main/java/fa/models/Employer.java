@@ -12,7 +12,7 @@ public class Employer extends Person implements Serializable, Searchable, Identi
 
   private static int nextId = 100;
 
-  private final SerializableProperty<Enum> sector;
+  private final SerializableProperty<DB.sectorOptions> sector;
   private final SerializableProperty<String> industry;
 
   private final int ID;
@@ -76,7 +76,7 @@ public class Employer extends Person implements Serializable, Searchable, Identi
     return this.ID;
   }
 
-  public ObjectProperty<Enum> sectorProperty() {
+  public ObjectProperty<DB.sectorOptions> sectorProperty() {
     return this.sector.getProperty();
   }
 

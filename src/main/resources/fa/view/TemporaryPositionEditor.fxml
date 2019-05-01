@@ -7,7 +7,7 @@
   <form>
     <EditorChoiceField fx:id="sectorField" labelText="Sector:"/>
     <EditorTextField fx:id="workplaceField" labelText="Workplace:" />
-    <EditorTextField fx:id="employerField" labelText="Employer:" />
+    <EditorChoiceField fx:id="employerField" labelText="Employer:" />
     <EditorTextField fx:id="categoryField" labelText="Category:" />
     <EditorTextField fx:id="durationField" labelText="Duration:" />
     <EditorTextField fx:id="workingHoursField" labelText="Working hours:" />
