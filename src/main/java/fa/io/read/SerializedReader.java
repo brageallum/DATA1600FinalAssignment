@@ -1,7 +1,7 @@
 package fa.io.read;
 
 import fa.io.read.exceptions.SerializedReaderInvalidClassException;
-import fa.models.DB;
+import fa.DB;
 
 import java.io.File;
 import java.io.FileInputStream;

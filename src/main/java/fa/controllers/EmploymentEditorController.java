@@ -1,8 +1,8 @@
-package fa;
+package fa.controllers;
 
 import fa.components.Editor;
 import fa.components.EditorChoiceField;
-import fa.models.DB;
+import fa.DB;
 import fa.models.Employment;
 import fa.models.JobSeeker;
 import fa.models.TemporaryPosition;

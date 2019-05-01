@@ -1,6 +1,6 @@
 package fa.io.write;
 
-import fa.models.DB;
+import fa.DB;
 
 import java.io.File;
 import java.io.FileOutputStream;

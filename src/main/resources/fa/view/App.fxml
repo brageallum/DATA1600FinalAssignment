@@ -10,7 +10,7 @@
 <?import javafx.scene.control.MenuItem?>
 
 <?import javafx.scene.control.Label?><?import javafx.scene.layout.StackPane?>
-<StackPane alignment="BOTTOM_RIGHT" fx:controller="fa.AppController" prefWidth="1200" prefHeight="700" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane alignment="BOTTOM_RIGHT" fx:controller="fa.controllers.AppController" prefWidth="1200" prefHeight="700" xmlns:fx="http://javafx.com/fxml/1">
   <BorderPane fx:id="rootContainer" prefWidth="1200" prefHeight="700">
     <top>
       <VBox styleClass="area--top-bar">

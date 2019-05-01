@@ -1,5 +1,6 @@
 package fa.models;
 
+import fa.DB;
 import fa.utils.SearchMatcher;
 import fa.utils.serialization.SerializableProperty;
 import javafx.beans.property.ObjectProperty;

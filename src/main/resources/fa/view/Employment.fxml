@@ -3,7 +3,7 @@
 <?import fa.components.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
-<Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.EmploymentEditorController">
+<Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.controllers.EmploymentEditorController">
   <form>
     <EditorChoiceField fx:id="jobSeekerField" labelText="Job seeker:" />
     <EditorChoiceField fx:id="temporaryPositionField" labelText="Temporary position:" />

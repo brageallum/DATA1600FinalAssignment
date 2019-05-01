@@ -1,6 +1,6 @@
 package fa.io.write;
 
-import fa.models.DB;
+import fa.DB;
 import fa.models.JobSeeker;
 
 import java.io.File;

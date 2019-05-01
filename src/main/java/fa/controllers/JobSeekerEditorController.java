@@ -1,9 +1,9 @@
-package fa;
+package fa.controllers;
 
 import fa.components.Editor;
 import fa.components.EditorDateField;
 import fa.components.EditorTextField;
-import fa.models.DB;
+import fa.DB;
 import fa.models.JobSeeker;
 import fa.utils.validation.StringValidator;
 import javafx.fxml.FXML;

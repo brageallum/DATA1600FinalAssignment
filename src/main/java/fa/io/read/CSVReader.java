@@ -1,5 +1,6 @@
 package fa.io.read;
 
+import fa.DB;
 import fa.io.read.exceptions.CSVReaderInvalidFormatException;
 import fa.io.read.exceptions.CSVReaderInvalidTypeException;
 import fa.io.read.exceptions.ReaderException;

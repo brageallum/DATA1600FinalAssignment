@@ -1,15 +1,13 @@
-package fa;
+package fa.controllers;
 
 import fa.io.FileHandler;
-import fa.models.Store;
+import fa.Store;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
@@ -21,7 +19,6 @@ public class AppController {
   private static String currentPage = "home";
 
   @FXML private BorderPane rootContainer;
-  @FXML private ImageView logoImage;
   @FXML private HBox topBar;
   @FXML private Label globalSnackbar;
 
@@ -52,7 +49,7 @@ public class AppController {
   }
 
   private void loadView(String pageUrl) throws IOException {
-    FXMLLoader view = new FXMLLoader(getClass().getResource(pageUrl));
+    FXMLLoader view = new FXMLLoader(getClass().getResource("../" + pageUrl));
     rootContainer.setCenter(view.load());
   }
 

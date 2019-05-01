@@ -6,7 +6,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Region?>
-<Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.EmployerEditorController">
+<Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.controllers.EmployerEditorController">
   <form>
     <EditorTextField fx:id="firstNameField" labelText="First name:" />
     <EditorTextField fx:id="lastNameField" labelText="Last name:" />

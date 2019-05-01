@@ -1,8 +1,8 @@
-package fa;
+package fa.controllers;
 
 import fa.components.Editor;
 import fa.models.Model;
-import fa.models.Store;
+import fa.Store;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

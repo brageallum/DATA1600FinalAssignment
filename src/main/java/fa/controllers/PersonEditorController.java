@@ -1,4 +1,4 @@
-package fa;
+package fa.controllers;
 
 import fa.components.Editor;
 import fa.components.EditorDateField;

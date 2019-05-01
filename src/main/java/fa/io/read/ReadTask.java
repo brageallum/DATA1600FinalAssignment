@@ -2,8 +2,8 @@ package fa.io.read;
 
 import fa.io.InvalidExtensionException;
 import fa.io.read.exceptions.ReaderException;
-import fa.models.DB;
-import fa.models.Store;
+import fa.DB;
+import fa.Store;
 import fa.utils.DialogHandler;
 import javafx.concurrent.Task;
 

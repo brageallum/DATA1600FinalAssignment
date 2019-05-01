@@ -1,10 +1,10 @@
-package fa;
+package fa.controllers;
 
 import fa.components.Editor;
 import fa.components.EditorChoiceField;
 import fa.components.EditorDateField;
 import fa.components.EditorTextField;
-import fa.models.DB;
+import fa.DB;
 import fa.models.Employer;
 import fa.models.TemporaryPosition;
 import fa.utils.validation.StringValidator;
