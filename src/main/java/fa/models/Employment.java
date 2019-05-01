@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Employment extends Model implements Serializable {
   private static int nextId = 100;
 
-  private final SerializableProperty<JobSeeker> jobSeeker;
+  private final SerializableProperty<Substitute> jobSeeker;
   private final SerializableProperty<TemporaryPosition> temporaryPosition;
 
   private final int ID;
@@ -18,18 +18,18 @@ public class Employment extends Model implements Serializable {
     this(null, null);
   }
 
-  public Employment(JobSeeker jobseeker, TemporaryPosition temporaryPosition) {
+  public Employment(Substitute jobseeker, TemporaryPosition temporaryPosition) {
     this(nextId, jobseeker, temporaryPosition);
   }
 
-  public Employment(int ID, JobSeeker jobseeker, TemporaryPosition temporaryPosition) {
+  public Employment(int ID, Substitute jobseeker, TemporaryPosition temporaryPosition) {
     if (ID >= nextId) nextId = ID + 1;
     this.ID = ID;
     this.jobSeeker = new SerializableProperty<>(jobseeker);
     this.temporaryPosition = new SerializableProperty<>(temporaryPosition);
   }
 
-  public ObjectProperty<JobSeeker> jobSeekerProperty() {
+  public ObjectProperty<Substitute> jobSeekerProperty() {
     return this.jobSeeker.getProperty();
   }
 

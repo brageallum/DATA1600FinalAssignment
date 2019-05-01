@@ -72,8 +72,8 @@ class CSVReader implements ReadStrategy {
   private void parseLine(Line line) throws ReaderException {
     String type = getType(line);
     switch (type) {
-      case "JobSeeker":
-        detachedDB.getJobSeekers().add(parseJobSeeker(line));
+      case "Substitute":
+        detachedDB.getSubstitute().add(parseJobSeeker(line));
         break;
       case "TemporaryPosition":
         detachedDB.getTemporaryPositions().add(parseWorkplace(line));
@@ -100,15 +100,15 @@ class CSVReader implements ReadStrategy {
     }
   }
 
-  private JobSeeker parseJobSeeker(Line line) throws CSVReaderInvalidFormatException {
+  private Substitute parseJobSeeker(Line line) throws CSVReaderInvalidFormatException {
     System.out.println("Job Seeker Parse");
     Matcher data = jobSeekerFields.matcher(line.getText());
     if (!data.find()) throw new CSVReaderInvalidFormatException(
-      String.format("[on line %s]: Incorrect format for type JobSeeker.", line.getLineNumber())
+      String.format("[on line %s]: Incorrect format for type Substitute.", line.getLineNumber())
     );
 
     try {
-      return new JobSeeker(
+      return new Substitute(
         Integer.parseInt(data.group("id")),
         data.group("firstName"),
         data.group("lastName"),

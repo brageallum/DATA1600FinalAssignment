@@ -7,7 +7,7 @@ import javafx.beans.property.ObjectProperty;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class JobSeeker extends Person implements Serializable {
+public class Substitute extends Person implements Serializable {
   private static int nextId = 100;
 
   private final SerializableProperty<String> education;
@@ -17,11 +17,11 @@ public class JobSeeker extends Person implements Serializable {
 
   public final int ID;
 
-  public JobSeeker() {
+  public Substitute() {
     this(null, null, null, null, null, null, null, 0, null, null);
   }
 
-  public JobSeeker(
+  public Substitute(
     String firstName,
     String lastName,
     String emailAddress,
@@ -48,7 +48,7 @@ public class JobSeeker extends Person implements Serializable {
     );
   }
 
-  public JobSeeker(
+  public Substitute(
     int ID,
     String firstName,
     String lastName,

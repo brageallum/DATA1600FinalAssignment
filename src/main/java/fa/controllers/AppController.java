@@ -16,7 +16,7 @@ import java.util.Date;
 
 public class AppController {
 
-  private static String currentPage = "home";
+  private static String currentPage;
 
   @FXML private BorderPane rootContainer;
   @FXML private HBox topBar;
@@ -36,14 +36,14 @@ public class AppController {
   }
 
   private boolean isNotCurrentPage(Node clickedLink) {
-    return !clickedLink.getId().equals(currentPage);
+    return !(currentPage != null && clickedLink.getUserData().equals(currentPage));
   }
 
   private void loadPage(Node link) throws IOException {
     String pageUrl = (String) link.getUserData();
 
     loadView(pageUrl);
-    currentPage = link.getId();
+    currentPage = pageUrl;
 
     highlightOnly(link);
   }

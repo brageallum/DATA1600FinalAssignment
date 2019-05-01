@@ -24,7 +24,7 @@ public class DB implements Serializable {
     Public
   }
 
-  private final SerializableObservableList<JobSeeker> jobSeekers = new SerializableObservableList<>(jobSeeker -> new Observable[]{
+  private final SerializableObservableList<Substitute> substitute = new SerializableObservableList<>(jobSeeker -> new Observable[]{
     jobSeeker.firstNameProperty(),
     jobSeeker.lastNameProperty(),
     jobSeeker.emailAddressProperty(),
@@ -90,15 +90,15 @@ public class DB implements Serializable {
       instance = new DB();
     }
 
-    instance.getJobSeekers().setAll(newDb.getJobSeekers());
+    instance.getSubstitute().setAll(newDb.getSubstitute());
     instance.getTemporaryPositions().setAll(newDb.getTemporaryPositions());
     instance.getEmployers().setAll(newDb.getEmployers());
     instance.getEmployerWorkplaces().setAll(newDb.getEmployerWorkplaces());
     instance.getEmployments().setAll(newDb.getEmployments());
   }
 
-  public ObservableList<JobSeeker> getJobSeekers() {
-    return jobSeekers.getObservableList();
+  public ObservableList<Substitute> getSubstitute() {
+    return substitute.getObservableList();
   }
 
   public ObservableList<TemporaryPosition> getTemporaryPositions() {
@@ -138,22 +138,6 @@ public class DB implements Serializable {
       throw new Error("No employer found for this field.");
     }
 
-  }
-
-  public JobSeeker getJobSeeker(int id) {
-    try {
-      return this.getJobSeekers()
-        .filtered(s -> (s.getID() == id))
-        .get(0);
-    } catch(IndexOutOfBoundsException e) {
-      // TODO: Add custom error
-      throw new Error("No job seeker found for this field.");
-    }
-  }
-
-  public List<JobSeeker> getJobSeekersFromTemporaryPosition(int id) throws IndexOutOfBoundsException {
-    // TODO: ADD LOGIC
-    return new ArrayList<JobSeeker>();
   }
 
   public EmployerWorkplace getWorkplacesFromEmployer(int id) throws IndexOutOfBoundsException {

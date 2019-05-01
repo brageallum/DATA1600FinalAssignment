@@ -4,12 +4,12 @@ import fa.components.Editor;
 import fa.components.EditorDateField;
 import fa.components.EditorTextField;
 import fa.DB;
-import fa.models.JobSeeker;
+import fa.models.Substitute;
 import fa.utils.validation.StringValidator;
 import javafx.fxml.FXML;
 
-public class JobSeekerEditorController extends PersonEditorController<JobSeeker> {
-  @FXML private Editor<JobSeeker> editor;
+public class JobSeekerEditorController extends PersonEditorController<Substitute> {
+  @FXML private Editor<Substitute> editor;
   @FXML private EditorTextField firstNameField,
     lastNameField,
     emailAddressField,
@@ -32,7 +32,7 @@ public class JobSeekerEditorController extends PersonEditorController<JobSeeker>
 
   @Override
   protected void setTableItems() {
-    this.editor.setTableItems(DB.getInstance().getJobSeekers());
+    this.editor.setTableItems(DB.getInstance().getSubstitute());
   }
 
   @Override
@@ -48,13 +48,13 @@ public class JobSeekerEditorController extends PersonEditorController<JobSeeker>
   }
 
   @Override
-  protected void selectItem(JobSeeker jobSeeker) {
-    super.selectItem(jobSeeker);
+  protected void selectItem(Substitute substitute) {
+    super.selectItem(substitute);
 
-    this.educationField.setValue(jobSeeker.educationProperty().get());
-    this.workExperienceField.setValue(jobSeeker.workExperienceProperty().getValue());
-    this.wageField.setValue(Integer.toString(jobSeeker.wageProperty().getValue()));
-    this.referencesField.setValue(jobSeeker.referencesProperty().getValue());
+    this.educationField.setValue(substitute.educationProperty().get());
+    this.workExperienceField.setValue(substitute.workExperienceProperty().getValue());
+    this.wageField.setValue(Integer.toString(substitute.wageProperty().getValue()));
+    this.referencesField.setValue(substitute.referencesProperty().getValue());
   }
 
   @Override
@@ -69,9 +69,9 @@ public class JobSeekerEditorController extends PersonEditorController<JobSeeker>
 
   @Override
   void createNewItem() {
-    this.selectedItem = new JobSeeker();
+    this.selectedItem = new Substitute();
     this.updateItem();
-    DB.getInstance().getJobSeekers().add(this.selectedItem);
+    DB.getInstance().getSubstitute().add(this.selectedItem);
   }
 
   @Override
@@ -85,7 +85,7 @@ public class JobSeekerEditorController extends PersonEditorController<JobSeeker>
 
   @Override
   protected void deleteItem() {
-    DB.getInstance().getJobSeekers().remove(this.selectedItem);
+    DB.getInstance().getSubstitute().remove(this.selectedItem);
   }
 
   @Override

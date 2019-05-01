@@ -1,7 +1,7 @@
 package fa.io.write;
 
 import fa.DB;
-import fa.models.JobSeeker;
+import fa.models.Substitute;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,24 +14,24 @@ class CSVWriter implements WriteStrategy {
   public void writeToFile(File file) throws IOException {
     PrintWriter writer = new PrintWriter(file);
 
-    DB.getInstance().getJobSeekers().forEach(jobSeeker -> writeJobSeeker(writer, jobSeeker));
+    DB.getInstance().getSubstitute().forEach(jobSeeker -> writeJobSeeker(writer, jobSeeker));
 
     writer.close();
   }
 
-  private void writeJobSeeker(PrintWriter writer, JobSeeker jobSeeker) {
+  private void writeJobSeeker(PrintWriter writer, Substitute substitute) {
     writer.println(toCSVFormat(new String[]{
-      "JobSeeker",
-      Integer.toString(jobSeeker.ID),
-      jobSeeker.firstNameProperty().getValue(),
-      jobSeeker.lastNameProperty().getValue(),
-      jobSeeker.emailAddressProperty().getValue(),
-      jobSeeker.phoneNumberProperty().getValue(),
-      jobSeeker.birthDateProperty().getValue().format(DateTimeFormatter.ISO_LOCAL_DATE),
-      jobSeeker.educationProperty().getValue(),
-      jobSeeker.workExperienceProperty().getValue(),
-      Integer.toString(jobSeeker.wageProperty().getValue()),
-      jobSeeker.referencesProperty().getValue(),
+      "Substitute",
+      Integer.toString(substitute.ID),
+      substitute.firstNameProperty().getValue(),
+      substitute.lastNameProperty().getValue(),
+      substitute.emailAddressProperty().getValue(),
+      substitute.phoneNumberProperty().getValue(),
+      substitute.birthDateProperty().getValue().format(DateTimeFormatter.ISO_LOCAL_DATE),
+      substitute.educationProperty().getValue(),
+      substitute.workExperienceProperty().getValue(),
+      Integer.toString(substitute.wageProperty().getValue()),
+      substitute.referencesProperty().getValue(),
     }));
   }
 
