@@ -61,11 +61,6 @@ public class DB implements Serializable {
     employer.birthDateProperty()
   });
 
-  private final SerializableObservableList<EmployerWorkplace> employerWorkplaces = new SerializableObservableList<>(employerWorkplace -> new Observable[]{
-    employerWorkplace.employerProperty(),
-    employerWorkplace.workplacesProperty()
-  });
-
   private final SerializableObservableList<Employment> employments = new SerializableObservableList<>(employment -> new Observable[]{
     employment.jobSeekerProperty(),
     employment.temporaryPositionProperty()
@@ -92,7 +87,6 @@ public class DB implements Serializable {
     instance.getSubstitutes().setAll(newDb.getSubstitutes());
     instance.getTemporaryPositions().setAll(newDb.getTemporaryPositions());
     instance.getEmployers().setAll(newDb.getEmployers());
-    instance.getEmployerWorkplaces().setAll(newDb.getEmployerWorkplaces());
     instance.getEmployments().setAll(newDb.getEmployments());
   }
 
@@ -106,10 +100,6 @@ public class DB implements Serializable {
 
   public ObservableList<Employer> getEmployers() {
     return employers.getObservableList();
-  }
-
-  public ObservableList<EmployerWorkplace> getEmployerWorkplaces() {
-    return employerWorkplaces.getObservableList();
   }
 
   public ObservableList<Employment> getEmployments() {
@@ -139,10 +129,11 @@ public class DB implements Serializable {
 
   }
 
-  public EmployerWorkplace getWorkplacesFromEmployer(int id) throws IndexOutOfBoundsException {
-    return this.getEmployerWorkplaces()
-      .filtered(s -> (s.employerProperty().getValue().getID() == id))
-      .get(0);
+  public ObservableList<TemporaryPosition> getTemporaryPositionFromEmployer(Employer employer) throws IndexOutOfBoundsException {
+    return this.getTemporaryPositions()
+      .filtered(
+        tp -> tp.employerProperty().getValue().equals(employer)
+      );
   }
 
   public List<TemporaryPosition> getTemporaryPositions(String data) {

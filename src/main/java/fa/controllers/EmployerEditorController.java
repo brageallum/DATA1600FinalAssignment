@@ -73,7 +73,7 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
 
   private void createTemporaryPositionsList() {
     try {
-      ObservableList<TemporaryPosition> list = DB.getInstance().getWorkplacesFromEmployer(this.selectedItem.getID()).workplacesObservable();
+      ObservableList<TemporaryPosition> list = DB.getInstance().getTemporaryPositionFromEmployer(this.selectedItem);
       this.workplacesField.setItems(list);
 
       int singleItemHeight = 24;

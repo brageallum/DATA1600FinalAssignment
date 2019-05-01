@@ -81,9 +81,6 @@ class CSVReader implements ReadStrategy {
       case "Employer":
         detachedDB.getEmployers().add(parseEmployer(line));
         break;
-      case "EmployerWorkplace":
-        detachedDB.getEmployerWorkplaces().add(parseEmployerWorkplace(line));
-        break;
       default:
         throw new CSVReaderInvalidTypeException(
           String.format("[on line %s]: \"%s\" is not a valid data type.", line.getLineNumber(), type)
@@ -169,18 +166,6 @@ class CSVReader implements ReadStrategy {
       data.group("phoneNumber"),
       data.group("emailAddress"),
       LocalDate.parse(data.group("birthDate"))
-    );
-  }
-
-  private EmployerWorkplace parseEmployerWorkplace(Line line) throws CSVReaderInvalidFormatException {
-    Matcher data = employerWorkplaceFields.matcher(line.getText());
-    if (!data.find()) throw new CSVReaderInvalidFormatException(
-      String.format("[on line %s]: Incorrect format for type EmployerWorkplace.", line.getLineNumber())
-    );
-
-    return new EmployerWorkplace(
-      this.detachedDB.getEmployer(Integer.parseInt(data.group("employer"))),
-      this.detachedDB.getTemporaryPositions(data.group("workplaces"))
     );
   }
 
