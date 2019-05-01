@@ -23,8 +23,8 @@ class CSVReader implements ReadStrategy {
     "birthDate", "education", "workExperience", "wage", "references", "address"
   );
 
-  private final Pattern workplaceFields = getCSVRowPattern(
-    "type", "id", "sector", "workplace", "employer", "category", "duration", "workingHours",
+  private final Pattern temporaryPositionFields = getCSVRowPattern(
+    "type", "id", "sector", "temporaryPosition", "employer", "category", "duration", "workingHours",
     "position", "qualifications", "wage", "conditions", "phoneNumber", "emailAddress",
     "description"
   );
@@ -76,7 +76,7 @@ class CSVReader implements ReadStrategy {
         detachedDB.getSubstitutes().add(parseJobSeeker(line));
         break;
       case "TemporaryPosition":
-        detachedDB.getTemporaryPositions().add(parseWorkplace(line));
+        detachedDB.getTemporaryPositions().add(parseTemporaryPosition(line));
         break;
       case "Employer":
         detachedDB.getEmployers().add(parseEmployer(line));
@@ -128,8 +128,8 @@ class CSVReader implements ReadStrategy {
     }
   }
 
-  private TemporaryPosition parseWorkplace(Line line) throws CSVReaderInvalidFormatException {
-    Matcher data = workplaceFields.matcher(line.getText());
+  private TemporaryPosition parseTemporaryPosition(Line line) throws CSVReaderInvalidFormatException {
+    Matcher data = temporaryPositionFields.matcher(line.getText());
     if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type TemporaryPosition.", line.getLineNumber())
     );
@@ -137,7 +137,7 @@ class CSVReader implements ReadStrategy {
     return new TemporaryPosition(
       Integer.parseInt(data.group("id")),
       DB.sectorOptions.valueOf(data.group("sector")),
-      data.group("workplace"),
+      data.group("temporaryPosition"),
       this.detachedDB.getEmployer(Integer.parseInt(data.group("employer"))),
       data.group("category"),
       data.group("duration"),

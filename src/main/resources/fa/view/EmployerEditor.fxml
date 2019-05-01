@@ -17,9 +17,9 @@
     <EditorChoiceField fx:id="sectorField" labelText="Sector:" />
     <EditorTextField fx:id="industryField" labelText="Industry:" />
     <HBox>
-      <Label fx:id="workplacesLabel" styleClass="workplacesLabel" visible="false" managed="false">Workplaces</Label>
+      <Label fx:id="temporaryPositionsLabel" styleClass="temporaryPositionsLabel" visible="false" managed="false">TemporaryPositions</Label>
     </HBox>
-    <ListView fx:id="workplacesField" visible="false" managed="false" />
+    <ListView fx:id="temporaryPositionsField" visible="false" managed="false" />
     <HBox alignment="CENTER_RIGHT" spacing="10">
         <Button fx:id="deleteButton" onAction="#delete" visible="false" text="Delete" />
         <Button fx:id="submitButton" onAction="#submit" text="Create" />

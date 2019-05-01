@@ -35,19 +35,19 @@ public class DB implements Serializable {
     substitute.birthDateProperty()
   });
 
-  private final SerializableObservableList<TemporaryPosition> temporaryPositions = new SerializableObservableList<>(workplace -> new Observable[]{
-    workplace.workplaceProperty(),
-    workplace.employerProperty(),
-    workplace.categoryProperty(),
-    workplace.durationProperty(),
-    workplace.workingHoursProperty(),
-    workplace.descriptionProperty(),
-    workplace.positionProperty(),
-    workplace.qualificationsProperty(),
-    workplace.wageProperty(),
-    workplace.conditionsProperty(),
-    workplace.phoneNumberProperty(),
-    workplace.emailAddressProperty()
+  private final SerializableObservableList<TemporaryPosition> temporaryPositions = new SerializableObservableList<>(temporaryPosition -> new Observable[]{
+    temporaryPosition.temporaryPositionProperty(),
+    temporaryPosition.employerProperty(),
+    temporaryPosition.categoryProperty(),
+    temporaryPosition.durationProperty(),
+    temporaryPosition.workingHoursProperty(),
+    temporaryPosition.descriptionProperty(),
+    temporaryPosition.positionProperty(),
+    temporaryPosition.qualificationsProperty(),
+    temporaryPosition.wageProperty(),
+    temporaryPosition.conditionsProperty(),
+    temporaryPosition.phoneNumberProperty(),
+    temporaryPosition.emailAddressProperty()
   });
 
   private final SerializableObservableList<Employer> employers = new SerializableObservableList<>(employer -> new Observable[]{
@@ -113,7 +113,7 @@ public class DB implements Serializable {
         .get(0);
     } catch(IndexOutOfBoundsException e) {
       // TODO: Add custom error
-      throw new Error("No workplace found for this field.");
+      throw new Error("No temporaryPosition found for this field.");
     }
   }
 
@@ -124,7 +124,7 @@ public class DB implements Serializable {
         .get(0);
     } catch(IndexOutOfBoundsException e) {
       // TODO: Add custom error
-      throw new Error("No workplace found for this field.");
+      throw new Error("No temporaryPosition found for this field.");
     }
   }
 

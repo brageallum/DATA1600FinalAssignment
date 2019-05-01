@@ -13,7 +13,7 @@ public class TemporaryPosition extends Model implements Serializable {
 
   private final int ID;
   private final SerializableProperty<DB.sectorOptions> sector;
-  private final SerializableProperty<String> workplace;
+  private final SerializableProperty<String> temporaryPosition;
   private final SerializableProperty<Employer> employer;
   private final SerializableProperty<String> category;
   private final SerializableProperty<String> duration;
@@ -32,7 +32,7 @@ public class TemporaryPosition extends Model implements Serializable {
 
   public TemporaryPosition(
     DB.sectorOptions sector,
-    String workplace,
+    String temporaryPosition,
     Employer employer,
     String category,
     String duration,
@@ -48,7 +48,7 @@ public class TemporaryPosition extends Model implements Serializable {
     this(
       nextId,
       sector,
-      workplace,
+      temporaryPosition,
       employer,
       category,
       duration,
@@ -66,7 +66,7 @@ public class TemporaryPosition extends Model implements Serializable {
   public TemporaryPosition(
     int ID,
     DB.sectorOptions sector,
-    String workplace,
+    String temporaryPosition,
     Employer employer,
     String category,
     String duration,
@@ -83,7 +83,7 @@ public class TemporaryPosition extends Model implements Serializable {
 
     this.ID = ID;
     this.sector = new SerializableProperty<>(sector);
-    this.workplace= new SerializableProperty<>(workplace);
+    this.temporaryPosition= new SerializableProperty<>(temporaryPosition);
     this.employer = new SerializableProperty<>(employer);
     this.category = new SerializableProperty<>(category);
     this.duration = new SerializableProperty<>(duration);
@@ -105,8 +105,8 @@ public class TemporaryPosition extends Model implements Serializable {
     return sector.getProperty();
   }
 
-  public ObjectProperty<String> workplaceProperty() {
-    return workplace.getProperty();
+  public ObjectProperty<String> temporaryPositionProperty() {
+    return temporaryPosition.getProperty();
   }
 
   public ObjectProperty<Employer> employerProperty() {
@@ -159,7 +159,7 @@ public class TemporaryPosition extends Model implements Serializable {
 
   @Override
   public String toString() {
-    return String.format("%s @%s", this.categoryProperty().getValue(), this.workplaceProperty().getValue());
+    return String.format("%s @%s", this.categoryProperty().getValue(), this.temporaryPositionProperty().getValue());
   }
 
   @Override
@@ -168,7 +168,7 @@ public class TemporaryPosition extends Model implements Serializable {
       pattern,
       Integer.toString(this.ID),
       this.sectorProperty().getValue().toString(),
-      this.workplaceProperty().getValue(),
+      this.temporaryPositionProperty().getValue(),
       this.employerProperty().getValue().firstNameProperty().getValue(),
       this.categoryProperty().getValue(),
       this.durationProperty().getValue(),

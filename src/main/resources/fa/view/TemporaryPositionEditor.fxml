@@ -6,7 +6,7 @@
 <Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.controllers.TemporaryPositionEditorController">
   <form>
     <EditorChoiceField fx:id="sectorField" labelText="Sector:"/>
-    <EditorTextField fx:id="workplaceField" labelText="Workplace:" />
+    <EditorTextField fx:id="temporaryPositionField" labelText="TemporaryPosition:" />
     <EditorChoiceField fx:id="employerField" labelText="Employer:" />
     <EditorTextField fx:id="categoryField" labelText="Category:" />
     <EditorTextField fx:id="durationField" labelText="Duration:" />

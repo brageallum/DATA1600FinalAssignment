@@ -23,14 +23,14 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
     industryField;
   @FXML private EditorChoiceField<DB.sectorOptions> sectorField;
   @FXML private EditorDateField birthDateField;
-  @FXML private ListView<TemporaryPosition> workplacesField;
-  @FXML private Label workplacesLabel;
+  @FXML private ListView<TemporaryPosition> temporaryPositionsField;
+  @FXML private Label temporaryPositionsLabel;
 
   @Override
   public void initialize() {
     super.initialize();
-    workplacesField.setFocusTraversable(false);
-    workplacesField.setMouseTransparent(true);
+    temporaryPositionsField.setFocusTraversable(false);
+    temporaryPositionsField.setMouseTransparent(true);
     sectorField.setOptions(DB.sectorOptions.values());
   }
 
@@ -55,10 +55,10 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
   @Override
   protected void showCreationForm() {
     super.showCreationForm();
-    this.workplacesField.setVisible(false);
-    this.workplacesField.setManaged(false);
-    this.workplacesLabel.setVisible(false);
-    this.workplacesLabel.setManaged(false);
+    this.temporaryPositionsField.setVisible(false);
+    this.temporaryPositionsField.setManaged(false);
+    this.temporaryPositionsLabel.setVisible(false);
+    this.temporaryPositionsLabel.setManaged(false);
   }
 
   @Override
@@ -74,25 +74,25 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
   private void createTemporaryPositionsList() {
     try {
       ObservableList<TemporaryPosition> list = DB.getInstance().getTemporaryPositionFromEmployer(this.selectedItem);
-      this.workplacesField.setItems(list);
+      this.temporaryPositionsField.setItems(list);
 
       int singleItemHeight = 24;
 
       if (0 < list.size()) {
         this.showTemporaryPositionsList();
-        this.workplacesLabel.setText(String.format("Responsible for temporary positions (%s)", list.size()));
-        this.workplacesField.setPrefHeight(list.size() * singleItemHeight);
+        this.temporaryPositionsLabel.setText(String.format("Responsible for temporary positions (%s)", list.size()));
+        this.temporaryPositionsField.setPrefHeight(list.size() * singleItemHeight);
       }
     } catch(IndexOutOfBoundsException e) {
-        this.workplacesField.setItems(null);
+        this.temporaryPositionsField.setItems(null);
     }
   }
 
   private void showTemporaryPositionsList() {
-    this.workplacesField.setVisible(true);
-    this.workplacesField.setManaged(true);
-    this.workplacesLabel.setVisible(true);
-    this.workplacesLabel.setManaged(true);
+    this.temporaryPositionsField.setVisible(true);
+    this.temporaryPositionsField.setManaged(true);
+    this.temporaryPositionsLabel.setVisible(true);
+    this.temporaryPositionsLabel.setManaged(true);
   }
 
   @Override

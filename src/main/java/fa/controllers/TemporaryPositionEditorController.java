@@ -15,7 +15,7 @@ public class TemporaryPositionEditorController extends EditorController<Temporar
   @FXML private Editor<TemporaryPosition> editor;
   @FXML private EditorChoiceField<DB.sectorOptions> sectorField;
   @FXML private EditorChoiceField<Employer> employerField;
-  @FXML private EditorTextField workplaceField,
+  @FXML private EditorTextField temporaryPositionField,
     categoryField,
     durationField,
     workingHoursField,
@@ -39,7 +39,7 @@ public class TemporaryPositionEditorController extends EditorController<Temporar
   protected void setTableColumns() {
     this.editor.setTableColumn("id", "ID");
     this.editor.setTableColumn("Sector", "sector");
-    this.editor.setTableColumn("Workplace", "workplace");
+    this.editor.setTableColumn("TemporaryPosition", "temporaryPosition");
     this.editor.setTableColumn("Employer", "employer");
     this.editor.setTableColumn("Category", "category");
     this.editor.setTableColumn("Duration", "duration");
@@ -64,7 +64,7 @@ public class TemporaryPositionEditorController extends EditorController<Temporar
     StringValidator requireNonEmpty = StringValidator.requireNonEmpty();
     StringValidator requireNumbersOnly = StringValidator.requireNumbersOnly();
 
-    this.workplaceField.setValidators(requireNonEmpty);
+    this.temporaryPositionField.setValidators(requireNonEmpty);
     this.categoryField.setValidators(requireNonEmpty);
     this.durationField.setValidators(requireNonEmpty);
     this.workingHoursField.setValidators(requireNonEmpty);
@@ -79,7 +79,7 @@ public class TemporaryPositionEditorController extends EditorController<Temporar
 
   @Override
   protected boolean fieldsNotValid() {
-    return !(workplaceField.validate() &
+    return !(temporaryPositionField.validate() &
       categoryField.validate() &
       durationField.validate() &
       workingHoursField.validate() &
@@ -97,7 +97,7 @@ public class TemporaryPositionEditorController extends EditorController<Temporar
     super.selectItem(item);
 
     this.sectorField.setValue(item.sectorProperty().getValue());
-    this.workplaceField.setValue(item.workplaceProperty().getValue());
+    this.temporaryPositionField.setValue(item.temporaryPositionProperty().getValue());
     this.employerField.setValue(item.employerProperty().getValue());
     this.categoryField.setValue(item.categoryProperty().getValue());
     this.durationField.setValue(item.durationProperty().getValue());
@@ -121,7 +121,7 @@ public class TemporaryPositionEditorController extends EditorController<Temporar
   @Override
   protected void updateItem() {
     this.selectedItem.sectorProperty().set(this.sectorField.getValue());
-    this.selectedItem.workplaceProperty().set(this.workplaceField.getValue());
+    this.selectedItem.temporaryPositionProperty().set(this.temporaryPositionField.getValue());
     this.selectedItem.employerProperty().set(this.employerField.getValue());
     this.selectedItem.categoryProperty().set(this.categoryField.getValue());
     this.selectedItem.durationProperty().set(this.durationField.getValue());
@@ -144,7 +144,7 @@ public class TemporaryPositionEditorController extends EditorController<Temporar
   protected void clearForm() {
     super.clearForm();
     this.sectorField.setToDefault();
-    this.workplaceField.clear();
+    this.temporaryPositionField.clear();
     this.employerField.setToDefault();
     this.categoryField.clear();
     this.durationField.clear();

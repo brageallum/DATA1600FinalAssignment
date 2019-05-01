@@ -19,7 +19,7 @@
         <HBox spacing="10" styleClass="area--navigation" fx:id="topBar">
             <Button fx:id="Home" userData="view/home.fxml" onAction="#navigateApp" styleClass="button--navigation, isActive">Home</Button>
             <Button fx:id="SubstituteEditor" userData="view/SubstituteEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Substitute</Button>
-            <Button fx:id="WorkplaceEditor" userData="view/TemporaryPositionEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Temporary positions</Button>
+            <Button fx:id="TemporaryPositionEditor" userData="view/TemporaryPositionEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Temporary positions</Button>
             <Button fx:id="EmployerEditor" userData="view/EmployerEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Employers</Button>
             <Button fx:id="Employment" userData="view/Employment.fxml" onAction="#navigateApp" styleClass="button--navigation">Employment</Button>
         </HBox>
