@@ -35,7 +35,7 @@ public class DB implements Serializable {
     jobSeeker.birthDateProperty()
   });
 
-  private final SerializableObservableList<Workplace> workplaces = new SerializableObservableList<>(workplace -> new Observable[]{
+  private final SerializableObservableList<TemporaryPosition> workplaces = new SerializableObservableList<>(workplace -> new Observable[]{
     workplace.workplaceProperty(),
     workplace.employerProperty(),
     workplace.categoryProperty(),
@@ -94,7 +94,7 @@ public class DB implements Serializable {
     return jobSeekers.getObservableList();
   }
 
-  public ObservableList<Workplace> getWorkplaces() {
+  public ObservableList<TemporaryPosition> getWorkplaces() {
     return workplaces.getObservableList();
   }
 
@@ -106,7 +106,7 @@ public class DB implements Serializable {
     return employerWorkplaces.getObservableList();
   }
 
-  public Workplace getWorkplace(int id) {
+  public TemporaryPosition getWorkplace(int id) {
     try {
       return this.getWorkplaces()
         .filtered(s -> (s.getID() == id))
@@ -151,7 +151,7 @@ public class DB implements Serializable {
       .get(0);
   }
 
-  public List<Workplace> getWorkplaces(String data) {
+  public List<TemporaryPosition> getWorkplaces(String data) {
     return Arrays.stream(data.split(","))
       .map(s -> this.getWorkplace(Integer.parseInt(s)))
       .collect(Collectors.toList());

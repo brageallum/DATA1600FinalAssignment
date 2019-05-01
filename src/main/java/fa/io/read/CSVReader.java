@@ -74,7 +74,7 @@ class CSVReader implements ReadStrategy {
       case "JobSeeker":
         detachedDB.getJobSeekers().add(parseJobSeeker(line));
         break;
-      case "Workplace":
+      case "TemporaryPosition":
         detachedDB.getWorkplaces().add(parseWorkplace(line));
         break;
       case "Employer":
@@ -128,14 +128,14 @@ class CSVReader implements ReadStrategy {
     }
   }
 
-  private Workplace parseWorkplace(Line line) throws CSVReaderInvalidFormatException {
-    System.out.println("Workplace Parse");
+  private TemporaryPosition parseWorkplace(Line line) throws CSVReaderInvalidFormatException {
+    System.out.println("TemporaryPosition Parse");
     Matcher data = workplaceFields.matcher(line.getText());
     if (!data.find()) throw new CSVReaderInvalidFormatException(
-      String.format("[on line %s]: Incorrect format for type Workplace.", line.getLineNumber())
+      String.format("[on line %s]: Incorrect format for type TemporaryPosition.", line.getLineNumber())
     );
 
-    return new Workplace(
+    return new TemporaryPosition(
       Integer.parseInt(data.group("id")),
       DB.sectorOptions.valueOf(data.group("sector")),
       data.group("workplace"),

@@ -6,22 +6,22 @@ import javafx.beans.property.ObjectProperty;
 public class Employment {
 
   private final SerializableProperty<JobSeeker> jobSeeker;
-  private final SerializableProperty<Workplace> workPlace;
+  private final SerializableProperty<TemporaryPosition> workPlace;
 
   public Employment() {
     this(null, null);
   }
 
-  public Employment(JobSeeker jobseeker, Workplace workplace) {
+  public Employment(JobSeeker jobseeker, TemporaryPosition temporaryPosition) {
     this.jobSeeker = new SerializableProperty<>(jobseeker);
-    this.workPlace = new SerializableProperty<>(workplace);
+    this.workPlace = new SerializableProperty<>(temporaryPosition);
   }
 
   public ObjectProperty<JobSeeker> jobSeekerProperty() {
     return this.jobSeeker.getProperty();
   }
 
-  public ObjectProperty<Workplace> workplaceProperty() {
+  public ObjectProperty<TemporaryPosition> workplaceProperty() {
     return this.workPlace.getProperty();
   }
 

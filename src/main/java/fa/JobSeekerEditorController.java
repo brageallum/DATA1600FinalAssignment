@@ -25,7 +25,7 @@ public class JobSeekerEditorController extends PersonEditorController<JobSeeker>
   protected void setTableColumns() {
     super.setTableColumns();
     this.editor.setTableColumn("Education", "education");
-    this.editor.setTableColumn("Workplace experience", "workExperience");
+    this.editor.setTableColumn("TemporaryPosition experience", "workExperience");
     this.editor.setTableColumn("Wage", "wage");
     this.editor.setTableColumn("References", "references");
   }

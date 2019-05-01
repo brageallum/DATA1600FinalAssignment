@@ -1,18 +1,8 @@
 package fa.utils;
 
-import fa.models.DB;
-import fa.models.Employer;
-import fa.models.EmployerWorkplace;
-import fa.models.JobSeeker;
-import fa.models.Workplace;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class FetchData {
 /*
-  public static Workplace getWorkplace(int id, DB db) {
+  public static TemporaryPosition getWorkplace(int id, DB db) {
     try {
       return db.getWorkplaces()
         .filtered(s -> (s.getID() == id))
@@ -52,7 +42,7 @@ public class FetchData {
       .get(0);
   }
 
-  public static List<Workplace> getWorkplaces(String data, DB db) {
+  public static List<TemporaryPosition> getWorkplaces(String data, DB db) {
     return Arrays.stream(data.split(","))
       .map(s -> FetchData.getWorkplace(Integer.parseInt(s), db))
       .collect(Collectors.toList());

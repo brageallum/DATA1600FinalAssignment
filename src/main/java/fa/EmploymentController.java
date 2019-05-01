@@ -1,7 +1,7 @@
 package fa;
 
 import fa.models.DB;
-import fa.models.Workplace;
+import fa.models.TemporaryPosition;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 
 public class EmploymentController {
 
-  @FXML private ComboBox<Workplace> workplacesDropDown;
+  @FXML private ComboBox<TemporaryPosition> workplacesDropDown;
   @FXML private VBox employeeInfo;
 
   public void initialize() {
@@ -24,7 +24,7 @@ public class EmploymentController {
     });
   }
 
-  public void onSelectWorkplace(ChangeListener<Workplace> changeListener) {
+  public void onSelectWorkplace(ChangeListener<TemporaryPosition> changeListener) {
     workplacesDropDown.getSelectionModel().selectedItemProperty().addListener(changeListener);
   }
 

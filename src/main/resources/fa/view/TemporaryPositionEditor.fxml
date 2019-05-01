@@ -3,7 +3,7 @@
 <?import fa.components.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
-<Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.WorkplaceEditorController">
+<Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.TemporaryPositionEditorController">
   <form>
     <EditorChoiceField fx:id="sectorField" labelText="Sector:"/>
     <EditorTextField fx:id="workplaceField" labelText="Workplace:" />

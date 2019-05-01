@@ -12,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Date;
@@ -26,12 +25,6 @@ public class AppController {
   @FXML private ImageView logoImage;
   @FXML private HBox topBar;
   @FXML private Label globalSnackbar;
-
-  @FXML
-  private void closeApp(ActionEvent e) {
-    Stage stage = (Stage) rootContainer.getScene().getWindow();
-    stage.close();
-  }
 
   @FXML
   private void navigateApp(ActionEvent e) {

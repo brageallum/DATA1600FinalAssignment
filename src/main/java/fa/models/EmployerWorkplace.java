@@ -1,35 +1,35 @@
 package fa.models;
 
-import java.util.List;
-
 import fa.utils.serialization.SerializableProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 public class EmployerWorkplace {
 
   private final SerializableProperty<Employer> employer;
-  private final SerializableProperty<List<Workplace>> workplaces;
+  private final SerializableProperty<List<TemporaryPosition>> workplaces;
 
   public EmployerWorkplace() {
     this(null, null);
   }
 
-  public EmployerWorkplace(Employer employer, List<Workplace> workplaces) {
+  public EmployerWorkplace(Employer employer, List<TemporaryPosition> temporaryPositions) {
     this.employer = new SerializableProperty<>(employer);
-    this.workplaces = new SerializableProperty<>(workplaces);
+    this.workplaces = new SerializableProperty<>(temporaryPositions);
   }
 
   public ObjectProperty<Employer> employerProperty() {
     return this.employer.getProperty();
   }
 
-  public ObjectProperty<List<Workplace>> workplacesProperty() {
+  public ObjectProperty<List<TemporaryPosition>> workplacesProperty() {
     return this.workplaces.getProperty();
   }
 
-  public ObservableList<Workplace> workplacesObservable() {
+  public ObservableList<TemporaryPosition> workplacesObservable() {
     return FXCollections.observableList(this.workplacesProperty().getValue());
   }
 

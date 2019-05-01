@@ -6,7 +6,7 @@ import fa.components.EditorDateField;
 import fa.components.EditorTextField;
 import fa.models.DB;
 import fa.models.Employer;
-import fa.models.Workplace;
+import fa.models.TemporaryPosition;
 import fa.utils.validation.StringValidator;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -23,7 +23,7 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
     industryField;
   @FXML private EditorChoiceField sectorField;
   @FXML private EditorDateField birthDateField;
-  @FXML private ListView<fa.models.Workplace> workplacesField;
+  @FXML private ListView<TemporaryPosition> workplacesField;
   @FXML private Label workplacesLabel;
 
   @Override
@@ -69,7 +69,7 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
     this.industryField.setValue(employer.industryProperty().getValue());
 
     try {
-      ObservableList<Workplace> list = DB.getInstance().getWorkplacesFromEmployer(this.selectedItem.getID()).workplacesObservable();
+      ObservableList<TemporaryPosition> list = DB.getInstance().getWorkplacesFromEmployer(this.selectedItem.getID()).workplacesObservable();
       this.workplacesField.setItems(list);
 
       int colSize = 24;
@@ -80,7 +80,7 @@ public class EmployerEditorController extends PersonEditorController<Employer> {
         this.workplacesField.setManaged(true);
         this.workplacesLabel.setVisible(true);
         this.workplacesLabel.setManaged(true);
-        this.workplacesLabel.setText(String.format("WORKPLACES (%s)", list.size()));
+        this.workplacesLabel.setText(String.format("Responsible for temporary positions (%s)", list.size()));
         this.workplacesField.setPrefHeight(list.size() * colSize);
       }
     } catch(IndexOutOfBoundsException e) {

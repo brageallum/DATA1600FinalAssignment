@@ -8,7 +8,7 @@ import javafx.beans.property.ObjectProperty;
 
 import java.io.Serializable;
 
-public class Workplace extends Model implements Serializable, Searchable, Identifiable {
+public class TemporaryPosition extends Model implements Serializable, Searchable, Identifiable {
   private static int nextId = 100;
 
   public final int ID;
@@ -26,11 +26,11 @@ public class Workplace extends Model implements Serializable, Searchable, Identi
   private final SerializableProperty<String> phoneNumber;
   private final SerializableProperty<String> emailAddress;
 
-  public Workplace() {
+  public TemporaryPosition() {
     this(null, null, null, null, null, null, null, null, 0, null, null, null, null);
   }
 
-  public Workplace(
+  public TemporaryPosition(
     DB.sectorOptions sector,
     String workplace,
     String employer,
@@ -63,7 +63,7 @@ public class Workplace extends Model implements Serializable, Searchable, Identi
     );
   }
 
-  public Workplace(
+  public TemporaryPosition(
     int ID,
     DB.sectorOptions sector,
     String workplace,
@@ -155,7 +155,7 @@ public class Workplace extends Model implements Serializable, Searchable, Identi
 
   @Override
   public String toString() {
-    return workplaceProperty().getValue();
+    return String.format("%s @%s", this.categoryProperty().getValue(), this.workplaceProperty().getValue());
   }
 
   @Override

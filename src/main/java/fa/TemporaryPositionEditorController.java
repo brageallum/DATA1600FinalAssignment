@@ -4,14 +4,14 @@ import fa.components.Editor;
 import fa.components.EditorChoiceField;
 import fa.components.EditorTextField;
 import fa.models.DB;
-import fa.models.Workplace;
+import fa.models.TemporaryPosition;
 import fa.utils.validation.StringValidator;
 import javafx.fxml.FXML;
 
 import java.util.Date;
 
-public class WorkplaceEditorController extends EditorController<Workplace> {
-  @FXML private Editor<Workplace> editor;
+public class TemporaryPositionEditorController extends EditorController<TemporaryPosition> {
+  @FXML private Editor<TemporaryPosition> editor;
   @FXML private EditorChoiceField sectorField;
   @FXML private EditorTextField workplaceField,
     employerField,
@@ -29,7 +29,7 @@ public class WorkplaceEditorController extends EditorController<Workplace> {
   @Override
   public void initialize() {
     super.initialize();
-    System.out.format("[ %s ]: WorkplaceEditorController initialized.\n", new Date());
+    System.out.format("[ %s ]: TemporaryPositionEditorController initialized.\n", new Date());
     sectorField.setOptions(DB.sectorOptions.values());
   }
 
@@ -93,7 +93,7 @@ public class WorkplaceEditorController extends EditorController<Workplace> {
   }
 
   @Override
-  protected void selectItem(Workplace item) {
+  protected void selectItem(TemporaryPosition item) {
     super.selectItem(item);
 
     this.sectorField.setValue(item.sectorProperty().getValue().toString());
@@ -113,7 +113,7 @@ public class WorkplaceEditorController extends EditorController<Workplace> {
 
   @Override
   void createNewItem() {
-    this.selectedItem = new Workplace();
+    this.selectedItem = new TemporaryPosition();
     this.updateItem();
     DB.getInstance().getWorkplaces().add(this.selectedItem);
   }

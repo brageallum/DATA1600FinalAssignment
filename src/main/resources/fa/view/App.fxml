@@ -8,7 +8,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.Region?>
 
 <?import javafx.scene.control.Label?><?import javafx.scene.layout.StackPane?>
 <StackPane alignment="BOTTOM_RIGHT" fx:controller="fa.AppController" prefWidth="1200" prefHeight="700" xmlns:fx="http://javafx.com/fxml/1">
@@ -34,11 +33,11 @@
             preserveRatio="true" />
           <!-- Navigation buttons -->
           <HBox fx:id="navigationBar" >
-            <Button  fx:id="home" userData="view/home.fxml" onAction="#navigateApp" styleClass="button--navigation, isActive">Home</Button>
+            <Button fx:id="home" userData="view/home.fxml" onAction="#navigateApp" styleClass="button--navigation, isActive">Home</Button>
             <Button fx:id="jobSeekerEditor" userData="view/JobSeekerEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Job seekers</Button>
-            <Button fx:id="workplaceEditor" userData="view/WorkplaceEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Workplaces</Button>
+            <Button fx:id="workplaceEditor" userData="view/TemporaryPositionEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Temporary positions</Button>
             <Button fx:id="employerEditor" userData="view/EmployerEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Employers</Button>
-            <Button fx:id="employment" userData="view/Employment.fxml" onAction="#navigateApp" styleClass="button--navigation">Assign to workplace</Button>
+            <Button fx:id="employment" userData="view/Employment.fxml" onAction="#navigateApp" styleClass="button--navigation">Employment</Button>
           </HBox>
         </HBox>
       </VBox>
