@@ -15,7 +15,7 @@ public class Substitute extends Person implements Serializable {
   private final SerializableProperty<Integer> wage;
   private final SerializableProperty<String> references;
 
-  public final int ID;
+  private final int ID;
 
   public Substitute() {
     this(null, null, null, null, null, null, null, 0, null, null);

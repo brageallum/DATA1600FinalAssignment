@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class TemporaryPosition extends Model implements Serializable {
   private static int nextId = 100;
 
-  public final int ID;
+  private final int ID;
   private final SerializableProperty<DB.sectorOptions> sector;
   private final SerializableProperty<String> workplace;
   private final SerializableProperty<Employer> employer;

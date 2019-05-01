@@ -1,7 +1,9 @@
 package fa.io.write;
 
 import fa.DB;
+import fa.models.Employer;
 import fa.models.Substitute;
+import fa.models.TemporaryPosition;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,19 +12,25 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 class CSVWriter implements WriteStrategy {
+  private PrintWriter writer;
+
   @Override
   public void writeToFile(File file) throws IOException {
-    PrintWriter writer = new PrintWriter(file);
+    this.writer = new PrintWriter(file);
 
-    DB.getInstance().getSubstitute().forEach(jobSeeker -> writeJobSeeker(writer, jobSeeker));
+    DB.getInstance().getSubstitutes().forEach(this::writeSubstitute);
+    this.writer.write("\n");
+    DB.getInstance().getEmployers().forEach(this::writeEmployer);
+    this.writer.write("\n");
+    DB.getInstance().getTemporaryPositions().forEach(this::writeTemporaryPosition);
 
-    writer.close();
+    this.writer.close();
   }
 
-  private void writeJobSeeker(PrintWriter writer, Substitute substitute) {
-    writer.println(toCSVFormat(new String[]{
+  private void writeSubstitute(Substitute substitute) {
+    this.writer.println(toCSVFormat(new String[]{
       "Substitute",
-      Integer.toString(substitute.ID),
+      Integer.toString(substitute.getID()),
       substitute.firstNameProperty().getValue(),
       substitute.lastNameProperty().getValue(),
       substitute.emailAddressProperty().getValue(),
@@ -32,6 +40,42 @@ class CSVWriter implements WriteStrategy {
       substitute.workExperienceProperty().getValue(),
       Integer.toString(substitute.wageProperty().getValue()),
       substitute.referencesProperty().getValue(),
+      substitute.addressProperty().getValue(),
+    }));
+  }
+
+  private void writeEmployer(Employer employer) {
+    this.writer.println(toCSVFormat(new String[]{
+      "Employer",
+      Integer.toString(employer.getID()),
+      employer.firstNameProperty().getValue(),
+      employer.lastNameProperty().getValue(),
+      employer.sectorProperty().getValue().toString(),
+      employer.addressProperty().getValue(),
+      employer.industryProperty().getValue(),
+      employer.phoneNumberProperty().getValue(),
+      employer.emailAddressProperty().getValue(),
+      employer.birthDateProperty().getValue().format(DateTimeFormatter.ISO_LOCAL_DATE),
+    }));
+  }
+
+  private void writeTemporaryPosition(TemporaryPosition temporaryPosition) {
+    this.writer.println(toCSVFormat(new String[]{
+      "TemporaryPosition",
+      Integer.toString(temporaryPosition.getID()),
+      temporaryPosition.sectorProperty().getValue().toString(),
+      temporaryPosition.workplaceProperty().getValue(),
+      Integer.toString(temporaryPosition.employerProperty().getValue().getID()),
+      temporaryPosition.categoryProperty().getValue(),
+      temporaryPosition.durationProperty().getValue(),
+      temporaryPosition.workingHoursProperty().getValue(),
+      temporaryPosition.positionProperty().getValue(),
+      temporaryPosition.qualificationsProperty().getValue(),
+      Integer.toString(temporaryPosition.wageProperty().getValue()),
+      temporaryPosition.conditionsProperty().getValue(),
+      temporaryPosition.phoneNumberProperty().getValue(),
+      temporaryPosition.emailAddressProperty().getValue(),
+      temporaryPosition.descriptionProperty().getValue()
     }));
   }
 

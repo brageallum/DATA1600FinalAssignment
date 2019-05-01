@@ -73,7 +73,7 @@ class CSVReader implements ReadStrategy {
     String type = getType(line);
     switch (type) {
       case "Substitute":
-        detachedDB.getSubstitute().add(parseJobSeeker(line));
+        detachedDB.getSubstitutes().add(parseJobSeeker(line));
         break;
       case "TemporaryPosition":
         detachedDB.getTemporaryPositions().add(parseWorkplace(line));

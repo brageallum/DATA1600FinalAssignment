@@ -32,7 +32,7 @@ public class JobSeekerEditorController extends PersonEditorController<Substitute
 
   @Override
   protected void setTableItems() {
-    this.editor.setTableItems(DB.getInstance().getSubstitute());
+    this.editor.setTableItems(DB.getInstance().getSubstitutes());
   }
 
   @Override
@@ -71,7 +71,7 @@ public class JobSeekerEditorController extends PersonEditorController<Substitute
   void createNewItem() {
     this.selectedItem = new Substitute();
     this.updateItem();
-    DB.getInstance().getSubstitute().add(this.selectedItem);
+    DB.getInstance().getSubstitutes().add(this.selectedItem);
   }
 
   @Override
@@ -85,7 +85,7 @@ public class JobSeekerEditorController extends PersonEditorController<Substitute
 
   @Override
   protected void deleteItem() {
-    DB.getInstance().getSubstitute().remove(this.selectedItem);
+    DB.getInstance().getSubstitutes().remove(this.selectedItem);
   }
 
   @Override

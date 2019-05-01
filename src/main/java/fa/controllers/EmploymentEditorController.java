@@ -19,7 +19,7 @@ public class EmploymentEditorController extends EditorController<Employment> {
   public void initialize() {
     super.initialize();
     this.editor.onShowEditor(() -> {
-      this.jobSeekerField.setOptions(DB.getInstance().getSubstitute());
+      this.jobSeekerField.setOptions(DB.getInstance().getSubstitutes());
       this.temporaryPositionField.setOptions(DB.getInstance().getTemporaryPositions().filtered(
         tp -> !DB.getInstance().getEmployments()
         .stream()

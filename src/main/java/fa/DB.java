@@ -6,7 +6,6 @@ import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -90,14 +89,14 @@ public class DB implements Serializable {
       instance = new DB();
     }
 
-    instance.getSubstitute().setAll(newDb.getSubstitute());
+    instance.getSubstitutes().setAll(newDb.getSubstitutes());
     instance.getTemporaryPositions().setAll(newDb.getTemporaryPositions());
     instance.getEmployers().setAll(newDb.getEmployers());
     instance.getEmployerWorkplaces().setAll(newDb.getEmployerWorkplaces());
     instance.getEmployments().setAll(newDb.getEmployments());
   }
 
-  public ObservableList<Substitute> getSubstitute() {
+  public ObservableList<Substitute> getSubstitutes() {
     return substitute.getObservableList();
   }
 
