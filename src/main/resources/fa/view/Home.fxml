@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<AnchorPane styleClass="area--page" userData="Home">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<ScrollPane fitToWidth="true" styleClass="area--page" userData="Home">
+  <VBox alignment="CENTER" styleClass="text-wrapper">
+    <Label wrapText="true" styleClass="title">Generell info</Label>
+    <Label wrapText="true">
+      Applikasjonen kaller Thread.sleep(5000) når data importeres eller eksporteres til fil,
+      slik at det er mulig å teste at dette faktisk kjører i sin egen tråd, og at det ikke fryser hele aplikasjonen.
+      Nederst i venstre hjørne vises det en liten "snackbar" når applikasjonen importerer eller eksporterer data.
+    </Label>
 
-</AnchorPane>
+    <Label wrapText="true" styleClass="title">For å legge til en vikar i et vikariat:</Label>
+    <Label wrapText="true">(Dette antar at det ønskede vikariatet allerede er registrert).</Label>
+    <Label wrapText="true">1. Legg til vikaren i "Substitutes" fanen.</Label>
+    <Label wrapText="true">2. Legg inn en jobbsøknad for vikaren i "Job applications".</Label>
+    <Label wrapText="true">3. Gå til siden "Employments", og velg vikariatet som du nettopp la inn en søknad på.</Label>
+    <Label wrapText="true">
+      4. Vikaren vil nå vises på under nedtrekksmenyen med navnet "Substitute", velg vikaren og
+      trykk "Create" (bare vikarer som har søkt på denne vikarjobben vises her).
+    </Label>
+
+    <Label wrapText="true" styleClass="title">Oppsettet på CSV filer lagret med denne applikasjonen:</Label>
+    <Label wrapText="true">
+      Alle datatyper lagres i samme fil. Første kolonne i hver rad forteller hvilken datatype som
+      er lagret i raden (f.eks. kan det stå "Substitute" eller "TemporaryPosition").
+    </Label>
+    <Label wrapText="true">
+      Kolonner som under vises omringet av anførselstegn (") skal alltid inneholde det som står
+      inne i annførselstegnene, alle andre kolonner kan settes til å inneholde den dataen man ønsker.
+    </Label>
+
+    <Label wrapText="true" styleClass="subtitle">Kolonnene til vikarer:</Label>
+    <Label wrapText="true">"Substitute";id;firstName;lastName;emailAddress;phoneNumber;birthDate;education;workExperience;wage;references;address</Label>
+
+    <Label wrapText="true" styleClass="subtitle">Kolonnene til vikariater:</Label>
+    <Label wrapText="true">"TemporaryPosition";id;sector;workplace;employer;category;duration;workingHours;position;qualifications;wage;conditions;phoneNumber;emailAddress;description</Label>
+
+    <Label wrapText="true" styleClass="subtitle">Kolonnene til arbeidsgivere</Label>
+    <Label wrapText="true">"Employer";id;firstName;lastName;sector;address;industry;phoneNumber;emailAddress;birthDate</Label>
+
+    <Label wrapText="true" styleClass="subtitle">Kolonnene til jobbsøknadene</Label>
+    <Label wrapText="true">"JobApplication";id;substituteId;temporaryPositionId</Label>
+
+    <Label wrapText="true" styleClass="subtitle">Kolonnene til arbeidsforholdene</Label>
+    <Label wrapText="true">"Employment";id;substituteId;temporaryPositionId</Label>
+  </VBox>
+</ScrollPane>

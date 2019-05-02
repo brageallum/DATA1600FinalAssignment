@@ -14,7 +14,7 @@
     <EditorTextField fx:id="descriptionField" labelText="Description:" />
     <EditorTextField fx:id="positionField" labelText="Position:" />
     <EditorTextField fx:id="qualificationsField" labelText="Qualifications:" />
-    <EditorTextField fx:id="wageField" labelText="Wage:" />
+    <EditorTextField fx:id="wageField" labelText="Wage (NOK/h):" />
     <EditorTextField fx:id="conditionsField" labelText="Conditions:" />
     <EditorTextField fx:id="phoneNumberField" labelText="Phone number:" />
     <EditorTextField fx:id="emailAddressField" labelText="Email address:" />

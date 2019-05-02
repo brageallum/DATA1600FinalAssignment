@@ -13,7 +13,7 @@
     <EditorTextField fx:id="addressField" labelText="Address:" />
     <EditorTextField fx:id="educationField" labelText="Education:" />
     <EditorTextField fx:id="workExperienceField" labelText="Work experience:" />
-    <EditorTextField fx:id="wageField" labelText="Wage:" />
+    <EditorTextField fx:id="wageField" labelText="Wage (NOK/h):" />
     <EditorTextField fx:id="referencesField" labelText="References:" />
     <HBox alignment="CENTER_RIGHT" spacing="10">
       <Button fx:id="deleteButton" onAction="#delete" visible="false" text="Delete" />

@@ -24,7 +24,7 @@ class CSVReader implements ReadStrategy {
   );
 
   private final Pattern temporaryPositionFields = getCSVRowPattern(
-    "type", "id", "sector", "temporaryPosition", "employer", "category", "duration", "workingHours",
+    "type", "id", "sector", "workplace", "employer", "category", "duration", "workingHours",
     "position", "qualifications", "wage", "conditions", "phoneNumber", "emailAddress",
     "description"
   );
@@ -32,6 +32,10 @@ class CSVReader implements ReadStrategy {
   private final Pattern employerFields = getCSVRowPattern(
   "type", "id", "firstName", "lastName", "sector", "address", "industry", "phoneNumber",
   "emailAddress", "birthDate"
+  );
+
+  private final Pattern jobApplicationFields = getCSVRowPattern(
+    "type", "id", "substituteId", "temporaryPositionId"
   );
 
   private final Pattern employmentFields = getCSVRowPattern(
@@ -140,7 +144,7 @@ class CSVReader implements ReadStrategy {
     return new TemporaryPosition(
       Integer.parseInt(data.group("id")),
       DB.sectorOptions.valueOf(data.group("sector")),
-      data.group("temporaryPosition"),
+      data.group("workplace"),
       this.detachedDB.getEmployer(Integer.parseInt(data.group("employer"))),
       data.group("category"),
       data.group("duration"),
@@ -175,7 +179,7 @@ class CSVReader implements ReadStrategy {
   }
 
   private JobApplication parseJobApplication(Line line) throws CSVReaderInvalidFormatException {
-    Matcher data = this.employmentFields.matcher(line.getText());
+    Matcher data = this.jobApplicationFields.matcher(line.getText());
     if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type JobApplication.", line.getLineNumber())
     );

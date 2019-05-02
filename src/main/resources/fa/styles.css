@@ -16,6 +16,22 @@
     -fx-padding: 0px 20px;
 }
 
+.text-wrapper > .label {
+    -fx-font-size: 15;
+    -fx-padding: 8 0 0 0;
+    -fx-max-width: 800;
+}
+.text-wrapper > .label.title {
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+    -fx-padding: 20 0 0 0;
+}
+.text-wrapper > .label.subtitle {
+    -fx-font-size: 15;
+    -fx-font-weight: bold;
+    -fx-padding: 16 0 0 0;
+}
+
 .button {
     -fx-cursor: hand;
 }
