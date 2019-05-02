@@ -11,6 +11,13 @@ public abstract class SubstituteTemporaryPositionRelationship extends Model impl
   private final SerializableProperty<TemporaryPosition> temporaryPosition;
 
   public SubstituteTemporaryPositionRelationship(Substitute substitute, TemporaryPosition temporaryPosition) {
+    super();
+    this.substitute = new SerializableProperty<>(substitute);
+    this.temporaryPosition = new SerializableProperty<>(temporaryPosition);
+  }
+
+  public SubstituteTemporaryPositionRelationship(int ID, Substitute substitute, TemporaryPosition temporaryPosition) {
+    super(ID);
     this.substitute = new SerializableProperty<>(substitute);
     this.temporaryPosition = new SerializableProperty<>(temporaryPosition);
   }

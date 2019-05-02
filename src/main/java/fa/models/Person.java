@@ -16,6 +16,7 @@ public abstract class Person extends Model implements Serializable {
   private final SerializableProperty<String> address;
 
   public Person(String firstName, String lastName, String emailAddress, String phoneNumber, LocalDate birthDate, String address) {
+    super();
     this.firstName = new SerializableProperty<>(firstName);
     this.lastName = new SerializableProperty<>(lastName);
     this.emailAddress = new SerializableProperty<>(emailAddress);
@@ -24,9 +25,19 @@ public abstract class Person extends Model implements Serializable {
     this.address = new SerializableProperty<>(address);
   }
 
-  public boolean matchesSearch(String regex) {
+  public Person(int ID, String firstName, String lastName, String emailAddress, String phoneNumber, LocalDate birthDate, String address) {
+    super(ID);
+    this.firstName = new SerializableProperty<>(firstName);
+    this.lastName = new SerializableProperty<>(lastName);
+    this.emailAddress = new SerializableProperty<>(emailAddress);
+    this.phoneNumber = new SerializableProperty<>(phoneNumber);
+    this.birthDate = new SerializableProperty<>(birthDate);
+    this.address = new SerializableProperty<>(address);
+  }
+
+  public boolean matchesSearch(String pattern) {
     return SearchMatcher.matches(
-      regex,
+      pattern,
       this.firstNameProperty().getValue(),
       this.lastNameProperty().getValue(),
       this.emailAddressProperty().getValue(),
