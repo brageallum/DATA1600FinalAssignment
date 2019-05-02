@@ -50,7 +50,7 @@ public class MainApp extends Application {
 
   private void setIcon() {
     this.stage.getIcons().add(new Image(
-      getClass().getResource("code.png").toString()
+      getClass().getResource("icon.png").toString()
     ));
   }
 
