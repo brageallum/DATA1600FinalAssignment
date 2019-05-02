@@ -22,7 +22,7 @@ public class MainApp extends Application {
 
   @Override
   public void start(Stage stage) throws Exception {
-
+    this.stage = stage;
     this.loadData();
     this.decorateStage();
     this.loadFXML();
@@ -67,7 +67,7 @@ public class MainApp extends Application {
       alert.setHeaderText("Make sure to export your data!");
       alert.setContentText("All changes will be lost unless you export your changes through " +
         "File >Export data to file. Click 'OK' to exit the program.");
-      alert.initOwner(stage);
+      alert.initOwner(this.stage);
 
       Optional<ButtonType> result = alert.showAndWait();
       if (result.isPresent() && result.get() == ButtonType.CANCEL){
