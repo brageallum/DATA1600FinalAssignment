@@ -17,14 +17,21 @@ public class JobApplicationEditorController extends EditorController<JobApplicat
   public void initialize() {
     super.initialize();
     this.editor.onShowEditor(this::setFieldData);
+    this.substituteField.setOnAction(event -> this.setTemporaryPositionDropdownOptions());
   }
 
   private void setFieldData() {
     this.substituteField.setOptions(DB.getInstance().getSubstitutes());
-    this.temporaryPositionField.setOptions(
-      DB.getInstance()
-      .getTemporaryPositions()
-      .filtered(DB::temporaryPositionIsAvailable));
+    this.setTemporaryPositionDropdownOptions();
+  }
+
+  private void setTemporaryPositionDropdownOptions() {
+    this.temporaryPositionField.setOptions(DB.getInstance().getTemporaryPositions()
+      .filtered(
+        temporaryPosition -> !DB.substituteHasAppliedToTemporaryPosition(this.substituteField.getValue(), temporaryPosition)
+      )
+      .filtered(DB::temporaryPositionIsAvailable)
+    );
   }
 
   @Override
@@ -44,7 +51,7 @@ public class JobApplicationEditorController extends EditorController<JobApplicat
 
   @Override
   protected boolean fieldsNotValid() {
-    return false;
+    return this.substituteField.getValue() == null || this.temporaryPositionField.getValue() == null;
   }
 
   @Override

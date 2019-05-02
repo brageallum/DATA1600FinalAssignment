@@ -105,7 +105,7 @@ public class DB implements Serializable {
   public static boolean substituteHasAppliedToTemporaryPosition(Substitute substitute, TemporaryPosition temporaryPosition) {
     return DB.getInstance().getJobApplications().filtered(jobApplication ->
         jobApplication.has(substitute) && jobApplication.has(temporaryPosition)
-        ).size() > 0;
+      ).size() > 0;
   }
 
   public ObservableList<Substitute> getSubstitutes() {

@@ -51,7 +51,7 @@ public class EmploymentEditorController extends EditorController<Employment> {
 
   @Override
   protected boolean fieldsNotValid() {
-    return false;
+    return this.substituteField.getValue() == null || this.temporaryPositionField.getValue() == null;
   }
 
   @Override
