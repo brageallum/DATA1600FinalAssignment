@@ -1,12 +1,11 @@
 package fa;
 
 import fa.io.FileHandler;
+import fa.utils.DialogHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -62,22 +61,14 @@ public class MainApp extends Application {
 
   private void handleCloseEvent() {
     stage.setOnCloseRequest((event) -> {
-
-      ButtonType exit = new ButtonType("Exit", ButtonBar.ButtonData.OK_DONE);
-      ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-      Alert alert = new Alert(Alert.AlertType.WARNING,
-        "All changes will be lost unless you export your changes through File >Export data " +
-          "to file. Click 'OK' to exit the program.",
-        exit,
-        cancel);
-
-      alert.setTitle("Warning!");
-      alert.setHeaderText("Make sure to export your data!");
-      alert.initOwner(this.stage);
-
-      Optional<ButtonType> result = alert.showAndWait();
-      if (result.isPresent() && result.get() == cancel){
+      Optional<ButtonType> result = DialogHandler.showWarningDialog(
+        "Make sure to export your data!",
+        "All changes will be lost unless you export your changes through File > Export data " +
+        "to file. Click 'OK' to exit the program.",
+        "Exit"
+      );
+      if (result.isPresent() && result.get() == ButtonType.CANCEL){
+        System.out.println("CANCEL");
         event.consume();
       }
     });
