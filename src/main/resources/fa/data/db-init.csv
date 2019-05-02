@@ -4,3 +4,10 @@ Substitute;102;Daniel;Vaage;daniel.vaage@email.com;45034751;1983-05-13;Pediatric
 Substitute;103;Linn;Klemetsen;linn97@gmail.com;47932345;1997-08-08;Bachelor in Architecture;Max Burgers;155;Magnus Haukedal;Askergata 2;
 
 Employer;104;Thomas;K Grav;Public;Linaaes gate 6A;Sales;48029345;thomaskg@gmail.com;1987-09-16;
+Employer;105;Jan;Fredsaagt;Private;Sorens veien 32;Technology;93756849;janfreds@hotmail.com;1969-03-14;
+
+TemporaryPosition;106;Private;Telia;104;Sales;5 weeks;12:15 - 16:30;Salesbooth;Experience with sales;170;Work on weekends and weekdays;47392839;job@telia.com;We need a talented substitute to fill in for our sales people. You will be selling gadgets in a booth.;
+TemporaryPosition;107;Public;OsloMet;105;Information Technology;1w;08:30 - 18:00;Substitute Teacher;Bachelor in IT related area;244;Weekdays;46738293;teach@oslomet.no;We need a substitute teacher to aid one of our information technology classes.;
+
+JobApplication;108;100;106;
+
