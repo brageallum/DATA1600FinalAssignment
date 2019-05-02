@@ -1,6 +1,6 @@
 package fa.io.read;
 
-import fa.io.read.exceptions.ReaderException;
+import fa.exceptions.ReaderException;
 import fa.DB;
 
 import java.io.File;

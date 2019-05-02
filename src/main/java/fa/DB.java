@@ -1,5 +1,6 @@
 package fa;
 
+import fa.exceptions.ModelNotFoundException;
 import fa.models.*;
 import fa.utils.serialization.SerializableObservableList;
 import javafx.beans.Observable;
@@ -128,36 +129,33 @@ public class DB implements Serializable {
     return jobApplications.getObservableList();
   }
 
-  public TemporaryPosition getTemporaryPosition(int id) {
+  public TemporaryPosition getTemporaryPosition(int id) throws ModelNotFoundException {
     try {
       return this.getTemporaryPositions()
         .filtered(s -> (s.getID() == id))
         .get(0);
     } catch(IndexOutOfBoundsException e) {
-      // TODO: Add custom error
-      throw new Error("No temporaryPosition found for this field.");
+      throw new ModelNotFoundException("No temporaryPosition found for this field.");
     }
   }
 
-  public Substitute getSubstitute(int id) {
+  public Substitute getSubstitute(int id) throws ModelNotFoundException {
     try {
       return this.getSubstitutes()
         .filtered(s -> (s.getID() == id))
         .get(0);
     } catch(IndexOutOfBoundsException e) {
-      // TODO: Add custom error
-      throw new Error("No temporaryPosition found for this field.");
+      throw new ModelNotFoundException("No temporaryPosition found for this field.");
     }
   }
 
-  public Employer getEmployer(int id) {
+  public Employer getEmployer(int id) throws ModelNotFoundException {
     try {
       return this.getEmployers()
         .filtered(s -> (s.getID() == id))
         .get(0);
     } catch(IndexOutOfBoundsException e) {
-      // TODO: Add custom error
-      throw new Error("No employer found for this field.");
+      throw new ModelNotFoundException("No employer found for this field.");
     }
   }
 
