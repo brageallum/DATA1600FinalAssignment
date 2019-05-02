@@ -3,10 +3,10 @@
 <?import fa.components.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
-<Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.controllers.EmploymentEditorController">
+<Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.controllers.JobApplicationEditorController">
   <form>
+    <EditorChoiceField fx:id="substituteField" labelText="Substitute:" />
     <EditorChoiceField fx:id="temporaryPositionField" labelText="Temporary position:" />
-    <EditorChoiceField fx:id="substituteField" labelText="Job seeker:" />
     <HBox alignment="CENTER_RIGHT" spacing="10">
         <Button fx:id="deleteButton" onAction="#delete" visible="false" text="Delete" />
         <Button fx:id="submitButton" onAction="#submit" text="Create" />

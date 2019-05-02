@@ -2,6 +2,8 @@ package fa.components;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;
@@ -36,28 +38,31 @@ public class EditorChoiceField<T> extends VBox {
   }
 
   public void setOptions(ObservableList<T> options) {
-    field.setItems(options);
+    this.field.setItems(options);
     this.setToDefault();
   }
 
+  public void setOnAction(EventHandler<ActionEvent> eventHandler) {
+    this.field.setOnAction(eventHandler);
+  }
 
   public void setToDefault() {
-    field.getSelectionModel().selectFirst();
+    this.field.getSelectionModel().selectFirst();
   }
 
   public void setValue(T s) {
-    field.setValue(s);
+    this.field.setValue(s);
   }
 
   public T getValue() {
-    return field.getValue();
+    return this.field.getValue();
   }
 
   public void setLabelText(String s) {
-    label.setText(s);
+    this.label.setText(s);
   }
 
   public String getLabelText() {
-    return label.getText();
+    return this.label.getText();
   }
 }

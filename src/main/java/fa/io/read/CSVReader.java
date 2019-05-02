@@ -35,8 +35,8 @@ class CSVReader implements ReadStrategy {
   );
 
   private final Pattern employmentFields = getCSVRowPattern(
-    "type", "id", "employer", "temporaryPosition"
-    );
+    "type", "id", "substituteId", "temporaryPositionId"
+  );
 
   private DB detachedDB;
   private BufferedReader reader;
@@ -80,6 +80,10 @@ class CSVReader implements ReadStrategy {
         break;
       case "Employer":
         detachedDB.getEmployers().add(parseEmployer(line));
+        break;
+      case "JobApplication":
+        System.out.println("Parse JobApplication");
+        detachedDB.getJobApplications().add(parseJobApplication(line));
         break;
       case "Employment":
         detachedDB.getEmployments().add(parseEmployment(line));
@@ -171,6 +175,19 @@ class CSVReader implements ReadStrategy {
     );
   }
 
+  private JobApplication parseJobApplication(Line line) throws CSVReaderInvalidFormatException {
+    Matcher data = this.employmentFields.matcher(line.getText());
+    if (!data.find()) throw new CSVReaderInvalidFormatException(
+      String.format("[on line %s]: Incorrect format for type JobApplication.", line.getLineNumber())
+    );
+
+    return new JobApplication(
+      Integer.parseInt(data.group("id")),
+      this.detachedDB.getSubstitute(Integer.parseInt(data.group("substituteId"))),
+      this.detachedDB.getTemporaryPosition(Integer.parseInt(data.group("temporaryPositionId")))
+    );
+  }
+
   private Employment parseEmployment(Line line) throws CSVReaderInvalidFormatException {
     Matcher data = this.employmentFields.matcher(line.getText());
     if (!data.find()) throw new CSVReaderInvalidFormatException(
@@ -179,8 +196,8 @@ class CSVReader implements ReadStrategy {
 
     return new Employment(
       Integer.parseInt(data.group("id")),
-      this.detachedDB.getSubstitute(Integer.parseInt(data.group("id"))),
-      this.detachedDB.getTemporaryPosition(Integer.parseInt(data.group("id")))
+      this.detachedDB.getSubstitute(Integer.parseInt(data.group("substituteId"))),
+      this.detachedDB.getTemporaryPosition(Integer.parseInt(data.group("temporaryPositionId")))
     );
   }
 

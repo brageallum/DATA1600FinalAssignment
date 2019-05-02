@@ -4,19 +4,19 @@ import fa.utils.SearchMatcher;
 
 import java.io.Serializable;
 
-public class Employment extends ManyToMany implements Serializable {
+public class JobApplication extends ManyToMany implements Serializable {
   private static int nextId = 100;
   private final int ID;
 
-  public Employment() {
+  public JobApplication() {
     this(null, null);
   }
 
-  public Employment(Substitute substitute, TemporaryPosition temporaryPosition) {
+  public JobApplication(Substitute substitute, TemporaryPosition temporaryPosition) {
     this(nextId, substitute, temporaryPosition);
   }
 
-  public Employment(int ID, Substitute substitute, TemporaryPosition temporaryPosition) {
+  public JobApplication(int ID, Substitute substitute, TemporaryPosition temporaryPosition) {
     super(substitute, temporaryPosition);
     if (ID >= nextId) nextId = ID + 1;
     this.ID = ID;
@@ -30,5 +30,13 @@ public class Employment extends ManyToMany implements Serializable {
   @Override
   public int getID() {
     return this.ID;
+  }
+
+  public boolean has(Substitute substitute) {
+    return this.substituteProperty().getValue().equals(substitute);
+  }
+
+  public boolean has(TemporaryPosition temporaryPosition) {
+    return this.temporaryPositionProperty().getValue().equals(temporaryPosition);
   }
 }

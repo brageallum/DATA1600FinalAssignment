@@ -1,10 +1,7 @@
 package fa.io.write;
 
 import fa.DB;
-import fa.models.Employer;
-import fa.models.Employment;
-import fa.models.Substitute;
-import fa.models.TemporaryPosition;
+import fa.models.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +21,8 @@ class CSVWriter implements WriteStrategy {
     DB.getInstance().getEmployers().forEach(this::writeEmployer);
     this.writer.write("\n");
     DB.getInstance().getTemporaryPositions().forEach(this::writeTemporaryPosition);
+    this.writer.write("\n");
+    DB.getInstance().getJobApplications().forEach(this::writeJobAplication);
     this.writer.write("\n");
     DB.getInstance().getEmployments().forEach(this::writeEmployment);
 
@@ -88,6 +87,15 @@ class CSVWriter implements WriteStrategy {
       Integer.toString(employment.getID()),
       Integer.toString(employment.substituteProperty().getValue().getID()),
       Integer.toString(employment.temporaryPositionProperty().getValue().getID())
+    }));
+  }
+
+  private void writeJobAplication(JobApplication jobApplication) {
+    this.writer.println(toCSVFormat(new String[]{
+      "JobApplication",
+      Integer.toString(jobApplication.getID()),
+      Integer.toString(jobApplication.substituteProperty().getValue().getID()),
+      Integer.toString(jobApplication.temporaryPositionProperty().getValue().getID())
     }));
   }
 

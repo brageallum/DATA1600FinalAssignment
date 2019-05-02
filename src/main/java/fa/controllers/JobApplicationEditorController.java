@@ -3,13 +3,13 @@ package fa.controllers;
 import fa.DB;
 import fa.components.Editor;
 import fa.components.EditorChoiceField;
-import fa.models.Employment;
+import fa.models.JobApplication;
 import fa.models.Substitute;
 import fa.models.TemporaryPosition;
 import javafx.fxml.FXML;
 
-public class EmploymentEditorController extends EditorController<Employment> {
-  @FXML private Editor<Employment> editor;
+public class JobApplicationEditorController extends EditorController<JobApplication> {
+  @FXML private Editor<JobApplication> editor;
   @FXML private EditorChoiceField<Substitute> substituteField;
   @FXML private EditorChoiceField<TemporaryPosition> temporaryPositionField;
 
@@ -17,21 +17,14 @@ public class EmploymentEditorController extends EditorController<Employment> {
   public void initialize() {
     super.initialize();
     this.editor.onShowEditor(this::setFieldData);
-    this.temporaryPositionField.setOnAction(event -> this.setSubstituteDropdownOptions());
   }
 
   private void setFieldData() {
+    this.substituteField.setOptions(DB.getInstance().getSubstitutes());
     this.temporaryPositionField.setOptions(
       DB.getInstance()
       .getTemporaryPositions()
       .filtered(DB::temporaryPositionIsAvailable));
-    this.setSubstituteDropdownOptions();
-  }
-
-  private void setSubstituteDropdownOptions() {
-    this.substituteField.setOptions(DB.getInstance().getSubstitutes().filtered(
-      substitute -> DB.substituteHasAppliedToTemporaryPosition(substitute, this.temporaryPositionField.getValue())
-    ));
   }
 
   @Override
@@ -43,7 +36,7 @@ public class EmploymentEditorController extends EditorController<Employment> {
 
   @Override
   protected void setTableItems() {
-    this.editor.setTableItems(DB.getInstance().getEmployments());
+    this.editor.setTableItems(DB.getInstance().getJobApplications());
   }
 
   @Override
@@ -56,10 +49,9 @@ public class EmploymentEditorController extends EditorController<Employment> {
 
   @Override
   void createNewItem() {
-    System.out.println("Create employment");
-    this.selectedItem = new Employment();
+    this.selectedItem = new JobApplication();
     this.updateItem();
-    DB.getInstance().getEmployments().add(this.selectedItem);
+    DB.getInstance().getJobApplications().add(this.selectedItem);
   }
 
   @Override
@@ -70,6 +62,6 @@ public class EmploymentEditorController extends EditorController<Employment> {
 
   @Override
   protected void deleteItem() {
-    DB.getInstance().getEmployments().remove(this.selectedItem);
+    DB.getInstance().getJobApplications().remove(this.selectedItem);
   }
 }

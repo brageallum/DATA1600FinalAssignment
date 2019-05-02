@@ -1,14 +1,12 @@
 package fa;
 
-import fa.models.Employer;
-import fa.models.Employment;
-import fa.models.Substitute;
-import fa.models.TemporaryPosition;
+import fa.models.*;
 import fa.utils.serialization.SerializableObservableList;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 
 import java.io.Serializable;
+import java.util.stream.Collectors;
 
 /**
  * This is where all our data is stored. It uses the singleton pattern to make a single instance
@@ -66,6 +64,11 @@ public class DB implements Serializable {
     employment.temporaryPositionProperty()
   });
 
+  private final SerializableObservableList<JobApplication> jobApplications = new SerializableObservableList<>(jobApplication -> new Observable[]{
+    jobApplication.substituteProperty(),
+    jobApplication.temporaryPositionProperty()
+  });
+
   private DB() {}
 
   public static DB getInstance() {
@@ -87,7 +90,22 @@ public class DB implements Serializable {
     instance.getSubstitutes().setAll(newDb.getSubstitutes());
     instance.getTemporaryPositions().setAll(newDb.getTemporaryPositions());
     instance.getEmployers().setAll(newDb.getEmployers());
+    instance.getJobApplications().setAll(newDb.getJobApplications());
     instance.getEmployments().setAll(newDb.getEmployments());
+  }
+
+  public static boolean temporaryPositionIsAvailable(TemporaryPosition temporaryPosition) {
+    return !DB.getInstance().getEmployments()
+        .stream()
+        .map(emp -> emp.temporaryPositionProperty().getValue())
+        .collect(Collectors.toList())
+        .contains(temporaryPosition);
+  }
+
+  public static boolean substituteHasAppliedToTemporaryPosition(Substitute substitute, TemporaryPosition temporaryPosition) {
+    return DB.getInstance().getJobApplications().filtered(jobApplication ->
+        jobApplication.has(substitute) && jobApplication.has(temporaryPosition)
+        ).size() > 0;
   }
 
   public ObservableList<Substitute> getSubstitutes() {
@@ -104,6 +122,10 @@ public class DB implements Serializable {
 
   public ObservableList<Employment> getEmployments() {
     return employments.getObservableList();
+  }
+
+  public ObservableList<JobApplication> getJobApplications() {
+    return jobApplications.getObservableList();
   }
 
   public TemporaryPosition getTemporaryPosition(int id) {
