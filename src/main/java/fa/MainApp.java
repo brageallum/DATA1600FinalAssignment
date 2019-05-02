@@ -9,14 +9,13 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.nio.file.Paths;
 
 public class MainApp extends Application {
 
   @Override
   public void start(Stage stage) throws Exception {
 
-    File DBInit = new File(getClass().getResource("data/db-init.csv").getFile());
+    File DBInit = new File(getClass().getResource("data/db-init.csv").toURI());
     new FileHandler().importData(DBInit);
 
     Parent root = FXMLLoader.load(getClass().getResource("view/App.fxml"));
