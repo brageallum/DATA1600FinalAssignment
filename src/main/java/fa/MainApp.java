@@ -5,10 +5,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.Optional;
 
 public class MainApp extends Application {
 
@@ -33,6 +36,19 @@ public class MainApp extends Application {
 
     stage.setScene(scene);
     stage.show();
+
+    stage.setOnCloseRequest((event) -> {
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("Warning!");
+      alert.setHeaderText("Make sure to export your data!");
+      alert.setContentText("All changes will be lost unless you export your changes through File > Export data to file. Click 'OK' to exit the program.");
+      alert.initOwner(stage);
+
+      Optional<ButtonType> result = alert.showAndWait();
+      if (result.isPresent() && result.get() == ButtonType.CANCEL){
+        event.consume();
+      }
+    });
   }
 
   /**

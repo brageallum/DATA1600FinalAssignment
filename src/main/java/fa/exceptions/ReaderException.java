@@ -1,4 +1,4 @@
-package fa.io.read.exceptions;
+package fa.exceptions;
 
 public class ReaderException extends Exception {
   public ReaderException(String msg) {

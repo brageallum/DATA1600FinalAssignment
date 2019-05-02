@@ -1,4 +1,4 @@
-package fa.io.read.exceptions;
+package fa.exceptions;
 
 public class CSVReaderInvalidFormatException extends ReaderException {
   public CSVReaderInvalidFormatException(String msg) {

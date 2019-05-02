@@ -1,7 +1,7 @@
 package fa.io.write;
 
 import fa.Store;
-import fa.io.InvalidExtensionException;
+import fa.exceptions.InvalidExtensionException;
 import fa.utils.DialogHandler;
 import javafx.application.Platform;
 import javafx.concurrent.Task;

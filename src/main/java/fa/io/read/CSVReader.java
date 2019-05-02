@@ -1,9 +1,10 @@
 package fa.io.read;
 
 import fa.DB;
-import fa.io.read.exceptions.CSVReaderInvalidFormatException;
-import fa.io.read.exceptions.CSVReaderInvalidTypeException;
-import fa.io.read.exceptions.ReaderException;
+import fa.exceptions.CSVReaderInvalidFormatException;
+import fa.exceptions.CSVReaderInvalidTypeException;
+import fa.exceptions.ModelNotFoundException;
+import fa.exceptions.ReaderException;
 import fa.models.*;
 
 import java.io.BufferedReader;
@@ -66,8 +67,7 @@ class CSVReader implements ReadStrategy {
     Line line = new Line();
     while (line.nextLine(reader.readLine())) {
       if (line.isEmpty()) continue;
-
-      parseLine(line);
+        parseLine(line);
     }
 
     return detachedDB;
@@ -140,23 +140,27 @@ class CSVReader implements ReadStrategy {
     if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type TemporaryPosition.", line.getLineNumber())
     );
+    try {
+      return new TemporaryPosition(
+        Integer.parseInt(data.group("id")),
+        DB.sectorOptions.valueOf(data.group("sector")),
+        data.group("workplace"),
+        this.detachedDB.getEmployer(Integer.parseInt(data.group("employer"))),
+        data.group("category"),
+        data.group("duration"),
+        data.group("workingHours"),
+        data.group("position"),
+        data.group("qualifications"),
+        Integer.parseInt(data.group("wage")),
+        data.group("conditions"),
+        data.group("phoneNumber"),
+        data.group("emailAddress"),
+        data.group("description")
+      );
+    } catch(ModelNotFoundException e) {
+      throw new Error(e.getMessage());
+    }
 
-    return new TemporaryPosition(
-      Integer.parseInt(data.group("id")),
-      DB.sectorOptions.valueOf(data.group("sector")),
-      data.group("workplace"),
-      this.detachedDB.getEmployer(Integer.parseInt(data.group("employer"))),
-      data.group("category"),
-      data.group("duration"),
-      data.group("workingHours"),
-      data.group("position"),
-      data.group("qualifications"),
-      Integer.parseInt(data.group("wage")),
-      data.group("conditions"),
-      data.group("phoneNumber"),
-      data.group("emailAddress"),
-      data.group("description")
-    );
   }
 
   private Employer parseEmployer(Line line) throws CSVReaderInvalidFormatException {
@@ -183,12 +187,15 @@ class CSVReader implements ReadStrategy {
     if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type JobApplication.", line.getLineNumber())
     );
-
-    return new JobApplication(
-      Integer.parseInt(data.group("id")),
-      this.detachedDB.getSubstitute(Integer.parseInt(data.group("substituteId"))),
-      this.detachedDB.getTemporaryPosition(Integer.parseInt(data.group("temporaryPositionId")))
-    );
+    try {
+      return new JobApplication(
+        Integer.parseInt(data.group("id")),
+        this.detachedDB.getSubstitute(Integer.parseInt(data.group("substituteId"))),
+        this.detachedDB.getTemporaryPosition(Integer.parseInt(data.group("temporaryPositionId")))
+      );
+    } catch(ModelNotFoundException e) {
+      throw new Error(e.getMessage());
+    }
   }
 
   private Employment parseEmployment(Line line) throws CSVReaderInvalidFormatException {
@@ -196,12 +203,15 @@ class CSVReader implements ReadStrategy {
     if (!data.find()) throw new CSVReaderInvalidFormatException(
       String.format("[on line %s]: Incorrect format for type Employment.", line.getLineNumber())
     );
-
-    return new Employment(
-      Integer.parseInt(data.group("id")),
-      this.detachedDB.getSubstitute(Integer.parseInt(data.group("substituteId"))),
-      this.detachedDB.getTemporaryPosition(Integer.parseInt(data.group("temporaryPositionId")))
-    );
+    try {
+      return new Employment(
+        Integer.parseInt(data.group("id")),
+        this.detachedDB.getSubstitute(Integer.parseInt(data.group("substituteId"))),
+        this.detachedDB.getTemporaryPosition(Integer.parseInt(data.group("temporaryPositionId")))
+      );
+    } catch(ModelNotFoundException e) {
+      throw new Error(e.getMessage());
+    }
   }
 
   private Pattern getCSVRowPattern(String... fields) {
