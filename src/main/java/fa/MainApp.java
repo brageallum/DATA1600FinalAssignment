@@ -28,7 +28,6 @@ public class MainApp extends Application {
     this.loadFXML();
     this.setIcon();
     this.showStage();
-
     this.handleCloseEvent();
   }
 
@@ -37,16 +36,16 @@ public class MainApp extends Application {
     new FileHandler().importData(DBInit);
   }
 
-  private void loadFXML() throws IOException {
-    Parent root = FXMLLoader.load(getClass().getResource("view/App.fxml"));
-    this.scene = new Scene(root);
-    this.scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
-  }
-
   private void decorateStage() {
     this.stage.setTitle("Final Assignment");
     this.stage.setMinWidth(600);
     this.stage.setMinHeight(400);
+  }
+
+  private void loadFXML() throws IOException {
+    Parent root = FXMLLoader.load(getClass().getResource("view/App.fxml"));
+    this.scene = new Scene(root);
+    this.scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
   }
 
   private void setIcon() {
