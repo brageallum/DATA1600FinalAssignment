@@ -8,9 +8,6 @@ import javafx.beans.property.ObjectProperty;
 import java.io.Serializable;
 
 public class TemporaryPosition extends Model implements Serializable {
-  private static int nextId = 100;
-
-  private final int ID;
   private final SerializableProperty<DB.sectorOptions> sector;
   private final SerializableProperty<String> workplace;
   private final SerializableProperty<Employer> employer;
@@ -44,22 +41,20 @@ public class TemporaryPosition extends Model implements Serializable {
     String emailAddress,
     String description
   ) {
-    this(
-      nextId,
-      sector,
-      workplace,
-      employer,
-      category,
-      duration,
-      workingHours,
-      position,
-      qualifications,
-      wage,
-      conditions,
-      phoneNumber,
-      emailAddress,
-      description
-    );
+    super();
+    this.sector = new SerializableProperty<>(sector);
+    this.workplace = new SerializableProperty<>(workplace);
+    this.employer = new SerializableProperty<>(employer);
+    this.category = new SerializableProperty<>(category);
+    this.duration = new SerializableProperty<>(duration);
+    this.workingHours = new SerializableProperty<>(workingHours);
+    this.position = new SerializableProperty<>(position);
+    this.qualifications = new SerializableProperty<>(qualifications);
+    this.wage = new SerializableProperty<>(wage);
+    this.conditions = new SerializableProperty<>(conditions);
+    this.phoneNumber = new SerializableProperty<>(phoneNumber);
+    this.emailAddress = new SerializableProperty<>(emailAddress);
+    this.description = new SerializableProperty<>(description);
   }
 
   public TemporaryPosition(
@@ -78,9 +73,7 @@ public class TemporaryPosition extends Model implements Serializable {
     String emailAddress,
     String description
   ) {
-    if (ID >= nextId) nextId = ID + 1;
-
-    this.ID = ID;
+    super(ID);
     this.sector = new SerializableProperty<>(sector);
     this.workplace = new SerializableProperty<>(workplace);
     this.employer = new SerializableProperty<>(employer);
@@ -94,10 +87,6 @@ public class TemporaryPosition extends Model implements Serializable {
     this.phoneNumber = new SerializableProperty<>(phoneNumber);
     this.emailAddress = new SerializableProperty<>(emailAddress);
     this.description = new SerializableProperty<>(description);
-  }
-
-  public int getID() {
-    return ID;
   }
 
   public ObjectProperty<DB.sectorOptions> sectorProperty() {
@@ -161,7 +150,6 @@ public class TemporaryPosition extends Model implements Serializable {
   public boolean matchesSearch(String pattern) {
     return SearchMatcher.matches(
       pattern,
-      Integer.toString(this.ID),
       this.sectorProperty().getValue().toString(),
       this.workplaceProperty().getValue(),
       this.employerProperty().getValue().firstNameProperty().getValue(),

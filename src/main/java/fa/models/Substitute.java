@@ -8,14 +8,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Substitute extends Person implements Serializable {
-  private static int nextId = 100;
-
   private final SerializableProperty<String> education;
   private final SerializableProperty<String> workExperience;
   private final SerializableProperty<Integer> wage;
   private final SerializableProperty<String> references;
 
-  private final int ID;
 
   public Substitute() {
     this(null, null, null, null, null, null, null, 0, null, null);
@@ -33,19 +30,11 @@ public class Substitute extends Person implements Serializable {
     String references,
     String address
   ) {
-    this(
-      nextId,
-      firstName,
-      lastName,
-      emailAddress,
-      phoneNumber,
-      birthDate,
-      education,
-      workExperience,
-      wage,
-      references,
-      address
-    );
+    super(firstName, lastName, emailAddress, phoneNumber, birthDate, address);
+    this.education = new SerializableProperty<>(education);
+    this.workExperience = new SerializableProperty<>(workExperience);
+    this.wage = new SerializableProperty<>(wage);
+    this.references = new SerializableProperty<>(references);
   }
 
   public Substitute(
@@ -61,20 +50,11 @@ public class Substitute extends Person implements Serializable {
     String references,
     String address
   ) {
-
-    super(firstName, lastName, emailAddress, phoneNumber, birthDate, address);
-
-    if (ID > nextId) nextId = ID + 1;
-
-    this.ID = ID;
+    super(ID, firstName, lastName, emailAddress, phoneNumber, birthDate, address);
     this.education = new SerializableProperty<>(education);
     this.workExperience = new SerializableProperty<>(workExperience);
     this.wage = new SerializableProperty<>(wage);
     this.references = new SerializableProperty<>(references);
-  }
-
-  public int getID() {
-    return this.ID;
   }
 
   public ObjectProperty<String> educationProperty() {
@@ -102,7 +82,6 @@ public class Substitute extends Person implements Serializable {
   public boolean matchesSearch(String regex) {
     return super.matchesSearch(regex) || SearchMatcher.matches(
         regex,
-        Integer.toString(this.ID),
         this.educationProperty().getValue(),
         this.workExperienceProperty().getValue(),
         this.wageProperty().getValue().toString(),

@@ -9,13 +9,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 public class Employer extends Person implements Serializable {
-
-  private static int nextId = 100;
-
   private final SerializableProperty<DB.sectorOptions> sector;
   private final SerializableProperty<String> industry;
-
-  private final int ID;
 
   public Employer() {
     this(null, null, null, null, null, null, null, null);
@@ -31,17 +26,9 @@ public class Employer extends Person implements Serializable {
     String emailAddress,
     LocalDate birthDate
   ) {
-    this(
-      nextId,
-      firstName,
-      lastName,
-      sector,
-      address,
-      industry,
-      phoneNumber,
-      emailAddress,
-      birthDate
-    );
+    super(firstName,lastName,emailAddress,phoneNumber,birthDate,address);
+    this.sector = new SerializableProperty<>(sector);
+    this.industry = new SerializableProperty<>(industry);
   }
 
   public Employer(
@@ -55,11 +42,7 @@ public class Employer extends Person implements Serializable {
     String emailAddress,
     LocalDate birthDate
   ) {
-    super(firstName,lastName,emailAddress,phoneNumber,birthDate,address);
-
-    if (ID >= nextId) nextId = ID + 1;
-
-    this.ID = ID;
+    super(ID, firstName,lastName,emailAddress,phoneNumber,birthDate,address);
     this.sector = new SerializableProperty<>(sector);
     this.industry = new SerializableProperty<>(industry);
   }
@@ -70,10 +53,6 @@ public class Employer extends Person implements Serializable {
       sectorProperty().getValue().toString(),
       industryProperty().getValue()
     );
-  }
-
-  public int getID() {
-    return this.ID;
   }
 
   public ObjectProperty<DB.sectorOptions> sectorProperty() {
