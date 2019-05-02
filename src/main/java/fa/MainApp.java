@@ -68,7 +68,6 @@ public class MainApp extends Application {
         "Exit"
       );
       if (result.isPresent() && result.get() == ButtonType.CANCEL){
-        System.out.println("CANCEL");
         event.consume();
       }
     });

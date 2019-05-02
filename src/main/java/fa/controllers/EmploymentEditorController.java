@@ -56,7 +56,6 @@ public class EmploymentEditorController extends EditorController<Employment> {
 
   @Override
   void createNewItem() {
-    System.out.println("Create employment");
     this.selectedItem = new Employment();
     this.updateItem();
     DB.getInstance().getEmployments().add(this.selectedItem);

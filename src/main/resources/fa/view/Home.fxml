@@ -5,13 +5,27 @@
 <ScrollPane fitToWidth="true" styleClass="area--page" userData="Home">
   <VBox alignment="CENTER" styleClass="text-wrapper">
     <Label wrapText="true" styleClass="title">Generell info</Label>
+    <Label wrapText="true" styleClass="subtitle">Testing av tråder</Label>
     <Label wrapText="true">
       Applikasjonen kaller Thread.sleep(5000) når data importeres eller eksporteres til fil,
       slik at det er mulig å teste at dette faktisk kjører i sin egen tråd, og at det ikke fryser hele aplikasjonen.
       Nederst i venstre hjørne vises det en liten "snackbar" når applikasjonen importerer eller eksporterer data.
     </Label>
+    <Label wrapText="true" styleClass="subtitle">
+      I /resources/fa/data i applikasjonens kildekode, ligger det følgende filer:
+    </Label>
+    <Label wrapText="true">
+      db-init.csv - lastes automatisk inn når programmet starter slik at det automatisk ligger inne litt data for å
+      gjøre det lettere å teste funksjonalitet
+    </Label>
+    <Label wrapText="true">
+      invalid.csv - en ugyldig csv fil for å teste feilhåndtering
+    </Label>
+    <Label wrapText="true">
+      invalid.jobj - en ugyldig jobj fil for å teste feilhåndtering
+    </Label>
 
-    <Label wrapText="true" styleClass="title">For å legge til en vikar i et vikariat:</Label>
+    <Label wrapText="true" styleClass="title">Hvordan legge til en vikar i et vikariat:</Label>
     <Label wrapText="true">(Dette antar at det ønskede vikariatet allerede er registrert).</Label>
     <Label wrapText="true">1. Legg til vikaren i "Substitutes" fanen.</Label>
     <Label wrapText="true">2. Legg inn en jobbsøknad for vikaren i "Job applications".</Label>

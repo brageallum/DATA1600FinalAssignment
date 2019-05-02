@@ -1,0 +1,6 @@
+Substitute;100;Mark;Sargent;marksargent@gmail.com;49342532;1979-05-10;Batchelor in Computer Engineering;Flamethrower Production;150;The Boring Company;Akersveien 7;
+Substitute;101;Medina;S Johnson;medinasj@hotmail.no;45399543;1995-05-11;Information technology;Student assistant for first year students;165;OsloMet;Arkitekt Rivertz' plass 3;
+Substitute;102;Daniel;Vaage;daniel.vaage@email.com;45034751;1983-05-13;Pediatric Nursing;Kindergarten substitute teacher;170;Egon barnehage;Arno Bergs plass 14;
+Substitute; THIS WILL RESULT IN AN ERROR AS THE COLUMNS DO NOT MATCH THE PATTERN FOR SUBSTITUTES
+
+Employer;104;Thomas;K Grav;Public;Linaaes gate 6A;Sales;48029345;thomaskg@gmail.com;1987-09-16;

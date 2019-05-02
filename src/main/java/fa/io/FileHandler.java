@@ -6,14 +6,10 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.nio.file.Paths;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class FileHandler {
 
   private String InitialDirectory = Paths.get("./src/main/resources/fa/data").toAbsolutePath().normalize().toString();
-
-  private static final Lock ioLock = new ReentrantLock();
 
   private static final FileChooser.ExtensionFilter allowedExt = new FileChooser.ExtensionFilter(
     "All compatible types",
@@ -57,7 +53,7 @@ public class FileHandler {
   private FileChooser getFileChooser() {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setInitialDirectory(new File(InitialDirectory));
-    fileChooser.getExtensionFilters().addAll(csvExt, jobjExt, allowedExt);
+    fileChooser.getExtensionFilters().addAll(allowedExt, jobjExt, csvExt);
 
     return fileChooser;
   }
