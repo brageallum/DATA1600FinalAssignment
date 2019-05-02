@@ -82,7 +82,6 @@ class CSVReader implements ReadStrategy {
         detachedDB.getEmployers().add(parseEmployer(line));
         break;
       case "JobApplication":
-        System.out.println("Parse JobApplication");
         detachedDB.getJobApplications().add(parseJobApplication(line));
         break;
       case "Employment":

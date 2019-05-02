@@ -6,11 +6,11 @@ import javafx.beans.property.ObjectProperty;
 
 import java.io.Serializable;
 
-public abstract class ManyToMany extends Model implements Serializable {
+public abstract class SubstituteTemporaryPositionRelationship extends Model implements Serializable {
   private final SerializableProperty<Substitute> substitute;
   private final SerializableProperty<TemporaryPosition> temporaryPosition;
 
-  public ManyToMany(Substitute substitute, TemporaryPosition temporaryPosition) {
+  public SubstituteTemporaryPositionRelationship(Substitute substitute, TemporaryPosition temporaryPosition) {
     this.substitute = new SerializableProperty<>(substitute);
     this.temporaryPosition = new SerializableProperty<>(temporaryPosition);
   }

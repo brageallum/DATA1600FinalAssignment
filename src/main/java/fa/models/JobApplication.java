@@ -4,7 +4,7 @@ import fa.utils.SearchMatcher;
 
 import java.io.Serializable;
 
-public class JobApplication extends ManyToMany implements Serializable {
+public class JobApplication extends SubstituteTemporaryPositionRelationship implements Serializable {
   private static int nextId = 100;
   private final int ID;
 
