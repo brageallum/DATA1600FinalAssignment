@@ -69,8 +69,10 @@ public class AppController {
   }
 
   public void initialize() {
-    System.out.format("[ %s ]: AppController initialized.\n", new Date());
     topBar.setAlignment(Pos.CENTER_LEFT);
+
+    globalSnackbar.setVisible(Store.loadingProperty().getValue());
+    globalSnackbar.setText(Store.loadingTextProperty().getValue());
 
     Store.loadingProperty().addListener((observableValue, oldValue, newValue) -> globalSnackbar.setVisible(newValue));
     Store.loadingTextProperty().addListener((observableValue, oldValue, newValue) -> globalSnackbar.setText(newValue));

@@ -30,7 +30,6 @@ public class TemporaryPositionEditorController extends EditorController<Temporar
   @Override
   public void initialize() {
     super.initialize();
-    System.out.format("[ %s ]: TemporaryPositionEditorController initialized.\n", new Date());
     sectorField.setOptions(DB.sectorOptions.values());
     employerField.setOptions(DB.getInstance().getEmployers());
   }
@@ -55,7 +54,6 @@ public class TemporaryPositionEditorController extends EditorController<Temporar
 
   @Override
   protected void setTableItems() {
-    System.out.println("Set table items");
     this.editor.setTableItems(DB.getInstance().getTemporaryPositions());
   }
 

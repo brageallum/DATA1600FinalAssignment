@@ -28,6 +28,9 @@
     -fx-pref-height: 29.0;
     -fx-font-size: 16px;
 }
+.button--navigation:hover {
+    -fx-text-fill: #90cbee;
+}
 .button--navigation.isActive {
     /*-fx-background-color: #1a75aa;*/
     -fx-text-fill: #2299dd;

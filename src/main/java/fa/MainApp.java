@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -15,7 +16,7 @@ public class MainApp extends Application {
   @Override
   public void start(Stage stage) throws Exception {
 
-    File DBInit = new File(Paths.get("./src/main/resources/fa/data/db-init.csv").toAbsolutePath().normalize().toString());
+    File DBInit = new File(getClass().getResource("data/db-init.csv").getFile());
     new FileHandler().importData(DBInit);
 
     Parent root = FXMLLoader.load(getClass().getResource("view/App.fxml"));
@@ -26,6 +27,11 @@ public class MainApp extends Application {
     stage.setTitle("Final Assignment");
     stage.setMinWidth(600);
     stage.setMinHeight(400);
+
+    stage.getIcons().add(new Image(
+      getClass().getResource("code.png").toString()
+    ));
+
     stage.setScene(scene);
     stage.show();
   }
