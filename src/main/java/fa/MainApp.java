@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -37,7 +38,7 @@ public class MainApp extends Application {
   }
 
   private void decorateStage() {
-    this.stage.setTitle("Final Assignment");
+    this.stage.setTitle("Manage Substitutes");
     this.stage.setMinWidth(600);
     this.stage.setMinHeight(400);
   }
@@ -61,15 +62,22 @@ public class MainApp extends Application {
 
   private void handleCloseEvent() {
     stage.setOnCloseRequest((event) -> {
-      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+      ButtonType exit = new ButtonType("Exit", ButtonBar.ButtonData.OK_DONE);
+      ButtonType cancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+      Alert alert = new Alert(Alert.AlertType.WARNING,
+        "All changes will be lost unless you export your changes through File >Export data " +
+          "to file. Click 'OK' to exit the program.",
+        exit,
+        cancel);
+
       alert.setTitle("Warning!");
       alert.setHeaderText("Make sure to export your data!");
-      alert.setContentText("All changes will be lost unless you export your changes through " +
-        "File >Export data to file. Click 'OK' to exit the program.");
       alert.initOwner(this.stage);
 
       Optional<ButtonType> result = alert.showAndWait();
-      if (result.isPresent() && result.get() == ButtonType.CANCEL){
+      if (result.isPresent() && result.get() == cancel){
         event.consume();
       }
     });
