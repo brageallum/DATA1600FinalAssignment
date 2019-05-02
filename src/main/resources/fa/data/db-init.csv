@@ -1,9 +1,6 @@
-Substitute;100;Birk;Wilberg;s333931@oslomet.no;93831352;1999-07-11;Anvendt Datateknologi;PublishLab AS;220;OHIF,PublishLab,LifLaga;Home
-Substitute;101;Brage;Allum;s000000@oslomet.no;48230481;1995-05-08;Informasjonsteknologi;PublishLab AS;220;OHIF,PublishLab,LifLaga;Home
-Substitute;102;Birk;Wilberg;s333931@oslomet.no;93831352;1999-07-11;Anvendt Datateknologi;PublishLab AS;220;OHIF,PublishLab,LifLaga;Home
-Substitute;103;Brage;Allum;s000000@oslomet.no;48230481;1995-05-08;Informasjonsteknologi;PublishLab AS;220;OHIF,PublishLab,LifLaga;Home
-Substitute;104;Birk;Wilberg;s333931@oslomet.no;93831352;1999-07-11;Anvendt Datateknologi;PublishLab AS;220;OHIF,PublishLab,LifLaga;Home
-Substitute;105;Brage;Allum;s000000@oslomet.no;48230481;1995-05-08;Informasjonsteknologi;PublishLab AS;220;OHIF,PublishLab,LifLaga;Home
-Employer;100;Birk;Wilberg;Private;Home;Webdesign;93831352;birk@ingebricson.no;1999-07-11;
-TemporaryPosition;100;Private;PublishLab;100;Programming;1yr;08:00-16:00;Fulltime;Bachelor;3000;Standard;48230481;jobb@publishlab.com;Work as a developer
-TemporaryPosition;101;Public;Home;100;Programming;1yr;08:00-16:00;Fulltime;Bachelor;3000;Standard;48230481;jobb@publishlab.com;Work as a developer
+Substitute;100;Mark;Sargent;marksargent@gmail.com;49342532;1979-05-10;Batchelor in Computer Engineering;Flamethrower Production;150;The Boring Company;Akersveien 7;
+Substitute;101;Medina;S Johnson;medinasj@hotmail.no;45399543;1995-05-11;Information technology;Student assistant for first year students;165;OsloMet;Arkitekt Rivertz' plass 3;
+Substitute;102;Daniel;Vaage;daniel.vaage@email.com;45034751;1983-05-13;Pediatric Nursing;Kindergarten substitute teacher;170;Egon barnehage;Arno Bergs plass 14;
+Substitute;103;Linn;Klemetsen;linn97@gmail.com;47932345;1997-08-08;Bachelor in Architecture;Max Burgers;155;Magnus Haukedal;Askergata 2;
+
+Employer;104;Thomas;K Grav;Public;Linaaes gate 6A;Sales;48029345;thomaskg@gmail.com;1987-09-16;
