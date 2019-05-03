@@ -1,11 +1,14 @@
 package fa.utils;
 
+import fa.MainApp;
+import fa.Store;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.util.Optional;
 
@@ -13,6 +16,7 @@ public class DialogHandler {
   public static void showErrorDialog(String header, String message) {
     Alert alert = new Alert(Alert.AlertType.ERROR, message, ButtonType.OK);
     alert.setHeaderText(header);
+    alert.initOwner(Store.stage);
 
     DialogHandler.enableTextWrapping(alert);
 
@@ -27,6 +31,7 @@ public class DialogHandler {
     Alert alert = new Alert(Alert.AlertType.WARNING, message, exit, cancel);
     alert.setTitle("Warning!");
     alert.setHeaderText(header);
+    alert.initOwner(Store.stage);
     DialogHandler.enableTextWrapping(alert);
 
     return alert.showAndWait();
