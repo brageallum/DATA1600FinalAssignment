@@ -23,6 +23,7 @@ public class MainApp extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     this.stage = stage;
+    Store.stage = stage;
     this.loadData();
     this.decorateStage();
     this.loadFXML();

@@ -4,11 +4,13 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.stage.Stage;
 
 public class Store {
 
   private static BooleanProperty loading = new SimpleBooleanProperty(false);
   private static StringProperty loadingText = new SimpleStringProperty("");
+  public static Stage stage;
 
   public static BooleanProperty loadingProperty() {
     return Store.loading;
