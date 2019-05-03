@@ -2,34 +2,44 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
-<StackPane alignment="BOTTOM_LEFT" fx:controller="fa.controllers.AppController" prefWidth="1200" prefHeight="700" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane alignment="BOTTOM_LEFT" fx:controller="fa.controllers.AppController" prefWidth="1200" prefHeight="700"
+           xmlns:fx="http://javafx.com/fxml/1">
   <BorderPane fx:id="rootContainer" prefWidth="1200" prefHeight="700">
     <top>
       <VBox styleClass="area--top-bar">
         <!-- Tool bar -->
         <HBox styleClass="area--tools">
           <MenuBar styleClass="area--menubar">
-            <Menu text="File" >
-              <MenuItem text="Import data from file" onAction="#importData" />
-              <MenuItem text="Export data to file" onAction="#exportData" />
+            <Menu text="File">
+              <MenuItem text="Import data from file" onAction="#importData"/>
+              <MenuItem text="Export data to file" onAction="#exportData"/>
             </Menu>
           </MenuBar>
         </HBox>
         <!-- Navigation Bar -->
         <HBox spacing="10" styleClass="area--navigation" fx:id="topBar">
-          <Button userData="view/home.fxml" onAction="#navigateApp" styleClass="button--navigation, isActive">Home</Button>
-          <Button userData="view/SubstituteEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Substitutes</Button>
-          <Button userData="view/TemporaryPositionEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Temporary positions</Button>
-          <Button userData="view/EmployerEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Employers</Button>
-          <Button userData="view/Employment.fxml" onAction="#navigateApp" styleClass="button--navigation">Employments</Button>
-          <Button userData="view/JobApplicationEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Job applications</Button>
+          <Button userData="view/home.fxml" onAction="#navigateApp" styleClass="button--navigation, isActive">Home
+          </Button>
+          <Button userData="view/SubstituteEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">
+            Substitutes
+          </Button>
+          <Button userData="view/TemporaryPositionEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">
+            Temporary positions
+          </Button>
+          <Button userData="view/EmployerEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">
+            Employers
+          </Button>
+          <Button userData="view/Employment.fxml" onAction="#navigateApp" styleClass="button--navigation">Employments
+          </Button>
+          <Button userData="view/JobApplicationEditor.fxml" onAction="#navigateApp" styleClass="button--navigation">Job
+            applications
+          </Button>
         </HBox>
       </VBox>
     </top>
     <center>
       <!-- Content -->
-      <fx:include source="Home.fxml" />
+      <fx:include source="Home.fxml"/>
     </center>
   </BorderPane>
   <Label fx:id="globalSnackbar" styleClass="snackbar" visible="false">Updating data...</Label>

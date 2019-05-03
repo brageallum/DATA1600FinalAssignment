@@ -2,27 +2,28 @@
 
 <?import fa.components.*?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
 <Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.controllers.EmployerEditorController">
   <form>
-    <EditorTextField fx:id="firstNameField" labelText="First name:" />
-    <EditorTextField fx:id="lastNameField" labelText="Last name:" />
-    <EditorTextField fx:id="emailAddressField" labelText="Email address:" />
-    <EditorDateField fx:id="birthDateField" labelText="Birth date:" />
-    <EditorTextField fx:id="addressField" labelText="Address:" />
-    <EditorTextField fx:id="phoneNumberField" labelText="Phone number:" />
-    <EditorChoiceField fx:id="sectorField" labelText="Sector:" />
-    <EditorTextField fx:id="industryField" labelText="Industry:" />
+    <EditorTextField fx:id="firstNameField" labelText="First name:"/>
+    <EditorTextField fx:id="lastNameField" labelText="Last name:"/>
+    <EditorTextField fx:id="emailAddressField" labelText="Email address:"/>
+    <EditorDateField fx:id="birthDateField" labelText="Birth date:"/>
+    <EditorTextField fx:id="addressField" labelText="Address:"/>
+    <EditorTextField fx:id="phoneNumberField" labelText="Phone number:"/>
+    <EditorChoiceField fx:id="sectorField" labelText="Sector:"/>
+    <EditorTextField fx:id="industryField" labelText="Industry:"/>
     <HBox>
-      <Label fx:id="temporaryPositionsLabel" styleClass="temporaryPositionsLabel" visible="false" managed="false">TemporaryPositions</Label>
+      <Label fx:id="temporaryPositionsLabel" styleClass="temporaryPositionsLabel" visible="false" managed="false">
+        TemporaryPositions
+      </Label>
     </HBox>
-    <ListView fx:id="temporaryPositionsField" visible="false" managed="false" />
+    <ListView fx:id="temporaryPositionsField" visible="false" managed="false"/>
     <HBox alignment="CENTER_RIGHT" spacing="10">
-        <Button fx:id="deleteButton" onAction="#delete" visible="false" text="Delete" />
-        <Button fx:id="submitButton" onAction="#submit" text="Create" />
+      <Button fx:id="deleteButton" onAction="#delete" visible="false" text="Delete"/>
+      <Button fx:id="submitButton" onAction="#submit" text="Create"/>
     </HBox>
   </form>
 </Editor>

@@ -46,13 +46,18 @@
     </Label>
 
     <Label wrapText="true" styleClass="subtitle">Kolonnene til vikarer:</Label>
-    <Label wrapText="true">"Substitute";id;firstName;lastName;emailAddress;phoneNumber;birthDate;education;workExperience;wage;references;address</Label>
+    <Label wrapText="true">
+      "Substitute";id;firstName;lastName;emailAddress;phoneNumber;birthDate;education;workExperience;wage;references;address
+    </Label>
 
     <Label wrapText="true" styleClass="subtitle">Kolonnene til vikariater:</Label>
-    <Label wrapText="true">"TemporaryPosition";id;sector;workplace;employer;category;duration;workingHours;position;qualifications;wage;conditions;phoneNumber;emailAddress;description</Label>
+    <Label wrapText="true">
+      "TemporaryPosition";id;sector;workplace;employer;category;duration;workingHours;position;qualifications;wage;conditions;phoneNumber;emailAddress;description
+    </Label>
 
     <Label wrapText="true" styleClass="subtitle">Kolonnene til arbeidsgivere</Label>
-    <Label wrapText="true">"Employer";id;firstName;lastName;sector;address;industry;phoneNumber;emailAddress;birthDate</Label>
+    <Label wrapText="true">"Employer";id;firstName;lastName;sector;address;industry;phoneNumber;emailAddress;birthDate
+    </Label>
 
     <Label wrapText="true" styleClass="subtitle">Kolonnene til jobbsøknadene</Label>
     <Label wrapText="true">"JobApplication";id;substituteId;temporaryPositionId</Label>

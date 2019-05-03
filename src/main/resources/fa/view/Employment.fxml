@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import fa.components.*?>
+<?import fa.components.Editor?>
+<?import fa.components.EditorChoiceField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
 <Editor fx:id="editor" xmlns:fx="http://javafx.com/fxml" fx:controller="fa.controllers.EmploymentEditorController">
   <form>
-    <EditorChoiceField fx:id="temporaryPositionField" labelText="Temporary position:" />
-    <EditorChoiceField fx:id="substituteField" labelText="Substitute:" />
+    <EditorChoiceField fx:id="temporaryPositionField" labelText="Temporary position:"/>
+    <EditorChoiceField fx:id="substituteField" labelText="Substitute:"/>
     <HBox alignment="CENTER_RIGHT" spacing="10">
-        <Button fx:id="deleteButton" onAction="#delete" visible="false" text="Delete" />
-        <Button fx:id="submitButton" onAction="#submit" text="Create" />
+      <Button fx:id="deleteButton" onAction="#delete" visible="false" text="Delete"/>
+      <Button fx:id="submitButton" onAction="#submit" text="Create"/>
     </HBox>
   </form>
 </Editor>

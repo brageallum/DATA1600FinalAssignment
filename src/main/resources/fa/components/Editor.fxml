@@ -3,27 +3,27 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <fx:root type="SplitPane" dividerPositions="0.4" xmlns:fx="http://javafx.com/fxml" styleClass="editorPane">
-    <VBox>
-        <TextField onAction="#search" fx:id="searchBar" promptText="Search (matches for data in a single column)" />
-        <TableView fx:id="itemsTable" styleClass="table-view" minWidth="200" prefWidth="700" VBox.vgrow="ALWAYS" />
-    </VBox>
-    <ScrollPane fx:id="scrollBox" maxWidth="400" prefWidth="400" fitToWidth="true" fitToHeight="true">
-        <HBox alignment="CENTER" maxWidth="400" prefWidth="400">
-            <StackPane prefWidth="400">
-                <Button fx:id="addNewButton" styleClass="addNewButton" onAction="#showEditor">+ ADD NEW</Button>
-                <BorderPane fx:id="editor" prefWidth="300" visible="false" managed="false">
-                    <top>
-                        <HBox alignment="CENTER_LEFT" styleClass="editor-navbar">
-                            <Button onAction="#goBack" styleClass="goBackButton">〈</Button>
-                            <Label fx:id="editorTitle" styleClass="editor--title">Add new</Label>
-                            <Label fx:id="editorID" styleClass="editor--id-title">#000</Label>
-                        </HBox>
-                    </top>
-                    <center>
-                        <VBox fx:id="editorFormContainer" alignment="CENTER_RIGHT" spacing="15" styleClass="formEditor" />
-                    </center>
-                </BorderPane>
-            </StackPane>
-        </HBox>
-    </ScrollPane>
+  <VBox>
+    <TextField onAction="#search" fx:id="searchBar" promptText="Search (matches for data in a single column)"/>
+    <TableView fx:id="itemsTable" styleClass="table-view" minWidth="200" prefWidth="700" VBox.vgrow="ALWAYS"/>
+  </VBox>
+  <ScrollPane fx:id="scrollBox" maxWidth="400" prefWidth="400" fitToWidth="true" fitToHeight="true">
+    <HBox alignment="CENTER" maxWidth="400" prefWidth="400">
+      <StackPane prefWidth="400">
+        <Button fx:id="addNewButton" styleClass="addNewButton" onAction="#showEditor">+ ADD NEW</Button>
+        <BorderPane fx:id="editor" prefWidth="300" visible="false" managed="false">
+          <top>
+            <HBox alignment="CENTER_LEFT" styleClass="editor-navbar">
+              <Button onAction="#goBack" styleClass="goBackButton">〈</Button>
+              <Label fx:id="editorTitle" styleClass="editor--title">Add new</Label>
+              <Label fx:id="editorID" styleClass="editor--id-title">#000</Label>
+            </HBox>
+          </top>
+          <center>
+            <VBox fx:id="editorFormContainer" alignment="CENTER_RIGHT" spacing="15" styleClass="formEditor"/>
+          </center>
+        </BorderPane>
+      </StackPane>
+    </HBox>
+  </ScrollPane>
 </fx:root>
